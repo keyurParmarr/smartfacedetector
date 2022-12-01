@@ -1,0 +1,75 @@
+.loginSignup-box {
+  height: 100%;
+  width: 100%;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+}
+.loginSignup-title {
+  height: 200px;
+  padding: 30px;
+  text-align: center;
+  font-size: 40px;
+  font-family: Quaxcites;
+}
+.loginSignup-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+/* .loginSignup-container {
+  width: 450px;
+  border: 1px black;
+  box-shadow: 0px 0px 50px 0px rgb(27, 170, 189);
+  border-radius: 10px;
+  padding: 5px;
+} */
+.loginSignup-container {
+  position: relative;
+  width: 400px;
+  height: 440px;
+  background: #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+}
+.loginSignup-container::before {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  content: "";
+  width: 380px;
+  height: 420px;
+  background: linear-gradient(0deg, transparent, cyan);
+  animation: animate 6s linear infinite;
+  transform-origin: bottom right;
+}
+.loginSignup-container::after {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  content: "";
+  width: 380px;
+  height: 420px;
+  background: linear-gradient(0deg, transparent, cyan);
+  animation: animate 6s linear infinite;
+  transform-origin: bottom right;
+  animation-delay: -3s;
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loginSignup-panel {
+  padding: 4px;
+  position: absolute;
+  inset: 5px;
+  z-index: 10;
+  background: #000000;
+  /* background: linear-gradient(to right, #951de5, #ec1a75) !important; */
+}

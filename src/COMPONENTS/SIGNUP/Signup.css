@@ -1,0 +1,15 @@
+.signup-label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: large;
+  color: aliceblue;
+}
+.signup-button {
+  text-align: center;
+  margin-top: 20px;
+}
+.signup-warningMsg {
+  text-align: center;
+  color: rgb(144, 11, 11);
+  font-size: larger;
+}

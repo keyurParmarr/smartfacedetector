@@ -1,0 +1,22 @@
+.firstpage-box {
+  background-image: url("./firstimg.png");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.firstpage-data {
+  display: flex;
+  justify-content: space-between;
+  font-size: x-large;
+  width: 100%;
+}
+
+.firstpage-infotitle {
+  font-family: Quaxcites;
+  margin-top: 15px;
+  font-size: xx-large;
+  margin-left: 170px;
+  height: auto;
+  color: antiquewhite;
+}

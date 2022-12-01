@@ -1,0 +1,20 @@
+.about-title {
+  margin-top: 5px;
+  font-family: Quaxcites;
+}
+.about-box {
+  text-align: center;
+}
+.about-info {
+  font-weight: 300;
+  font-size: larger;
+  margin: 10px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.about-img {
+  display: inline-block;
+  border-radius: 35px;
+  margin-top: 35px;
+  box-shadow: 5px 5px 50px 5px rgb(114, 250, 248);
+}

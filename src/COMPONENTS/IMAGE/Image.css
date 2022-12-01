@@ -1,0 +1,28 @@
+.image-box {
+  display: flex;
+  justify-content: center;
+}
+.image-data {
+  position: absolute;
+  box-shadow: 0 0 0 3px rgb(1, 135, 159);
+  text-align: center;
+  animation: load 2s linear 1;
+}
+.image-container {
+  position: relative;
+}
+
+@keyframes load {
+  0% {
+    box-shadow: 0 0 0 0.2px #149df2;
+  }
+  25% {
+    box-shadow: 0 0 0 1px #149df2;
+  }
+  60% {
+    box-shadow: 0 0 0 2px #149df2;
+  }
+  100% {
+    box-shadow: 0 0 0 3px #149df2;
+  }
+}
