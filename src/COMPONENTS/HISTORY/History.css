@@ -1,0 +1,55 @@
+.history-main {
+  display: flex;
+  justify-content: space-between;
+  font-size: xx-large;
+  font-weight: 800;
+  font-family: Quaxcites;
+  height: 6vh;
+  width: 100vw;
+  flex-direction: row;
+}
+.history-backbtn {
+  margin-left: 15px;
+  margin-top: 3px;
+  align-self: flex-start;
+}
+.history-info {
+  font-size: x-large;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 30px;
+}
+table {
+  margin-top: 20px;
+  border: 2px solid beige;
+  width: 1400px;
+  height: 200px;
+}
+th {
+  font-size: x-large;
+  border-radius: 11px;
+  border: 2px solid white;
+}
+
+td {
+  font-size: larger;
+  font-weight: 700;
+  border: 2px solid white;
+  border-radius: 11px;
+}
+
+.history-tableheaderNo {
+  height: 70px;
+  width: 100px;
+  font-size: x-large;
+}
+.history-table {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  text-align: center;
+}
+.history-extradot {
+  color: #9900ff;
+}

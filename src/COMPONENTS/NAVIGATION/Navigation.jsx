@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Profileinfo } from "../PROFILEINFO/Profileinfo";
 import { Signout } from "../PROFILEINFO/Signout";
+import { Title } from "../TITLE/Title";
 import brainlogo from "./brain.png";
 import { Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import "./Navigation.css";
@@ -14,6 +15,11 @@ export const Navigation = () => {
   const value = useContext(UserContext);
   const navigate = useNavigate();
   console.log(value);
+  const titleData = {
+    title: "SMART FACE DETECTOR",
+    color: "cyan",
+    fontsize: "36px",
+  };
   return (
     <div className="navigation-box">
       <img
@@ -22,7 +28,7 @@ export const Navigation = () => {
         width={150}
         className="navigation-logo"
       />
-      <h1 className="navigation-title">SMART FACE DETECTOR</h1>
+      <Title titleData={titleData} />
       <div className="navigation-profile">
         <Menu>
           <MenuButton>
