@@ -1,0 +1,34 @@
+th {
+  padding: 15px;
+  border-radius: 20px;
+}
+td,
+tr {
+  font-size: large;
+  padding: 7px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+table {
+  width: 75%;
+  border-collapse: separate !important ;
+  border-spacing: 5px 10px;
+}
+
+thead {
+  background-color: #455165;
+  color: white;
+  box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
+}
+
+.table-data-row {
+  background-color: rgb(133, 226, 255);
+  box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 50px 0px 50px;
+}
