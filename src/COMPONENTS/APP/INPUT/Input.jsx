@@ -1,6 +1,6 @@
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import React, { useState, useContext } from "react";
-import { UserContext } from "../../CONTEXT/User.context";
+import { UserContext } from "../../../CONTEXT/User.context";
 import "./Input.css";
 
 export const InputComp = (props) => {

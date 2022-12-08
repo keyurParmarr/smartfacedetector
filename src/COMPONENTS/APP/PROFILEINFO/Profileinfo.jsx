@@ -13,7 +13,8 @@ import {
 } from "@chakra-ui/react";
 import "./Profileinfo.css";
 import { useContext } from "react";
-import { UserContext } from "../../CONTEXT/User.context";
+import { UserContext } from "../../../CONTEXT/User.context";
+import "./1.jpg";
 
 export const Profileinfo = (props) => {
   const value = useContext(UserContext);
@@ -24,7 +25,7 @@ export const Profileinfo = (props) => {
         <ModalContent>
           <ModalHeader>
             <div>Edit Profile</div>
-            <Avatar size="2xl" />
+            <Avatar size="2xl" src="1.jpg" />
           </ModalHeader>
           <ModalCloseButton
             onClick={() => {

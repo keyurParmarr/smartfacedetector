@@ -45,32 +45,36 @@ export const History = () => {
       <div className="history-info">Recent Searches</div>
       <div className="history-table">
         <table>
-          <tr>
-            <th className="history-tableheaderNo">No.</th>
-            <th>Links</th>
-          </tr>
+          <thead>
+            <tr className="table-heading-row">
+              <th>No.</th>
+              <th>Links</th>
+            </tr>
+          </thead>
           {links.map((link, index) => {
             return (
-              <tr>
-                <td>{index + 1}</td>
-                <td>
-                  <Popover placement="bottom">
-                    <PopoverTrigger>
-                      <Button>{link}</Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverHeader fontWeight="semibold">
-                        Image{" "}
-                      </PopoverHeader>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverBody>
-                        <img src={link} className="img" alt="" />
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                </td>
-              </tr>
+              <tbody>
+                <tr className="table-data-row">
+                  <td>{index + 1}</td>
+                  <td>
+                    <Popover placement="bottom">
+                      <PopoverTrigger>
+                        <Button>{link}</Button>
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <PopoverHeader fontWeight="semibold">
+                          Image{" "}
+                        </PopoverHeader>
+                        <PopoverArrow />
+                        <PopoverCloseButton />
+                        <PopoverBody>
+                          <img src={link} className="img" alt="" />
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Popover>
+                  </td>
+                </tr>
+              </tbody>
             );
           })}
         </table>

@@ -1,7 +1,6 @@
 import React from "react";
 import "./Firstpage.css";
 import { useNavigate } from "react-router-dom";
-
 import { Button } from "@chakra-ui/react";
 import { Title } from "../TITLE/Title";
 
@@ -19,10 +18,8 @@ export const Firstpage = () => {
           <div style={{ marginLeft: "150px" }}>.</div>
 
           <Title titleData={titleData} />
-          <div>
+          <div className="button-box">
             <Button
-              marginTop={"3"}
-              marginRight={"2.5"}
               colorScheme="teal"
               size="md"
               onClick={() => {
@@ -32,8 +29,6 @@ export const Firstpage = () => {
               About
             </Button>
             <Button
-              marginTop={"3"}
-              marginRight={"2.5"}
               colorScheme="teal"
               size="md"
               onClick={() => {

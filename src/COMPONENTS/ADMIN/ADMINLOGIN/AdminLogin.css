@@ -1,0 +1,90 @@
+.adminlogin-label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: large;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+.adminlogin-button {
+  text-align: center;
+  margin-top: 20px;
+}
+.loginname {
+  font-size: x-large;
+  font-weight: 900;
+  text-align: center;
+}
+.adminlogin-warningMsg {
+  text-align: center;
+  color: rgb(144, 11, 11);
+  font-size: larger;
+}
+.admin-input {
+  position: relative;
+  width: 100%;
+  border: none;
+}
+.adminlogin-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  margin-top: 100px;
+}
+
+.adminlogin-container {
+  position: relative;
+  width: 400px;
+  height: 440px;
+  background: #f3b9b9;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+}
+.adminlogin-container::before {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  content: "";
+  width: 380px;
+  height: 420px;
+  background: linear-gradient(0deg, transparent, rgb(255, 0, 0));
+  animation: animate 6s linear infinite;
+  transform-origin: bottom right;
+}
+.adminlogin-container::after {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  content: "";
+  width: 380px;
+  height: 420px;
+  background: linear-gradient(0deg, transparent, rgb(255, 0, 0));
+  animation: animate 6s linear infinite;
+  transform-origin: bottom right;
+  animation-delay: -3s;
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.adminlogin-panel {
+  padding: 10px;
+  position: absolute;
+  inset: 5px;
+  z-index: 10;
+  background: #2482ca;
+}
+
+.admin-login {
+  font-family: "Times New Roman", Times, serif;
+  font-size: xx-large;
+}
+
+.adminextra-dot {
+  color: #ff006f;
+}

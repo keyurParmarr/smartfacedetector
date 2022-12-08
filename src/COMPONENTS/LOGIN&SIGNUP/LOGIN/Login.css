@@ -2,6 +2,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: large;
+  font-weight: 600;
   color: aliceblue;
 }
 .login-button {
@@ -12,6 +13,7 @@
   text-align: center;
   color: rgb(144, 11, 11);
   font-size: larger;
+  font-weight: 600;
 }
 .input {
   position: relative;

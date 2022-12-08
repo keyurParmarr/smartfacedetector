@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { UserContext } from "../../CONTEXT/User.context";
+import { UserContext } from "../../../CONTEXT/User.context";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 export const Login = () => {
   const navigate = useNavigate();

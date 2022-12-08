@@ -14,13 +14,10 @@
   flex-direction: row;
 }
 
-.firstpage-infotitle {
-  font-family: Quaxcites;
-  margin-top: 15px;
-  font-size: xx-large;
-  margin-left: 170px;
-  height: auto;
-  color: antiquewhite;
-  align-self: flex-start;
-  justify-self: flex-end;
+.button-box {
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
 }

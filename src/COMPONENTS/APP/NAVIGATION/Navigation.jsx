@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Profileinfo } from "../PROFILEINFO/Profileinfo";
 import { Signout } from "../PROFILEINFO/Signout";
-import { Title } from "../TITLE/Title";
+import { Title } from "../../TITLE/Title";
 import brainlogo from "./brain.png";
 import { Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import "./Navigation.css";
-import { UserContext } from "../../CONTEXT/User.context";
+import { UserContext } from "../../../CONTEXT/User.context";
 
 export const Navigation = () => {
   const [profile, setprofile] = useState(false);

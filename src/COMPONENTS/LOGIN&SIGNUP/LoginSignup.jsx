@@ -1,14 +1,16 @@
 import React from "react";
 import { Tab, TabList, TabPanels, Tabs, TabPanel } from "@chakra-ui/react";
-import { Login } from "../LOGIN/Login";
-import { Signup } from "../SIGNUP/Signup";
+import { Login } from "./LOGIN/Login";
+import { Signup } from "./SIGNUP/Signup";
+
 import "./LoginSignup.css";
+import { LoginSignupNav } from "./LoginSignupNav";
 
 export const LoginSignup = () => {
   return (
     <>
       <div className="loginSignup-box">
-        <div className="loginSignup-title">Smart Face Detector</div>
+        <LoginSignupNav />
         <div className="loginSignup-section">
           <div className="loginSignup-container">
             <div className="loginSignup-panel">

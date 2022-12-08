@@ -23,20 +23,26 @@
 table {
   margin-top: 20px;
   border: 2px solid beige;
+  border-collapse: separate;
+  border-spacing: 0 1em;
   width: 1400px;
-  height: 200px;
 }
+thead {
+  background-color: #455165;
+  color: white;
+  box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
+}
+.table-data-row {
+  background-color: #ffff;
+  box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
+  margin-top: 100px;
+}
+td,
 th {
-  font-size: x-large;
-  border-radius: 11px;
-  border: 2px solid white;
-}
-
-td {
   font-size: larger;
   font-weight: 700;
-  border: 2px solid white;
   border-radius: 11px;
+  padding: 1rem 1rem;
 }
 
 .history-tableheaderNo {
@@ -45,10 +51,14 @@ td {
   font-size: x-large;
 }
 .history-table {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   width: 100vw;
-  text-align: center;
+  text-align: center; */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin: 10px 50px 0px 50px;
 }
 .history-extradot {
   color: #9900ff;
