@@ -4,6 +4,7 @@ import "./Information.css";
 
 export const Information = () => {
   const value = useContext(UserContext);
+  console.log(value);
   return (
     <div className="information-box">
       <div className="information-data">

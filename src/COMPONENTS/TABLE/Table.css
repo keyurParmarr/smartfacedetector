@@ -11,7 +11,7 @@ tr {
 }
 
 table {
-  width: 75%;
+  width: 100%;
   border-collapse: separate !important ;
   border-spacing: 5px 10px;
 }
@@ -19,6 +19,7 @@ table {
 thead {
   background-color: #455165;
   color: white;
+
   box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
 }
 
@@ -30,5 +31,10 @@ thead {
 .table-container {
   display: flex;
   justify-content: center;
-  margin: 10px 50px 0px 50px;
+  margin: 50px 50px 0px 50px;
+  height: 770px;
+}
+.table {
+  overflow-y: scroll;
+  width: 75%;
 }

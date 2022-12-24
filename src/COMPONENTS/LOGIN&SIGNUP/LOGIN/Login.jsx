@@ -7,26 +7,46 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [userDetails, setUserDetails] = useState({});
   const [msg, setMsg] = useState("");
   const value = useContext(UserContext);
   const handleClick = () => setShow(!show);
+  const loginData = (e) => {
+    const { name, value } = e.target;
+    setUserDetails({ ...userDetails, [name]: value });
+  };
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/login", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    console.log(data);
-    if (data.success) {
-      value.setuser(data);
-      return navigate("/app");
+    try {
+      const res = await fetch("http://localhost:5000/login", {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(userDetails),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.success) {
+        return navigate("/app");
+      }
+      setMsg("Invalid username or password");
+    } catch (error) {
+      console.log(error);
     }
-    setMsg("Invalid username or password");
+  };
+
+  const style = {
+    background: "transparent",
+    borderRadius: "0",
+    borderTop: "1px solid black",
+    borderLeft: "1px solid black",
+    borderRight: "1px solid black",
+    borderBottom: "1px solid cyan",
+    color: "cyan",
+    marginBottom: "5px",
+    marginTop: "5px",
+
+    outline: "none",
   };
 
   return (
@@ -34,46 +54,29 @@ export const Login = () => {
       <div className="login-label">EMAIL</div>
       <Input
         className="input"
-        style={{
-          background: "transparent",
-          borderRadius: "0",
-          borderTop: "1px solid black",
-          borderLeft: "1px solid black",
-          borderRight: "1px solid black",
-          borderBottom: "1px solid cyan",
-          outline: "none",
-        }}
-        // placeholder="Email"
+        autoComplete="off"
+        style={style}
+        name={"email"}
         type={"email"}
-        color={"cyan"}
         required={"required"}
         backgroundColor={"whiteAlpha.500"}
-        marginTop="5px"
-        marginBottom="5px"
-        onChange={(e) => setemail(e.target.value)}
+        onChange={(e) => loginData(e)}
+        // aftersome time
       />
       <div className="login-label">PASSWORD</div>
       <InputGroup size="md" marginTop="5px" marginBottom="5px">
         <Input
           className="input"
-          style={{
-            background: "transparent",
-            borderRadius: "0",
-            borderTop: "1px solid black",
-            borderLeft: "1px solid black",
-            borderRight: "1px solid black",
-            borderBottom: "1px solid cyan",
-            outline: "none",
-          }}
-          pr="4.5rem"
+          autoComplete="off"
+          style={style}
+          name={"password"}
           required={"required"}
           type={show ? "text" : "password"}
           backgroundColor={"whiteAlpha.500"}
-          color={"cyan"}
-          onChange={(e) => setpassword(e.target.value)}
+          onChange={(e) => loginData(e)}
         />
         <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm" onClick={handleClick}>
+          <Button h="1.75rem" size="sm" mt={"2"} onClick={handleClick}>
             {show ? <FaEyeSlash /> : <FaEye />}
           </Button>
         </InputRightElement>

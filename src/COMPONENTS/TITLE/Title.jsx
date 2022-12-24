@@ -7,6 +7,7 @@ export const Title = (props) => {
       style={{
         color: `${props.titleData.color}`,
         fontSize: `${props.titleData.fontsize}`,
+        marginTop: `${props.titleData.marginTop}`,
       }}
     >
       {props.titleData.title}

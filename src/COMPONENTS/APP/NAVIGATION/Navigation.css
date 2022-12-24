@@ -9,13 +9,9 @@
   margin-bottom: 50px;
 }
 .navigation-logo {
-  /* border-radius: 10px;
-  box-shadow: 2px 2px 20px 2px salmon;
-  background-color: #1bffff; */
   align-items: flex-start;
   height: 200px;
-  width: 190px;
-  /* background: linear-gradient(to right, #ec1a75, #951de5); */
+  width: 240px;
 }
 
 .navigation-title {

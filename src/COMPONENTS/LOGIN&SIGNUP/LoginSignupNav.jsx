@@ -8,6 +8,7 @@ export const LoginSignupNav = () => {
     title: "SMART FACE DETECTOR",
     color: "black",
     fontsize: "36px",
+    marginTop: "10px",
   };
 
   return (
@@ -19,7 +20,7 @@ export const LoginSignupNav = () => {
           height={"50px"}
           colorScheme={"green"}
           onClick={() => {
-            navigate("/Adminlogin");
+            navigate("/adminlogin");
           }}
         >
           Admin-Login

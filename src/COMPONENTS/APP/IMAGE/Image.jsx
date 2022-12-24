@@ -6,7 +6,7 @@ export const Image = (props) => {
     width: "500px",
     height: "auto",
   };
-  console.log(props.box);
+
   return (
     <div className="image-box">
       <div className="image-container">

@@ -6,6 +6,8 @@ import { Firstpage } from "./COMPONENTS/FIRSTPAGE/Firstpage";
 import { About } from "./COMPONENTS/ABOUT/About";
 import { History } from "./COMPONENTS/HISTORY/History";
 import { AdminLogin } from "./COMPONENTS/ADMIN/ADMINLOGIN/AdminLogin";
+import { Adminpage } from "./COMPONENTS/ADMIN/ADMINPAGE/Adminpage";
+import { Modifyusers } from "./COMPONENTS/ADMIN/MODIFYUSERS/Modifyusers";
 
 export const Path = () => {
   return (
@@ -16,6 +18,8 @@ export const Path = () => {
       <Route path="/about" element={<About />} />
       <Route path="/history" element={<History />} />
       <Route path="/adminlogin" element={<AdminLogin />} />
+      <Route path="/adminpage" element={<Adminpage />} />
+      <Route path="/modifyusers" element={<Modifyusers />} />
     </Routes>
   );
 };

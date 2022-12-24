@@ -14,10 +14,6 @@ export const About = () => {
           It also provide an provide an extra features like u can detect
           everything that an image contains in it.
         </p>
-        <p>
-          For example: If an image has any laptop, book or any other items then
-          it will detect it and display its name.
-        </p>
       </div>
 
       <img src={gify} className="about-img" alt="aboutImage" />

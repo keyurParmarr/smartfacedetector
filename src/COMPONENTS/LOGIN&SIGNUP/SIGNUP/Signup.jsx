@@ -6,96 +6,96 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const Signup = () => {
   const [show, setShow] = useState(false);
-  const [name, setname] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [userDetails, setUserDetails] = useState({});
   const [msg, setMsg] = useState("");
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
-  const loginHandler = async (e) => {
+  const signupData = (e) => {
+    const { name, value } = e.target;
+    setUserDetails({ ...userDetails, [name]: value });
+  };
+  const signupHandler = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/signup", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      return navigate("/app");
+    try {
+      const res = await fetch("http://localhost:5000/signup", {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(userDetails),
+      });
+      const data = await res.json();
+      if (data.success) {
+        return navigate("/app");
+      }
+      setMsg("Account already exists");
+    } catch (error) {
+      console.log(error);
     }
-    setMsg("Account already exists");
+  };
+  const style = {
+    background: "transparent",
+    borderRadius: "0",
+    borderTop: "1px solid black",
+    borderLeft: "1px solid black",
+    borderRight: "1px solid black",
+    borderBottom: "1px solid cyan",
+    outline: "none",
+    marginBottom: "5px",
+    marginTop: "5px",
+    color: "cyan",
   };
   return (
-    <div>
+    <form onSubmit={signupHandler}>
       <div className="signup-label">NAME</div>
       <Input
-        style={{
-          background: "transparent",
-          borderRadius: "0",
-          borderTop: "1px solid black",
-          borderLeft: "1px solid black",
-          borderRight: "1px solid black",
-          borderBottom: "1px solid cyan",
-          outline: "none",
-        }}
+        style={style}
         type="text"
-        marginBottom="5px"
-        marginTop="5px"
+        required={"required"}
+        name="username"
+        autoComplete="off"
         backgroundColor={"whiteAlpha.500"}
         onChange={(e) => {
-          setname(e.target.value);
+          signupData(e);
         }}
       />
       <div className="signup-label">EMAIL</div>
       <Input
-        style={{
-          background: "transparent",
-          borderRadius: "0",
-          borderTop: "1px solid black",
-          borderLeft: "1px solid black",
-          borderRight: "1px solid black",
-          borderBottom: "1px solid cyan",
-          outline: "none",
-        }}
+        style={style}
         type={"email"}
-        marginTop="5px"
-        marginBottom="5px"
+        name="email"
+        required={"required"}
+        autoComplete="off"
         backgroundColor={"whiteAlpha.500"}
         onChange={(e) => {
-          setemail(e.target.value);
+          signupData(e);
         }}
       />
       <div className="signup-label">PASSWORD</div>
       <InputGroup size="md" marginTop="5px" marginBottom="5px">
         <Input
-          style={{
-            background: "transparent",
-            borderRadius: "0",
-            borderTop: "1px solid black",
-            borderLeft: "1px solid black",
-            borderRight: "1px solid black",
-            borderBottom: "1px solid cyan",
-            outline: "none",
-          }}
+          style={style}
+          required={"required"}
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+          autoComplete="off"
+          title="Password must contain at least 1 uppercase,1 lowercase, 1 special character, 1 number,and between 8-12 characters"
           type={show ? "text" : "password"}
           backgroundColor={"whiteAlpha.500"}
-          color={"black"}
+          name="password"
           onChange={(e) => {
-            setpassword(e.target.value);
+            signupData(e);
           }}
         />
         <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm" onClick={handleClick}>
+          <Button h="1.75rem" size="sm" mt={"2"} onClick={handleClick}>
             {show ? <FaEyeSlash /> : <FaEye />}
           </Button>
         </InputRightElement>
       </InputGroup>
       <div className="signup-warningMsg">{msg}</div>
       <div className="signup-button">
-        <Button isLoading={false} onClick={loginHandler}>
+        <Button isLoading={false} type="submit">
           SIGNUP
         </Button>
       </div>
-    </div>
+    </form>
   );
 };

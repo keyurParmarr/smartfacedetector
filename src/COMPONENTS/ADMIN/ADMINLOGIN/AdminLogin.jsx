@@ -29,10 +29,16 @@ export const AdminLogin = () => {
     }
     setMsg("Invalid username or password");
   };
+  const titleData = {
+    title: "Admin Panel-Login",
+    color: "black",
+    fontsize: "33px",
+    marginTop: "10px",
+  };
 
   return (
     <>
-      <AdminNav />
+      <AdminNav titleData={titleData} />
       <div className="adminlogin-section">
         <div className="adminlogin-container">
           <div className="adminlogin-panel">

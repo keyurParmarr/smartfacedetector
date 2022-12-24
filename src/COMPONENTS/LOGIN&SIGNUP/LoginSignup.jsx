@@ -2,7 +2,6 @@ import React from "react";
 import { Tab, TabList, TabPanels, Tabs, TabPanel } from "@chakra-ui/react";
 import { Login } from "./LOGIN/Login";
 import { Signup } from "./SIGNUP/Signup";
-
 import "./LoginSignup.css";
 import { LoginSignupNav } from "./LoginSignupNav";
 

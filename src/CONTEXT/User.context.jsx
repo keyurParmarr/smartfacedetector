@@ -14,7 +14,7 @@ export const User = ({ children }) => {
   const [count, setcount] = useState(0);
   const [user, setuser] = useState({
     name: "abc",
-    count: 5,
+    count: 0,
   });
   const value = { token, settoken, user, setuser, count, setcount };
   return <UserContext.Provider value={value}> {children}</UserContext.Provider>;

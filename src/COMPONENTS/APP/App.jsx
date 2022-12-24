@@ -13,12 +13,6 @@ export const App = () => {
   const value = useContext(UserContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // if (value.token === "") {
-    //   navigate("/login");
-    // }
-  }, []);
-
   return (
     <>
       <Navigation />

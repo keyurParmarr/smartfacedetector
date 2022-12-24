@@ -7,8 +7,9 @@ import { Title } from "../TITLE/Title";
 export const Firstpage = () => {
   const titleData = {
     title: "SMART FACE DETECTOR",
-    color: "cyan",
-    fontsize: "36px",
+    color: "black",
+    fontsize: "45px",
+    marginTop: "10px",
   };
   const navigate = useNavigate();
   return (
