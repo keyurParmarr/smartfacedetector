@@ -16,3 +16,6 @@ code {
 #root {
   height: 100vh;
 }
+button:hover {
+  filter: brightness(130%);
+}

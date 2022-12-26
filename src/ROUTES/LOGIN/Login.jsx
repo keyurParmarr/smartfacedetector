@@ -2,8 +2,10 @@ import React, { useState, useContext } from "react";
 import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { UserContext } from "../../../CONTEXT/User.context";
+import { UserContext } from "../../CONTEXT/User.context";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
+import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -48,48 +50,56 @@ export const Login = () => {
 
     outline: "none",
   };
-
+  const titleData = {
+    title: "SMART FACE DETECTOR",
+    color: "black",
+    fontsize: "45px",
+    marginTop: "10px",
+  };
   return (
     <form onSubmit={loginHandler}>
-      <div className="login-label">EMAIL</div>
-      <Input
-        className="input"
-        autoComplete="off"
-        style={style}
-        name={"email"}
-        type={"email"}
-        required={"required"}
-        backgroundColor={"whiteAlpha.500"}
-        onChange={(e) => loginData(e)}
-        // aftersome time
-      />
-      <div className="login-label">PASSWORD</div>
-      <InputGroup size="md" marginTop="5px" marginBottom="5px">
+      <Loginsignupnav titleData={titleData} />
+      <Loginsignupcontainer>
+        <div className="login-title">LOGIN</div>
+        <div className="login-label">EMAIL</div>
         <Input
           className="input"
           autoComplete="off"
           style={style}
-          name={"password"}
+          name={"email"}
+          type={"email"}
           required={"required"}
-          type={show ? "text" : "password"}
           backgroundColor={"whiteAlpha.500"}
           onChange={(e) => loginData(e)}
         />
-        <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm" mt={"2"} onClick={handleClick}>
-            {show ? <FaEyeSlash /> : <FaEye />}
+        <div className="login-label">PASSWORD</div>
+        <InputGroup size="md" marginTop="5px" marginBottom="5px">
+          <Input
+            className="input"
+            autoComplete="off"
+            style={style}
+            name={"password"}
+            required={"required"}
+            type={show ? "text" : "password"}
+            backgroundColor={"whiteAlpha.500"}
+            onChange={(e) => loginData(e)}
+          />
+          <InputRightElement width="4.5rem">
+            <Button h="1.75rem" size="sm" mt={"2"} onClick={handleClick}>
+              {show ? <FaEyeSlash /> : <FaEye />}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+        <div className="atag">
+          <a href="/">Forget Password?</a>
+        </div>
+        <div className="login-warningMsg">{msg}</div>
+        <div className="login-button">
+          <Button type="submit" isLoading={false}>
+            LOGIN
           </Button>
-        </InputRightElement>
-      </InputGroup>
-      <div className="atag">
-        <a href="/">Forget Password?</a>
-      </div>
-      <div className="login-warningMsg">{msg}</div>
-      <div className="login-button">
-        <Button type="submit" isLoading={false}>
-          LOGIN
-        </Button>
-      </div>
+        </div>
+      </Loginsignupcontainer>
     </form>
   );
 };

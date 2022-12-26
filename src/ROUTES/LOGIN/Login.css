@@ -27,3 +27,9 @@
   outline: none;
   color: aqua;
 }
+.login-title {
+  text-align: center;
+  color: antiquewhite;
+  height: 40px;
+  font-size: 25px;
+}

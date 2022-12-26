@@ -11,33 +11,39 @@ export const Firstpage = () => {
     fontsize: "45px",
     marginTop: "10px",
   };
+  const style = {
+    height: "45px",
+    padding: "7px",
+    color: "white",
+    borderRadius: "10px",
+  };
   const navigate = useNavigate();
   return (
     <>
       <div className="firstpage-box">
         <div className="firstpage-data">
-          <div style={{ marginLeft: "150px" }}>.</div>
+          <div style={{ marginLeft: "300px" }}></div>
 
           <Title titleData={titleData} />
-          <div className="button-box">
-            <Button
-              colorScheme="teal"
-              size="md"
-              onClick={() => {
-                navigate("/about");
-              }}
+          <div className="loginsignupnav-button">
+            <button
+              style={{ backgroundColor: "brown", ...style }}
+              onClick={() => navigate("/admin")}
             >
-              About
-            </Button>
-            <Button
-              colorScheme="teal"
-              size="md"
-              onClick={() => {
-                navigate("/login");
-              }}
+              ADMIN LOGIN
+            </button>
+            <button
+              style={{ backgroundColor: "teal", ...style }}
+              onClick={() => navigate("/login")}
             >
-              Login/Sign Up
-            </Button>
+              LOGIN
+            </button>
+            <button
+              style={{ backgroundColor: "teal", ...style }}
+              onClick={() => navigate("/signup")}
+            >
+              SIGNUP
+            </button>
           </div>
         </div>
       </div>

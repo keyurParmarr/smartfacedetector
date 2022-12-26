@@ -1,2 +1,0 @@
-username:test@mail.com
-password:Test12@#

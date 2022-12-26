@@ -1,0 +1,14 @@
+.loginsignupnav-container {
+  display: flex;
+  justify-content: space-between;
+}
+.loginsignupnav-space {
+  margin-left: 300px;
+}
+.loginsignupnav-button {
+  display: flex;
+  width: 280px;
+  justify-content: space-between;
+  margin-right: 10px;
+  align-items: center;
+}

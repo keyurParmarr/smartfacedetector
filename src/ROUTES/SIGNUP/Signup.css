@@ -14,3 +14,9 @@
   color: rgb(240, 26, 26);
   font-size: larger;
 }
+.signup-title {
+  text-align: center;
+  color: antiquewhite;
+  height: 40px;
+  font-size: 25px;
+}
