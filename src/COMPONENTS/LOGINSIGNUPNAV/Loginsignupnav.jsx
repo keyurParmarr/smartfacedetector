@@ -13,12 +13,19 @@ export const Loginsignupnav = (props) => {
   const navigate = useNavigate();
   return (
     <div className="loginsignupnav-container">
-      <div className="loginsignupnav-space"></div>
+      <div className="loginsignupnav-space">
+        <button
+          style={{ backgroundColor: "blue", ...style }}
+          onClick={() => navigate("/about")}
+        >
+          ABOUT
+        </button>
+      </div>
       <Title titleData={props.titleData} />
       <div className="loginsignupnav-button">
         <button
           style={{ backgroundColor: "brown", ...style }}
-          onClick={() => navigate("/admin")}
+          onClick={() => navigate("/adminlogin")}
         >
           ADMIN LOGIN
         </button>

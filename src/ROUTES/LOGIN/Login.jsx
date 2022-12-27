@@ -47,7 +47,6 @@ export const Login = () => {
     color: "cyan",
     marginBottom: "5px",
     marginTop: "5px",
-
     outline: "none",
   };
   const titleData = {

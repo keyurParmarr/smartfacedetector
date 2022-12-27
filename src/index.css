@@ -17,5 +17,5 @@ code {
   height: 100vh;
 }
 button:hover {
-  filter: brightness(130%);
+  filter: brightness(110%);
 }

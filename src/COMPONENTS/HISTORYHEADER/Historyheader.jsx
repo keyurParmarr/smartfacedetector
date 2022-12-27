@@ -2,7 +2,7 @@ import React from "react";
 import "./Historyheader.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { Title } from "../../TITLE/Title";
+import { Title } from "../TITLE/Title";
 export const Historyheader = () => {
   const titleData = {
     title: "HISTORY",

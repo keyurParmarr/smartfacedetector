@@ -1,7 +1,7 @@
 import React from "react";
-import { Table } from "../TABLE/Table";
+import { Historyheader } from "../../COMPONENTS/HISTORYHEADER/Historyheader";
+import { Table } from "../../COMPONENTS/TABLE/Table";
 import "./History.css";
-import { Historyheader } from "./HISTORYHEADER/Historyheader";
 export const History = () => {
   const links = [
     "https://www.shutterstock.com/image-photo/closeup-portrait-yong-woman-casual-260nw-1554086789.jpg",

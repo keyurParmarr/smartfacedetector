@@ -10,13 +10,12 @@
 }
 .navigation-logo {
   align-items: flex-start;
-  height: 200px;
-  width: 240px;
+  height: 180px;
+  width: 220px;
 }
 
 .navigation-title {
   font-family: Quaxcites;
-  font-size: 35px;
   font-weight: 300;
   color: #31dee1;
 }

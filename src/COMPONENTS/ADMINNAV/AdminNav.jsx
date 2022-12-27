@@ -1,6 +1,7 @@
 import React from "react";
-import "./AdminNav.css";
 import { Title } from "../TITLE/Title";
+import "./AdminNav.css";
+
 export const AdminNav = (props) => {
   return (
     <div className="admin-nav">

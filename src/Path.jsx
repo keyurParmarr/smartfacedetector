@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import App from "./COMPONENTS/APP/App";
-import { Firstpage } from "./COMPONENTS/FIRSTPAGE/Firstpage";
-import { About } from "./COMPONENTS/ABOUT/About";
-import { History } from "./COMPONENTS/HISTORY/History";
-import { AdminLogin } from "./COMPONENTS/ADMIN/ADMINLOGIN/AdminLogin";
-import { Adminpage } from "./COMPONENTS/ADMIN/ADMINPAGE/Adminpage";
-import { Modifyusers } from "./COMPONENTS/ADMIN/MODIFYUSERS/Modifyusers";
-import { Signup } from "./ROUTES/SIGNUP/Signup";
+import { Firstpage } from "./ROUTES/FIRSTPAGE/Firstpage";
 import { Login } from "./ROUTES/LOGIN/Login";
+import { Signup } from "./ROUTES/SIGNUP/Signup";
+import { App } from "./ROUTES/APP/App";
+import { About } from "./ROUTES/ABOUT/About";
+import { History } from "./ROUTES/HISTORY/History";
+import { AdminLogin } from "./ROUTES/ADMINLOGIN/AdminLogin";
+import { Adminpage } from "./ROUTES/ADMINPAGE/Adminpage";
+import { Modifyusers } from "./ROUTES/MODIFYUSERS/Modifyusers";
 
 export const Path = () => {
   return (

@@ -1,12 +1,13 @@
 import React from "react";
-import { Table } from "../../TABLE/Table";
-import { Title } from "../../TITLE/Title";
+import { Table } from "../../COMPONENTS/TABLE/Table";
+import { Title } from "../../COMPONENTS/TITLE/Title";
+
 import "./Modifyusers.css";
 export const Modifyusers = () => {
   const titleData = {
     title: "Modify Users",
     color: "black",
-    fontsize: "33px",
+    fontsize: "45px",
     marginTop: "10px",
   };
   const data = [

@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AdminNav } from "../AdminNav";
+import { AdminNav } from "../../COMPONENTS/ADMINNAV/AdminNav";
+
 import "./Adminpage.css";
 export const Adminpage = () => {
   const navigate = useNavigate();
   const titleData = {
     title: "Admin Page",
     color: "black",
-    fontsize: "33px",
+    fontsize: "45px",
     marginTop: "10px",
   };
   return (

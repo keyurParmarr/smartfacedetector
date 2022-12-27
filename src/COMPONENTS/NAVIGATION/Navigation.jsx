@@ -1,28 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Profileinfo } from "../PROFILEINFO/Profileinfo";
 import { Signout } from "../PROFILEINFO/Signout";
-import { Title } from "../../TITLE/Title";
 import logo from "./logo3.png";
 import { Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import "./Navigation.css";
-import { UserContext } from "../../../CONTEXT/User.context";
+import { Title } from "../TITLE/Title";
 
 export const Navigation = () => {
   const [profile, setprofile] = useState(false);
   const [signout, setsignout] = useState(false);
 
-  const value = useContext(UserContext);
   const navigate = useNavigate();
 
   const titleData = {
     title: "SMART FACE DETECTOR",
-    color: "cyan",
-    fontsize: "36px",
+    color: "black",
+    fontsize: "45px",
+    marginTop: "10px",
   };
   return (
     <div className="navigation-box">
-      <img src={logo} className="navigation-logo" />
+      <img src={logo} className="navigation-logo" alt="img" />
       <Title titleData={titleData} />
       <div className="navigation-profile">
         <Menu>
