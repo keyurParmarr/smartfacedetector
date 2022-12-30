@@ -9,9 +9,12 @@ import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Logi
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState({
+    email: "test@mail.com",
+    password: "Test12@#",
+  });
   const [msg, setMsg] = useState("");
-  const value = useContext(UserContext);
+  const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const loginData = (e) => {
     const { name, value } = e.target;
@@ -27,8 +30,10 @@ export const Login = () => {
         body: JSON.stringify(userDetails),
       });
       const data = await res.json();
+
       console.log(data);
       if (data.success) {
+        setuser(data);
         return navigate("/app");
       }
       setMsg("Invalid username or password");
@@ -67,7 +72,7 @@ export const Login = () => {
           style={style}
           name={"email"}
           type={"email"}
-          required={"required"}
+          // required={"required"}
           backgroundColor={"whiteAlpha.500"}
           onChange={(e) => loginData(e)}
         />
@@ -78,7 +83,7 @@ export const Login = () => {
             autoComplete="off"
             style={style}
             name={"password"}
-            required={"required"}
+            // required={"required"}
             type={show ? "text" : "password"}
             backgroundColor={"whiteAlpha.500"}
             onChange={(e) => loginData(e)}

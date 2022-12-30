@@ -5,17 +5,36 @@ export const UserContext = createContext({
   settoken: () => {},
   user: {},
   setuser: () => {},
-  count: 0,
-  setcount: () => {},
+  history: [],
+  sethistory: () => {},
+  url: "",
+  seturl: () => {},
+  box: [],
+  setbox: () => {},
+  localCount: 0,
+  setlocalCount: () => {},
 });
 
 export const User = ({ children }) => {
   const [token, settoken] = useState("");
-  const [count, setcount] = useState(0);
-  const [user, setuser] = useState({
-    name: "abc",
-    count: 0,
-  });
-  const value = { token, settoken, user, setuser, count, setcount };
+  const [history, sethistory] = useState([]);
+  const [url, seturl] = useState("");
+  const [box, setbox] = useState([]);
+  const [user, setuser] = useState({});
+  const [localCount, setlocalCount] = useState(0);
+  const value = {
+    token,
+    settoken,
+    user,
+    setuser,
+    history,
+    sethistory,
+    url,
+    seturl,
+    box,
+    setbox,
+    localCount,
+    setlocalCount,
+  };
   return <UserContext.Provider value={value}> {children}</UserContext.Provider>;
 };

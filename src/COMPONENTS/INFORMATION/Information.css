@@ -3,10 +3,13 @@
   justify-content: center;
   height: 150px;
   margin-top: 8px;
+  color: aliceblue;
   margin-bottom: 8px;
 }
 .information-data {
   text-align: center;
+  color: aliceblue;
+
   width: 70%;
   font-size: xx-large;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;

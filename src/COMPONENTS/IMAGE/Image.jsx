@@ -1,17 +1,20 @@
 import React from "react";
+import { useContext } from "react";
+import { UserContext } from "../../CONTEXT/User.context";
 import "./Image.css";
 
-export const Image = (props) => {
+export const Image = () => {
   let b = {
-    width: "500px",
-    height: "auto",
+    width: "auto",
+    height: "450px",
   };
+  const { box, url } = useContext(UserContext);
 
   return (
     <div className="image-box">
       <div className="image-container">
-        <img style={b} src={props.url} id="input" alt={""}></img>
-        {props.box.map((data, i) => {
+        <img style={b} src={url} id="input" alt={""}></img>
+        {box.map((data, i) => {
           return (
             <div
               key={i}

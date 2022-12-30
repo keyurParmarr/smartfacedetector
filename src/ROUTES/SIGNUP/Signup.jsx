@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
 import "./Signup.css";
+import { UserContext } from "../../CONTEXT/User.context";
+
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
+import { useContext } from "react";
 
 export const Signup = () => {
   const [show, setShow] = useState(false);
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState({
+    username: "test",
+    email: "test@mail.com",
+    password: "Test12@#",
+  });
+  const { setuser } = useContext(UserContext);
   const [msg, setMsg] = useState("");
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
@@ -26,6 +34,7 @@ export const Signup = () => {
       });
       const data = await res.json();
       if (data.success) {
+        setuser(data);
         return navigate("/app");
       }
       setMsg("Account already exists");
@@ -60,7 +69,7 @@ export const Signup = () => {
         <Input
           style={style}
           type="text"
-          required={"required"}
+          // required={"required"}
           name="username"
           autoComplete="off"
           backgroundColor={"whiteAlpha.500"}
@@ -73,7 +82,7 @@ export const Signup = () => {
           style={style}
           type={"email"}
           name="email"
-          required={"required"}
+          // required={"required"}
           autoComplete="off"
           backgroundColor={"whiteAlpha.500"}
           onChange={(e) => {
@@ -84,7 +93,7 @@ export const Signup = () => {
         <InputGroup size="md" marginTop="5px" marginBottom="5px">
           <Input
             style={style}
-            required={"required"}
+            // required={"required"}
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
             autoComplete="off"
             title="Password must contain at least 1 uppercase,1 lowercase, 1 special character, 1 number,and between 8-12 characters"

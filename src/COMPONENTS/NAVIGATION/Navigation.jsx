@@ -28,7 +28,7 @@ export const Navigation = () => {
           <MenuButton>
             <Avatar size="2xl" />
           </MenuButton>
-          <MenuList backgroundColor={"gray.400"} marginTop={"-3"}>
+          <MenuList backgroundColor={"gray.400"} marginTop={"-0.5"}>
             <MenuItem
               onClick={() => {
                 navigate("/history");

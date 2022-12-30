@@ -11,9 +11,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
+import { Scroll } from "../SCROLL/Scroll";
 export const Table = (props) => {
   const location = useLocation();
-
+  console.log(props.data);
   const historyComp = (link, i) => {
     return (
       <tr key={i} className="table-data-row">
@@ -21,14 +22,18 @@ export const Table = (props) => {
         <td>
           <Popover placement="bottom">
             <PopoverTrigger>
-              <Button>{link}</Button>
+              <Button>
+                {link.history.length > 120
+                  ? `${link.history.slice(0, 120)}${"..."}`
+                  : link.history}
+              </Button>
             </PopoverTrigger>
             <PopoverContent>
               <PopoverHeader fontWeight="semibold">Image</PopoverHeader>
               <PopoverArrow />
               <PopoverCloseButton />
               <PopoverBody>
-                <img src={link} className="img" alt="" />
+                <img src={link.history} className="img" alt="" />
               </PopoverBody>
             </PopoverContent>
           </Popover>
@@ -55,38 +60,40 @@ export const Table = (props) => {
   return (
     <div className="table-container">
       <div className="table">
-        <table>
-          <thead>
-            <tr className="table-heading-row">
-              {location.pathname === "/history" ? (
-                <>
-                  <th>Sr.No</th>
-                  <th>Links</th>
-                </>
-              ) : (
-                <>
-                  <th>Id</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Faces Detected</th>
-                  <th>History</th>
-                  <th>Remove</th>
-                  <th>Block</th>
-                </>
-              )}
-            </tr>
-          </thead>
+        <Scroll>
+          <table>
+            <thead>
+              <tr className="table-heading-row">
+                {location.pathname === "/history" ? (
+                  <>
+                    <th>Sr.No</th>
+                    <th>Links</th>
+                  </>
+                ) : (
+                  <>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Faces Detected</th>
+                    <th>History</th>
+                    <th>Remove</th>
+                    <th>Block</th>
+                  </>
+                )}
+              </tr>
+            </thead>
 
-          <tbody>
-            {location.pathname === "/history"
-              ? props.data.map((link, i) => {
-                  return historyComp(link, i);
-                })
-              : props.data.map((userData, i) => {
-                  return userDataComp(userData, i);
-                })}
-          </tbody>
-        </table>
+            <tbody>
+              {location.pathname === "/history"
+                ? props.data.map((link, i) => {
+                    return historyComp(link, i);
+                  })
+                : props.data.map((userData, i) => {
+                    return userDataComp(userData, i);
+                  })}
+            </tbody>
+          </table>
+        </Scroll>
       </div>
     </div>
   );

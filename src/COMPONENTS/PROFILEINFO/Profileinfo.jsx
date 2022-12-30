@@ -16,7 +16,7 @@ import { useContext } from "react";
 import { UserContext } from "../../CONTEXT/User.context";
 
 export const Profileinfo = (props) => {
-  const value = useContext(UserContext);
+  const { user } = useContext(UserContext);
   return (
     <div>
       <Modal isOpen={props.profile} isCentered>
@@ -33,8 +33,11 @@ export const Profileinfo = (props) => {
           />
           <ModalBody>
             <div className="profileinfo-details">
-              <h4>Member since:{value.user.joined}</h4>
-              <h2>Name: {value.user.name}</h2>
+              <h4>
+                Member since:
+                {new Date(user.joined).toLocaleString("hi-IN").slice(0, 10)}
+              </h4>
+              <h2>Name: {user.name}</h2>
             </div>
             <div className="profileinfo-input">
               <Input type="text" placeholder="Edit Name" padding={1} />
