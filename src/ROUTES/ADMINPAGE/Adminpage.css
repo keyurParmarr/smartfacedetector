@@ -1,26 +1,24 @@
 .admin-box {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-top: 50px;
 }
 .admin-faceDetect {
   width: 45%;
   height: 750px;
   display: flex;
+  border-radius: 25px;
   justify-content: center;
   align-items: center;
+  background-color: aqua;
 }
 .admin-modifyUsers {
   width: 45%;
   height: 750px;
   display: flex;
+  border-radius: 25px;
   justify-content: center;
   align-items: center;
-}
-.admin-faceDetect:hover {
-  background-color: aqua;
-}
-.admin-modifyUsers:hover {
   background-color: brown;
 }
 .admin-text {

@@ -1,25 +1,51 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Historyheader } from "../../COMPONENTS/HISTORYHEADER/Historyheader";
 import { Table } from "../../COMPONENTS/TABLE/Table";
 import { UserContext } from "../../CONTEXT/User.context";
 import "./History.css";
 export const History = () => {
-  const { user } = useContext(UserContext);
-  const [links, setLinks] = useState([]);
+  const { user, setuser, sethistory, history } = useContext(UserContext);
+  const navigate = useNavigate();
   useEffect(() => {
-    const getHistoryData = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      if (!user.id) {
+        fetchData();
+      }
+    } else {
+      navigate("/login");
+      return;
+    }
+
+    async function fetchData() {
+      const data = await fetch("http://localhost:5000/tokenlogin", {
+        method: "post",
+        headers: { "content-type": "application/json", authorization: token },
+      });
+      const user = await data.json();
+      setuser(user);
+
+      const resp = await fetch(`http://localhost:5000/history/${user.id}`);
+      const history = await resp.json();
+      console.log(history);
+
+      sethistory(history.historyData);
+      return;
+    }
+
+    const fetchHistory = async () => {
       const resp = await fetch(`http://localhost:5000/history/${user.id}`);
       const data = await resp.json();
-
-      setLinks(data.historyData);
+      sethistory(data.historyData);
     };
-    getHistoryData();
+    fetchHistory();
   }, []);
 
   return (
     <>
       <Historyheader />
-      <Table data={links} />
+      <Table data={history} />
     </>
   );
 };

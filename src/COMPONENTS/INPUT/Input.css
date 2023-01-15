@@ -36,9 +36,19 @@
 }
 
 .input-button {
-  width: 130px;
+  width: 120px;
   border: 2px solid wheat;
+  margin-right: 0.5px;
+  margin-left: 1px;
 }
 .input-button:hover {
+  background-color: greenyellow;
+}
+.input-clearbtn {
+  border: 2px solid wheat;
+  width: 80px;
+  margin-left: 0.5px;
+}
+.input-clearbtn:hover {
   background-color: greenyellow;
 }

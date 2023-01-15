@@ -33,6 +33,7 @@ export const Login = () => {
 
       console.log(data);
       if (data.success) {
+        localStorage.setItem("token", data.token);
         setuser(data);
         return navigate("/app");
       }

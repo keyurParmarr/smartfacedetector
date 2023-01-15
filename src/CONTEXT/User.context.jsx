@@ -1,8 +1,8 @@
 import React, { createContext, useState } from "react";
 
 export const UserContext = createContext({
-  token: "",
-  settoken: () => {},
+  modifyusers: [],
+  setmodifyusers: () => {},
   user: {},
   setuser: () => {},
   history: [],
@@ -16,15 +16,15 @@ export const UserContext = createContext({
 });
 
 export const User = ({ children }) => {
-  const [token, settoken] = useState("");
+  const [modifyusers, setmodifyusers] = useState([]);
   const [history, sethistory] = useState([]);
   const [url, seturl] = useState("");
   const [box, setbox] = useState([]);
   const [user, setuser] = useState({});
   const [localCount, setlocalCount] = useState(0);
   const value = {
-    token,
-    settoken,
+    modifyusers,
+    setmodifyusers,
     user,
     setuser,
     history,

@@ -10,6 +10,11 @@ export const InputComp = () => {
   const handleClick = () => {
     setimgurl("");
   };
+  const clearData = () => {
+    seturl("");
+    setbox([]);
+    setlocalCount(0);
+  };
   const fetchData = async () => {
     seturl(imgurl);
 
@@ -78,6 +83,16 @@ export const InputComp = () => {
               }}
             >
               DETECT
+            </Button>
+            <Button
+              height={"49px"}
+              className="input-clearbtn"
+              colorScheme={"red"}
+              onClick={() => {
+                clearData();
+              }}
+            >
+              CLEAR
             </Button>
           </div>
         </div>
