@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
 import "./Image.css";
 

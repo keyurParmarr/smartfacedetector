@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Historyheader } from "../../COMPONENTS/HISTORYHEADER/Historyheader";
 import { Table } from "../../COMPONENTS/TABLE/Table";
 import { UserContext } from "../../CONTEXT/User.context";
@@ -14,6 +15,9 @@ export const History = () => {
         fetchData();
       }
     } else {
+      toast.warning("PLEASE LOGIN TO PROCEED", {
+        theme: "colored",
+      });
       navigate("/login");
       return;
     }

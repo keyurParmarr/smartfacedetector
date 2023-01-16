@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Table } from "../../COMPONENTS/TABLE/Table";
 import { Title } from "../../COMPONENTS/TITLE/Title";
 import { UserContext } from "../../CONTEXT/User.context";
@@ -13,15 +14,37 @@ export const Modifyusers = () => {
     fontsize: "45px",
     marginTop: "10px",
   };
-  const { modifyusers, setmodifyusers } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { modifyusers, setmodifyusers, user, setuser } =
+    useContext(UserContext);
+
   useEffect(() => {
-    async function fetchModifyUsers() {
-      const resp = await fetch("http://localhost:5000/modifyusers");
-      const data = await resp.json();
-      console.log(data);
-      setmodifyusers(data.modifyusers);
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token) {
+      if (!user.id) {
+        fetchData();
+      }
+      fetchModifyUsers();
+      async function fetchData() {
+        const data = await fetch("http://localhost:5000/tokenlogin", {
+          method: "post",
+          headers: { "content-type": "application/json", authorization: token },
+        });
+        const user = await data.json();
+        console.log(user);
+        setuser(user);
+      }
+      async function fetchModifyUsers() {
+        const resp = await fetch("http://localhost:5000/modifyusers");
+        const data = await resp.json();
+        console.log(data);
+        setmodifyusers(data.modifyusers);
+      }
+    } else {
+      navigate("/adminlogin");
+      return;
     }
-    fetchModifyUsers();
   }, []);
 
   return (

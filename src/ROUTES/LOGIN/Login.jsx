@@ -6,6 +6,7 @@ import { UserContext } from "../../CONTEXT/User.context";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
+import { toast } from "react-toastify";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -13,16 +14,23 @@ export const Login = () => {
     email: "test@mail.com",
     password: "Test12@#",
   });
-  const [msg, setMsg] = useState("");
   const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const loginData = (e) => {
     const { name, value } = e.target;
     setUserDetails({ ...userDetails, [name]: value });
   };
-
+  const toastStyle = {
+    theme: "colored",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+  };
   const loginHandler = async (e) => {
     e.preventDefault();
+    toast.dismiss();
+    const loadingToast = toast.loading("LOGGING IN", toastStyle);
     try {
       const res = await fetch("http://localhost:5000/login", {
         method: "post",
@@ -30,15 +38,32 @@ export const Login = () => {
         body: JSON.stringify(userDetails),
       });
       const data = await res.json();
-
+      toast.update(loadingToast, {
+        render: "SUCCESSFULLY LOGGED IN",
+        type: "success",
+        isLoading: false,
+        ...toastStyle,
+      });
       console.log(data);
       if (data.success) {
         localStorage.setItem("token", data.token);
         setuser(data);
         return navigate("/app");
+      } else {
+        toast.update(loadingToast, {
+          render: data.message,
+          type: "warning",
+          isLoading: false,
+          ...toastStyle,
+        });
       }
-      setMsg("Invalid username or password");
     } catch (error) {
+      toast.update(loadingToast, {
+        render: "SOMETHING WENT WRONG",
+        type: "error",
+        isLoading: false,
+        ...toastStyle,
+      });
       console.log(error);
     }
   };
@@ -65,7 +90,18 @@ export const Login = () => {
     <form onSubmit={loginHandler}>
       <Loginsignupnav titleData={titleData} />
       <Loginsignupcontainer>
-        <div className="login-title">LOGIN</div>
+        <div className="login-title">
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: "green",
+              padding: "3px",
+              borderRadius: "5px",
+            }}
+          >
+            LOGIN
+          </div>
+        </div>
         <div className="login-label">EMAIL</div>
         <Input
           className="input"
@@ -98,11 +134,9 @@ export const Login = () => {
         <div className="atag">
           <a href="/">Forget Password?</a>
         </div>
-        <div className="login-warningMsg">{msg}</div>
+
         <div className="login-button">
-          <Button type="submit" isLoading={false}>
-            LOGIN
-          </Button>
+          <Button type="submit">LOGIN</Button>
         </div>
       </Loginsignupcontainer>
     </form>

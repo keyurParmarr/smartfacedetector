@@ -27,6 +27,10 @@ thead {
   background-color: rgb(133, 226, 255);
   box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
 }
+.table-data-blockrow {
+  background-color: rgb(237, 6, 202);
+  box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
+}
 
 .table-container {
   display: flex;

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminNav } from "../../COMPONENTS/ADMINNAV/AdminNav";
+import { UserContext } from "../../CONTEXT/User.context";
 
 import "./Adminpage.css";
 export const Adminpage = () => {
+  const { setuser, user } = useContext(UserContext);
+
   const navigate = useNavigate();
   const titleData = {
     title: "Admin Page",
@@ -11,6 +15,28 @@ export const Adminpage = () => {
     fontsize: "45px",
     marginTop: "10px",
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token) {
+      if (!user.id) {
+        fetchData();
+      }
+      async function fetchData() {
+        const data = await fetch("http://localhost:5000/tokenlogin", {
+          method: "post",
+          headers: { "content-type": "application/json", authorization: token },
+        });
+        const user = await data.json();
+        console.log(user);
+        setuser(user);
+      }
+    } else {
+      navigate("/adminlogin");
+      return;
+    }
+  }, []);
+
   return (
     <div>
       <AdminNav titleData={titleData} />

@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
 import "./Signup.css";
 import { UserContext } from "../../CONTEXT/User.context";
-
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 export const Signup = () => {
   const [show, setShow] = useState(false);
@@ -17,31 +17,58 @@ export const Signup = () => {
     password: "Test12@#",
   });
   const { setuser } = useContext(UserContext);
-  const [msg, setMsg] = useState("");
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const signupData = (e) => {
     const { name, value } = e.target;
     setUserDetails({ ...userDetails, [name]: value });
   };
+  const toastStyle = {
+    theme: "colored",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+  };
   const signupHandler = async (e) => {
     e.preventDefault();
+    toast.dismiss();
+    const loadingToast = toast.loading("CREATING ACCOUNT", toastStyle);
     try {
       const res = await fetch("http://localhost:5000/signup", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(userDetails),
       });
+
       const data = await res.json();
+      toast.update(loadingToast, {
+        render: "ACCOUNT CREATED",
+        type: "success",
+        isLoading: false,
+        ...toastStyle,
+      });
       console.log(data);
       if (data.success) {
         localStorage.setItem("token", data.token);
         setuser(data);
         return navigate("/app");
+      } else {
+        toast.update(loadingToast, {
+          render: data.message,
+          type: "warning",
+          isLoading: false,
+          ...toastStyle,
+        });
       }
-      setMsg("Account already exists");
     } catch (error) {
       console.log(error);
+      toast.update(loadingToast, {
+        render: "SOMETHING WENT WRONG",
+        type: "error",
+        isLoading: false,
+        ...toastStyle,
+      });
     }
   };
   const style = {
@@ -66,7 +93,18 @@ export const Signup = () => {
     <form onSubmit={signupHandler}>
       <Loginsignupnav titleData={titleData} />
       <Loginsignupcontainer>
-        <div className="signup-title">SIGNUP</div>
+        <div className="signup-title">
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: "teal",
+              padding: "3px",
+              borderRadius: "5px",
+            }}
+          >
+            SIGNUP
+          </div>
+        </div>
         <div className="signup-label">NAME</div>
         <Input
           style={style}
@@ -112,7 +150,6 @@ export const Signup = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <div className="signup-warningMsg">{msg}</div>
         <div className="signup-button">
           <Button isLoading={false} type="submit">
             SIGNUP

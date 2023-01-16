@@ -5,6 +5,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { UserContext } from "../../CONTEXT/User.context";
+import { toast } from "react-toastify";
 
 export const AdminLogin = () => {
   const navigate = useNavigate();
@@ -12,23 +13,57 @@ export const AdminLogin = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [msg, setMsg] = useState("");
-  const value = useContext(UserContext);
+  const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
-
+  const toastStyle = {
+    theme: "colored",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+  };
   const loginHandler = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/login", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    console.log(data);
-    if (data.success) {
-      value.setuser(data);
-      return navigate("/app");
+    toast.dismiss();
+    const loadingToast = toast.loading("LOGGING IN", toastStyle);
+    try {
+      const res = await fetch("http://localhost:5000/adminlogin", {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          email: "admin@mail.com",
+          password: "Admin12@#",
+        }),
+      });
+      const data = await res.json();
+      toast.update(loadingToast, {
+        render: "SUCCESSFULLY LOGGED IN",
+        type: "success",
+        isLoading: false,
+        ...toastStyle,
+      });
+      console.log(data);
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        setuser(data);
+        return navigate("/adminpage");
+      } else {
+        toast.update(loadingToast, {
+          render: data.message,
+          type: "warning",
+          isLoading: false,
+          ...toastStyle,
+        });
+      }
+    } catch (error) {
+      toast.update(loadingToast, {
+        render: "SOMETHING WENT WRONG",
+        type: "error",
+        isLoading: false,
+        ...toastStyle,
+      });
+      console.log(error);
     }
-    setMsg("Invalid username or password");
   };
   const titleData = {
     title: "SMART FACE DETECTOR",
@@ -54,15 +89,27 @@ export const AdminLogin = () => {
       <form onSubmit={loginHandler}>
         <Loginsignupnav titleData={titleData} />
         <Loginsignupcontainer>
-          <div className="login-title">ADMIN-LOGIN</div>
+          <div className="login-title">
+            <div
+              style={{
+                display: "inline-block",
+                backgroundColor: "brown",
+                padding: "3px",
+                borderRadius: "5px",
+              }}
+            >
+              ADMIN-LOGIN
+            </div>
+          </div>
           <div className="login-label">EMAIL</div>
           <Input
             className="input"
             autoComplete="off"
             style={style}
+            value={"admin@mail.com"}
             name={"email"}
             type={"email"}
-            required={"required"}
+            // required={"required"}
             backgroundColor={"whiteAlpha.500"}
             onChange={(e) => setemail(e.target.value)}
           />
@@ -73,7 +120,8 @@ export const AdminLogin = () => {
               autoComplete="off"
               style={style}
               name={"password"}
-              required={"required"}
+              value={"Admin12@#"}
+              // required={"required"}
               type={show ? "text" : "password"}
               backgroundColor={"whiteAlpha.500"}
               onChange={(e) => setpassword(e.target.value)}

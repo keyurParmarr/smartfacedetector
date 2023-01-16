@@ -1,5 +1,6 @@
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import React, { useState, useContext } from "react";
+import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
 import "./Input.css";
 
@@ -16,6 +17,16 @@ export const InputComp = () => {
     setlocalCount(0);
   };
   const fetchData = async () => {
+    if (imgurl === "") {
+      return toast.error("PLEASE ENTER URL/LINK", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        theme: "colored",
+      });
+    }
     seturl(imgurl);
 
     const resp = await fetch("http://localhost:5000/imagebox", {
@@ -27,22 +38,26 @@ export const InputComp = () => {
       }),
     });
     const { data, userData } = await resp.json();
-    const { height, width } = document.getElementById("input");
-    const boxData = data.outputs[0].data.regions.map((i) => {
-      const clarfaiim = i.region_info.bounding_box;
-      const w = Number(width);
-      const h = Number(height);
+    if (data.message) {
+      toast.error(data.message);
+    } else {
+      const { height, width } = document.getElementById("input");
+      const boxData = data.outputs[0].data.regions.map((i) => {
+        const clarfaiim = i.region_info.bounding_box;
+        const w = Number(width);
+        const h = Number(height);
 
-      return {
-        leftCol: clarfaiim.left_col * w,
-        rightCol: w - clarfaiim.right_col * w,
-        topRow: clarfaiim.top_row * h,
-        bottomRow: h - clarfaiim.bottom_row * h,
-      };
-    });
-    setuser(userData[0]);
-    setlocalCount(boxData.length);
-    setbox(boxData);
+        return {
+          leftCol: clarfaiim.left_col * w,
+          rightCol: w - clarfaiim.right_col * w,
+          topRow: clarfaiim.top_row * h,
+          bottomRow: h - clarfaiim.bottom_row * h,
+        };
+      });
+      setuser(userData[0]);
+      setlocalCount(boxData.length);
+      setbox(boxData);
+    }
   };
 
   return (

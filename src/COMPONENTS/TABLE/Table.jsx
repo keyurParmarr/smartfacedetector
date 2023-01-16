@@ -10,14 +10,37 @@ import {
   PopoverCloseButton,
   Button,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Scroll } from "../SCROLL/Scroll";
+import { UserContext } from "../../CONTEXT/User.context";
 export const Table = (props) => {
+  const { setmodifyusers, sethistory } = useContext(UserContext);
+  const navigate = useNavigate();
   const location = useLocation();
-  const blockUsers = async (id) => {
-    console.log(id);
-    const res = await fetch(`http://localhost:5000/blockusers/${id}`);
+  const blockUnblockUsers = async ({ request, id }) => {
+    const blockdata = { request, id };
+    const res = await fetch(`http://localhost:5000/blockusers`, {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(blockdata),
+    });
     const data = await res.json();
+    console.log(data);
+    setmodifyusers(data);
+  };
+  const historyUsers = async (id) => {
+    console.log(id);
+    const res = await fetch(`http://localhost:5000/history/${id}`);
+    const data = await res.json();
+    console.log(data);
+    sethistory(data.historyData);
+    navigate("/history");
+  };
+  const removeUsers = async (id) => {
+    const res = await fetch(`http://localhost:5000/removeusers/${id}`);
+    const data = await res.json();
+    console.log(data);
+    setmodifyusers(data);
   };
 
   const historyComp = (link, i) => {
@@ -47,54 +70,69 @@ export const Table = (props) => {
     );
   };
   const userDataComp = (data, i) => {
-    return (
-      <>
-        <tr key={i} className="table-data-row">
-          <td>{data.id}</td>
-          <td>{data.name}</td>
-          <td>{data.email}</td>
-          <td>{data.entries}</td>
-          <td>{data.joined?.slice(0, 10)}</td>
-          <td>
-            <button
-              style={{
-                backgroundColor: "purple",
-                color: "white",
-                padding: "3px",
-                borderRadius: "10px",
-              }}
-            >
-              HISTORY
-            </button>
-          </td>
-          <td>
-            <button
-              style={{
-                backgroundColor: "orange",
-                color: "white",
-                padding: "3px",
-                borderRadius: "10px",
-              }}
-            >
-              REMOVE
-            </button>
-          </td>
-          <td>
-            <button
-              style={{
-                backgroundColor: "red",
-                color: "white",
-                padding: "3px",
-                borderRadius: "10px",
-              }}
-              onClick={() => blockUsers(data.id)}
-            >
-              BLOCK
-            </button>
-          </td>
-        </tr>
-      </>
-    );
+    console.log(data.isblocked);
+    if (!data.isadmin)
+      return (
+        <>
+          <tr
+            key={i}
+            className={
+              data.isblocked ? "table-data-blockrow" : "table-data-row"
+            }
+          >
+            <td>{data.id}</td>
+            <td>{data.name}</td>
+            <td>{data.email}</td>
+            <td>{data.entries}</td>
+            <td>{data.joined?.slice(0, 10)}</td>
+            <td>
+              <button
+                style={{
+                  backgroundColor: "purple",
+                  color: "white",
+                  padding: "3px",
+                  borderRadius: "10px",
+                }}
+                onClick={() => {
+                  historyUsers(data.id);
+                }}
+              >
+                HISTORY
+              </button>
+            </td>
+            <td>
+              <button
+                style={{
+                  backgroundColor: "orange",
+                  color: "white",
+                  padding: "3px",
+                  borderRadius: "10px",
+                }}
+                onClick={() => removeUsers(data.id)}
+              >
+                REMOVE
+              </button>
+            </td>
+            <td>
+              <button
+                style={{
+                  backgroundColor: "red",
+                  color: "white",
+                  padding: "3px",
+                  borderRadius: "10px",
+                }}
+                onClick={() =>
+                  data.isblocked
+                    ? blockUnblockUsers({ request: "unblock", id: data.id })
+                    : blockUnblockUsers({ request: "block", id: data.id })
+                }
+              >
+                {data.isblocked ? "UNBLOCK" : "BLOCK"}
+              </button>
+            </td>
+          </tr>
+        </>
+      );
   };
   let scroll = false;
   if (props.data.length > 10) scroll = true;
