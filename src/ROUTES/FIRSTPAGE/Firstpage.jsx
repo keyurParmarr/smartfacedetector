@@ -12,9 +12,7 @@ export const Firstpage = () => {
 
   return (
     <>
-      <div className="firstpage-box">
-        <Loginsignupnav titleData={titleData} />
-      </div>
+      <div className="firstpage-box"></div>
     </>
   );
 };

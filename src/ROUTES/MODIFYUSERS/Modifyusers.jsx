@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
+import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Table } from "../../COMPONENTS/TABLE/Table";
 import { Title } from "../../COMPONENTS/TITLE/Title";
@@ -49,8 +50,20 @@ export const Modifyusers = () => {
 
   return (
     <div>
-      <div className="Modifyusers-nav">
+      <div className="modifyusers-nav">
+        <div className="modifyusers-backbtn">
+          <button
+            onClick={() => {
+              navigate("/adminpage");
+            }}
+          >
+            <FaArrowLeft
+              style={{ background: "none", alignContent: "flex-start" }}
+            />
+          </button>
+        </div>
         <Title titleData={titleData} />
+        <div className="modifyusers-extra"></div>
       </div>
 
       <Table data={modifyusers} />

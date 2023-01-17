@@ -83,15 +83,9 @@ export const Signup = () => {
     marginTop: "5px",
     color: "cyan",
   };
-  const titleData = {
-    title: "SMART FACE DETECTOR",
-    color: "black",
-    fontsize: "45px",
-    marginTop: "10px",
-  };
+
   return (
     <form onSubmit={signupHandler}>
-      <Loginsignupnav titleData={titleData} />
       <Loginsignupcontainer>
         <div className="signup-title">
           <div

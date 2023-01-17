@@ -1,10 +1,17 @@
 import React from "react";
+import { Title } from "../../COMPONENTS/TITLE/Title";
 import "./About.css";
 import gify from "./gify.gif";
 export const About = () => {
+  const titleData = {
+    title: "ABOUT",
+    color: "black",
+    fontsize: "45px",
+    marginTop: "10px",
+  };
   return (
     <div className="about-box">
-      <div className="about-title">About</div>
+      <Title titleData={titleData} />
       <div className="about-info">
         <p>
           This Face Detector will detect all the faces that an image contain in

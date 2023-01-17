@@ -9,12 +9,23 @@ import {
   AlertDialogBody,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Signout = (props) => {
   const navigate = useNavigate();
 
-  const signOutHandler = () => {
-    navigate("/");
+  const signOutHandler = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`http://localhost:5000/signout`, {
+        method: "post",
+        headers: { "content-type": "application/json", authorization: token },
+      });
+      localStorage.removeItem("token");
+      navigate("/");
+    } catch (error) {
+      toast.error("error");
+    }
   };
   return (
     <div>

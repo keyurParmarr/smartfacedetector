@@ -9,17 +9,26 @@ import { History } from "./ROUTES/HISTORY/History";
 import { AdminLogin } from "./ROUTES/ADMINLOGIN/AdminLogin";
 import { Adminpage } from "./ROUTES/ADMINPAGE/Adminpage";
 import { Modifyusers } from "./ROUTES/MODIFYUSERS/Modifyusers";
+import { Loginsignupnav } from "./COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 
 export const Path = () => {
+  const titleData = {
+    title: "SMART FACE DETECTOR",
+    color: "black",
+    fontsize: "45px",
+    marginTop: "10px",
+  };
   return (
     <Routes>
-      <Route path="/" element={<Firstpage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/" element={<Loginsignupnav titleData={titleData} />}>
+        <Route index element={<Firstpage />} />
+        <Route path="login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/about" element={<About />} />
+      </Route>
       <Route path="/app" element={<App />} />
-      <Route path="/about" element={<About />} />
       <Route path="/history" element={<History />} />
-      <Route path="/adminlogin" element={<AdminLogin />} />
       <Route path="/adminpage" element={<Adminpage />} />
       <Route path="/modifyusers" element={<Modifyusers />} />
     </Routes>

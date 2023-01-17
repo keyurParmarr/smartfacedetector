@@ -25,7 +25,7 @@ export const Historyheader = () => {
           </button>
         </div>
         <Title titleData={titleData} />
-        <div className="history-extradot">.</div>
+        <div className="history-extradot"></div>
       </div>
       <div className="history-info">Recent Searches</div>
     </>

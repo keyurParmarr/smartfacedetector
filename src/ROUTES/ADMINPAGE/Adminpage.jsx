@@ -42,9 +42,9 @@ export const Adminpage = () => {
       <AdminNav titleData={titleData} />
       <div className="admin-box">
         <div className="admin-faceDetect">
-          <span className="admin-text" onClick={() => navigate("/app")}>
-            Admin-Face Detect
-          </span>
+          <div className="admin-text" onClick={() => navigate("/app")}>
+            Admin-Face Detection
+          </div>
         </div>
         <div className="admin-modifyUsers">
           <span className="admin-text" onClick={() => navigate("/modifyusers")}>

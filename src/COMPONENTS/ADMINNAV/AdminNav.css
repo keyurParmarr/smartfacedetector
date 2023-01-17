@@ -1,5 +1,10 @@
 .admin-nav {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  font-size: xx-large;
+  font-weight: 800;
+  font-family: Quaxcites;
+  height: 6vh;
+  width: 100vw;
+  flex-direction: row;
 }

@@ -10,7 +10,15 @@
   border-radius: 25px;
   justify-content: center;
   align-items: center;
+}
+.admin-faceDetect:hover {
   background-color: aqua;
+}
+.admin-faceDetect:hover > .admin-text {
+  color: black;
+}
+.admin-modifyUsers:hover > .admin-text {
+  color: black;
 }
 .admin-modifyUsers {
   width: 45%;
@@ -19,10 +27,13 @@
   border-radius: 25px;
   justify-content: center;
   align-items: center;
+}
+.admin-modifyUsers:hover {
   background-color: brown;
 }
 .admin-text {
   font-size: xx-large;
   text-decoration: underline;
   cursor: pointer;
+  color: white;
 }

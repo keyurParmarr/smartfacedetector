@@ -4,16 +4,12 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { UserContext } from "../../CONTEXT/User.context";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { toast } from "react-toastify";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const [userDetails, setUserDetails] = useState({
-    email: "test@mail.com",
-    password: "Test12@#",
-  });
+  const [userDetails, setUserDetails] = useState({});
   const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const loginData = (e) => {
@@ -29,6 +25,7 @@ export const Login = () => {
   };
   const loginHandler = async (e) => {
     e.preventDefault();
+    console.log("login");
     toast.dismiss();
     const loadingToast = toast.loading("LOGGING IN", toastStyle);
     try {
@@ -80,15 +77,9 @@ export const Login = () => {
     marginTop: "5px",
     outline: "none",
   };
-  const titleData = {
-    title: "SMART FACE DETECTOR",
-    color: "black",
-    fontsize: "45px",
-    marginTop: "10px",
-  };
+
   return (
-    <form onSubmit={loginHandler}>
-      <Loginsignupnav titleData={titleData} />
+    <div onSubmit={loginHandler}>
       <Loginsignupcontainer>
         <div className="login-title">
           <div
@@ -109,7 +100,7 @@ export const Login = () => {
           style={style}
           name={"email"}
           type={"email"}
-          // required={"required"}
+          required={"required"}
           backgroundColor={"whiteAlpha.500"}
           onChange={(e) => loginData(e)}
         />
@@ -120,7 +111,7 @@ export const Login = () => {
             autoComplete="off"
             style={style}
             name={"password"}
-            // required={"required"}
+            required={"required"}
             type={show ? "text" : "password"}
             backgroundColor={"whiteAlpha.500"}
             onChange={(e) => loginData(e)}
@@ -139,6 +130,6 @@ export const Login = () => {
           <Button type="submit">LOGIN</Button>
         </div>
       </Loginsignupcontainer>
-    </form>
+    </div>
   );
 };

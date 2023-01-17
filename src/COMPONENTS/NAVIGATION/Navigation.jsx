@@ -6,11 +6,13 @@ import logo from "./logo3.png";
 import { Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import "./Navigation.css";
 import { Title } from "../TITLE/Title";
+import { useContext } from "react";
+import { UserContext } from "../../CONTEXT/User.context";
 
 export const Navigation = () => {
   const [profile, setprofile] = useState(false);
   const [signout, setsignout] = useState(false);
-
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const titleData = {
@@ -19,6 +21,7 @@ export const Navigation = () => {
     fontsize: "45px",
     marginTop: "10px",
   };
+
   return (
     <div className="navigation-box">
       <img src={logo} className="navigation-logo" alt="img" />

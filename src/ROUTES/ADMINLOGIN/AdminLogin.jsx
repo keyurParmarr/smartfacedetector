@@ -65,12 +65,7 @@ export const AdminLogin = () => {
       console.log(error);
     }
   };
-  const titleData = {
-    title: "SMART FACE DETECTOR",
-    color: "black",
-    fontsize: "45px",
-    marginTop: "10px",
-  };
+
   const style = {
     background: "transparent",
     borderRadius: "0",
@@ -87,7 +82,6 @@ export const AdminLogin = () => {
   return (
     <>
       <form onSubmit={loginHandler}>
-        <Loginsignupnav titleData={titleData} />
         <Loginsignupcontainer>
           <div className="login-title">
             <div
