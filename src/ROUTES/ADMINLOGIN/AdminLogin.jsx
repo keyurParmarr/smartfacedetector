@@ -126,9 +126,7 @@ export const AdminLogin = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
-          <div className="atag">
-            <a href="/">Forget Password?</a>
-          </div>
+
           <div className="login-warningMsg">{msg}</div>
           <div className="login-button">
             <Button type="submit" isLoading={false}>

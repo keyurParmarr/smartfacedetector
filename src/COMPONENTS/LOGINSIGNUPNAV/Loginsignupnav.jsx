@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { Title } from "../TITLE/Title";
 import "./Loginsignupnav.css";
 
@@ -10,9 +10,10 @@ export const Loginsignupnav = (props) => {
     color: "white",
     borderRadius: "10px",
   };
+
   const navigate = useNavigate();
   return (
-    <>
+    <div className="loginsignnav-box">
       <div className="loginsignupnav-container">
         <div className="loginsignupnav-space">
           <button
@@ -45,6 +46,6 @@ export const Loginsignupnav = (props) => {
         </div>
       </div>
       <Outlet />
-    </>
+    </div>
   );
 };

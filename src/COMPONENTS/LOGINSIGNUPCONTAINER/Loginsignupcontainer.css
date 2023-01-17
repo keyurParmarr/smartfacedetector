@@ -1,15 +1,20 @@
 .loginSignup-section {
-  margin-top: 100px;
+  /* margin-top: 30vh; */
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 60vh;
+  height: 90vh;
+  padding: 180px;
+  /* margin-top: 300px; */
+  /* margin-left: 200px; */
+  /* margin-left: 10vw; */
 }
 .loginSignup-container {
   position: relative;
   width: 400px;
   height: 460px;
-  background: #696161;
+  /* background: #696161; */
+  background: transparent;
   border-radius: 8px;
   overflow: hidden;
   z-index: 10;
@@ -49,7 +54,8 @@
   padding: 10px;
   position: absolute;
   inset: 5px;
+  border: 2px solid black;
   z-index: 10;
-  background: #000000;
+  background: transparent;
   /* background: linear-gradient(to right, #951de5, #ec1a75) !important; */
 }

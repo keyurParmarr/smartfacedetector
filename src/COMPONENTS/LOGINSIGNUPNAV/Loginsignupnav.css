@@ -15,3 +15,9 @@
   margin-right: 10px;
   align-items: center;
 }
+.loginsignnav-box {
+  background-image: url("./firstimg.png");
+  background-size: auto;
+  height: 100%;
+  width: 100%;
+}

@@ -21,6 +21,7 @@
   border: none;
   outline: none;
   color: aqua;
+  text-decoration: underline;
 }
 .login-title {
   text-align: center;
