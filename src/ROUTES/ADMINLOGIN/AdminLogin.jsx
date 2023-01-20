@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { UserContext } from "../../CONTEXT/User.context";
 import { toast } from "react-toastify";
@@ -12,7 +11,7 @@ export const AdminLogin = () => {
   const [show, setShow] = useState(false);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [msg, setMsg] = useState("");
+
   const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const toastStyle = {
@@ -65,7 +64,14 @@ export const AdminLogin = () => {
       console.log(error);
     }
   };
-
+  useEffect(() => {
+    document.getElementsByClassName("imagetag")[0].style.opacity = "0.5";
+    return opacity;
+    function opacity() {
+      if (document.getElementsByClassName("imagetag")[0])
+        document.getElementsByClassName("imagetag")[0].style.opacity = "1";
+    }
+  }, []);
   const style = {
     background: "transparent",
     borderRadius: "0",
@@ -79,6 +85,7 @@ export const AdminLogin = () => {
 
     outline: "none",
   };
+
   return (
     <>
       <form onSubmit={loginHandler}>
@@ -127,7 +134,6 @@ export const AdminLogin = () => {
             </InputRightElement>
           </InputGroup>
 
-          <div className="login-warningMsg">{msg}</div>
           <div className="login-button">
             <Button type="submit" isLoading={false}>
               LOGIN

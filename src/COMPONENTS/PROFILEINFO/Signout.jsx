@@ -10,17 +10,27 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "../../CONTEXT/User.context";
 
 export const Signout = (props) => {
   const navigate = useNavigate();
-
+  const { seturl, setbox, setlocalCount, setuser, setmodifyusers, sethistory } =
+    useContext(UserContext);
   const signOutHandler = async () => {
     const token = localStorage.getItem("token");
     try {
+      // eslint-disable-next-line
       const res = await fetch(`http://localhost:5000/signout`, {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });
+      seturl("");
+      setbox([]);
+      setuser({});
+      setmodifyusers([]);
+      sethistory([]);
+      setlocalCount(0);
       localStorage.removeItem("token");
       navigate("/");
     } catch (error) {

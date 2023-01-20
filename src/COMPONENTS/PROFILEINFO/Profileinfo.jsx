@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -14,9 +14,36 @@ import {
 import "./Profileinfo.css";
 import { useContext } from "react";
 import { UserContext } from "../../CONTEXT/User.context";
+import { toast } from "react-toastify";
 
 export const Profileinfo = (props) => {
-  const { user } = useContext(UserContext);
+  const toastStyle = {
+    theme: "colored",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+  };
+  const [name, setname] = useState("");
+  const { user, setuser } = useContext(UserContext);
+  const editName = async () => {
+    if (name) {
+      try {
+        const res = await fetch("http://localhost:5000/editname", {
+          method: "post",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ name, id: user.id }),
+        });
+        const data = await res.json();
+        setname("");
+        setuser(data);
+        toast.success("Name Changed", toastStyle);
+        props.setprofile(!props.profile);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   return (
     <div>
       <Modal isOpen={props.profile} isCentered>
@@ -40,11 +67,17 @@ export const Profileinfo = (props) => {
               <h2>Name: {user.name}</h2>
             </div>
             <div className="profileinfo-input">
-              <Input type="text" placeholder="Edit Name" padding={1} />
+              <Input
+                type="text"
+                placeholder="Edit Name"
+                padding={1}
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+              />
             </div>
           </ModalBody>
           <ModalFooter padding={1} display={"flex"} justifyContent={"center"}>
-            <Button colorScheme={"red"} margin={2}>
+            <Button colorScheme={"red"} margin={2} onClick={() => editName()}>
               Save
             </Button>
             <Button

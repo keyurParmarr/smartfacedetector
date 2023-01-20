@@ -6,10 +6,14 @@ import { UserContext } from "../../CONTEXT/User.context";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState({
+    email: "test@mail.com",
+    password: "Test12@#",
+  });
   const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const loginData = (e) => {
@@ -64,7 +68,14 @@ export const Login = () => {
       console.log(error);
     }
   };
-
+  useEffect(() => {
+    document.getElementsByClassName("imagetag")[0].style.opacity = "0.5";
+    return opacity;
+    function opacity() {
+      if (document.getElementsByClassName("imagetag")[0])
+        document.getElementsByClassName("imagetag")[0].style.opacity = "1";
+    }
+  }, []);
   const style = {
     background: "transparent",
     borderRadius: "0",
@@ -79,7 +90,7 @@ export const Login = () => {
   };
 
   return (
-    <div onSubmit={loginHandler}>
+    <form onSubmit={loginHandler}>
       <Loginsignupcontainer>
         <div className="login-title">
           <div
@@ -100,7 +111,7 @@ export const Login = () => {
           style={style}
           name={"email"}
           type={"email"}
-          required={"required"}
+          // required={"required"}
           backgroundColor={"whiteAlpha.500"}
           onChange={(e) => loginData(e)}
         />
@@ -111,7 +122,7 @@ export const Login = () => {
             autoComplete="off"
             style={style}
             name={"password"}
-            required={"required"}
+            // required={"required"}
             type={show ? "text" : "password"}
             backgroundColor={"whiteAlpha.500"}
             onChange={(e) => loginData(e)}
@@ -130,6 +141,6 @@ export const Login = () => {
           <Button type="submit">LOGIN</Button>
         </div>
       </Loginsignupcontainer>
-    </div>
+    </form>
   );
 };

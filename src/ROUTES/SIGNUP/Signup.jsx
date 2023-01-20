@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
 import "./Signup.css";
 import { UserContext } from "../../CONTEXT/User.context";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
-import { Loginsignupnav } from "../../COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
@@ -83,6 +82,14 @@ export const Signup = () => {
     marginTop: "5px",
     color: "cyan",
   };
+  useEffect(() => {
+    document.getElementsByClassName("imagetag")[0].style.opacity = "0.5";
+    return opacity;
+    function opacity() {
+      if (document.getElementsByClassName("imagetag")[0])
+        document.getElementsByClassName("imagetag")[0].style.opacity = "1";
+    }
+  }, []);
 
   return (
     <form onSubmit={signupHandler}>
@@ -91,7 +98,7 @@ export const Signup = () => {
           <div
             style={{
               display: "inline-block",
-              backgroundColor: "teal",
+              backgroundColor: "blue",
               padding: "3px",
               borderRadius: "5px",
             }}

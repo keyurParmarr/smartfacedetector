@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Title } from "../../COMPONENTS/TITLE/Title";
 import "./About.css";
 import gify from "./gify.gif";
@@ -9,6 +9,14 @@ export const About = () => {
     fontsize: "45px",
     marginTop: "10px",
   };
+  useEffect(() => {
+    document.getElementsByClassName("imagetag")[0].style.opacity = "0";
+    return opacity;
+    function opacity() {
+      if (document.getElementsByClassName("imagetag")[0])
+        document.getElementsByClassName("imagetag")[0].style.opacity = "1";
+    }
+  }, []);
   return (
     <div className="about-box">
       <Title titleData={titleData} />

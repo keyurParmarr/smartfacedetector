@@ -16,8 +16,16 @@
   align-items: center;
 }
 .loginsignnav-box {
-  background-image: url("./firstimg.png");
+  /* background-image: url("./firstimg.png"); */
   background-size: auto;
+  position: relative;
+  /* opacity: 0.5; */
   height: 100%;
   width: 100%;
+}
+.imagetag {
+  position: absolute;
+  z-index: -10;
+  height: 100vh;
+  width: 100vw;
 }

@@ -1,20 +1,15 @@
 .loginSignup-section {
-  /* margin-top: 30vh; */
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   height: 90vh;
-  padding: 180px;
-  /* margin-top: 300px; */
-  /* margin-left: 200px; */
-  /* margin-left: 10vw; */
 }
 .loginSignup-container {
   position: relative;
   width: 400px;
   height: 460px;
   /* background: #696161; */
-  background: transparent;
+  /* background: transparent; */
   border-radius: 8px;
   overflow: hidden;
   z-index: 10;
