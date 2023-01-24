@@ -44,8 +44,9 @@ export const History = () => {
       sethistory(data.historyData);
     };
     fetchHistory();
+    // eslint-disable-next-line
   }, []);
-
+  document.getElementsByClassName("html-title")[0].innerText = "HISTORY";
   return (
     <>
       <Historyheader />

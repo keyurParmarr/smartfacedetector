@@ -1,6 +1,5 @@
 import React from "react";
 import { useContext } from "react";
-import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
 import "./Image.css";
 
@@ -13,6 +12,7 @@ export const Image = () => {
 
   return (
     <div className="image-box">
+      <style></style>
       <div className="image-container">
         <img style={b} src={url} id="input" alt={""}></img>
         {box.map((data, i) => {

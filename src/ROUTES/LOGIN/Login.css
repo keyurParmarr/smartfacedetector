@@ -15,13 +15,24 @@
   width: 100%;
   border: none;
 }
-.atag {
+.login-authbtn {
   margin-top: 15px;
   margin-left: 5px;
   border: none;
   outline: none;
   color: aqua;
+  display: flex;
+  justify-content: space-between;
+}
+.login-atag {
   text-decoration: underline;
+}
+.login-checkbox {
+  margin-right: 5px;
+  height: 14px;
+  width: 15px;
+  cursor: pointer;
+  border-radius: 30px;
 }
 .login-title {
   text-align: center;

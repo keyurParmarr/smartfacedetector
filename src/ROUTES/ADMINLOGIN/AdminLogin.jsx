@@ -11,7 +11,6 @@ export const AdminLogin = () => {
   const [show, setShow] = useState(false);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-
   const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const toastStyle = {
@@ -21,6 +20,7 @@ export const AdminLogin = () => {
     closeOnClick: true,
     pauseOnHover: true,
   };
+  document.getElementsByClassName("html-title")[0].innerText = "ADMIN-LOGIN";
   const loginHandler = async (e) => {
     e.preventDefault();
     toast.dismiss();

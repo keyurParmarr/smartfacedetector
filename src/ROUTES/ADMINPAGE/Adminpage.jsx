@@ -35,8 +35,9 @@ export const Adminpage = () => {
       navigate("/adminlogin");
       return;
     }
+    // eslint-disable-next-line
   }, []);
-
+  document.getElementsByClassName("html-title")[0].innerText = "ADMIN-PAGE";
   return (
     <div>
       <AdminNav titleData={titleData} />

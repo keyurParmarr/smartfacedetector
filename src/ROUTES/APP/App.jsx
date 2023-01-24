@@ -7,8 +7,11 @@ import { InputComp } from "../../COMPONENTS/INPUT/Input";
 import { Image } from "../../COMPONENTS/IMAGE/Image";
 import { UserContext } from "../../CONTEXT/User.context";
 import { useNavigate } from "react-router-dom";
+import { InputTab } from "../../COMPONENTS/INPUTTABPANEL/InputTab";
 
 export const App = () => {
+  document.getElementsByClassName("html-title")[0].innerText =
+    "SMART FACE DETECTOR | APP";
   const { setuser, user } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -32,12 +35,13 @@ export const App = () => {
       console.log(user);
       setuser(user);
     }
+    // eslint-disable-next-line
   }, []);
   return (
     <>
       <Navigation />
       <Information />
-      <InputComp />
+      <InputTab />
       <Image />
     </>
   );

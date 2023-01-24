@@ -90,7 +90,7 @@ export const Signup = () => {
         document.getElementsByClassName("imagetag")[0].style.opacity = "1";
     }
   }, []);
-
+  document.getElementsByClassName("html-title")[0].innerText = "SIGNUP";
   return (
     <form onSubmit={signupHandler}>
       <Loginsignupcontainer>
@@ -98,7 +98,7 @@ export const Signup = () => {
           <div
             style={{
               display: "inline-block",
-              backgroundColor: "blue",
+              backgroundColor: "#1877f2",
               padding: "3px",
               borderRadius: "5px",
             }}

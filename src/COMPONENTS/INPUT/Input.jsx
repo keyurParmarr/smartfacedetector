@@ -13,22 +13,24 @@ export const InputComp = () => {
   };
   const clearData = () => {
     seturl("");
+    setimgurl("");
     setbox([]);
     setlocalCount(0);
   };
+  const toastStyle = {
+    position: "bottom-center",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    theme: "colored",
+  };
   const fetchData = async () => {
     if (imgurl === "") {
-      return toast.error("PLEASE ENTER URL/LINK", {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        theme: "colored",
-      });
+      return toast.error("PLEASE ENTER URL/LINK", toastStyle);
     }
     seturl(imgurl);
-
+    const loadingToast = toast.loading("FETCHING DATA", toastStyle);
     const resp = await fetch("http://localhost:5000/imagebox", {
       method: "post",
       headers: { "content-type": "application/json" },
@@ -37,10 +39,23 @@ export const InputComp = () => {
         id: user.id,
       }),
     });
-    const { data, userData } = await resp.json();
-    if (data.message) {
-      toast.error(data.message);
+    const { data, userData, message } = await resp.json();
+    console.log(data);
+    if (message) {
+      setbox([]);
+      toast.update(loadingToast, {
+        ...toastStyle,
+        type: "error",
+        isLoading: false,
+        render: message,
+      });
     } else {
+      toast.update(loadingToast, {
+        ...toastStyle,
+        type: "success",
+        isLoading: false,
+        render: "DATA FETCHED SUCCESSFULLY",
+      });
       const { height, width } = document.getElementById("input");
       const boxData = data.outputs[0].data.regions.map((i) => {
         const clarfaiim = i.region_info.bounding_box;
@@ -61,57 +76,53 @@ export const InputComp = () => {
   };
 
   return (
-    <>
-      <div className="input-box">
-        <div className="input-style">
-          <InputGroup width={550}>
-            <Input
-              height={12}
-              value={imgurl}
-              pr="4.5rem"
-              backgroundColor={"whitesmoke"}
-              placeholder={"Enter Image Link"}
-              onChange={(e) => {
-                setimgurl(e.target.value);
-              }}
-            />
-            <InputRightElement width="4.5rem">
-              <Button
-                height={8}
-                marginTop={2}
-                size="sm"
-                onClick={handleClick}
-                backgroundColor={"red.400"}
-                fontSize={"large"}
-              >
-                &times;
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          <div>
-            <Button
-              height={"49px"}
-              className="input-button"
-              colorScheme={"green"}
-              onClick={() => {
-                fetchData();
-              }}
-            >
-              DETECT
-            </Button>
-            <Button
-              height={"49px"}
-              className="input-clearbtn"
-              colorScheme={"red"}
-              onClick={() => {
-                clearData();
-              }}
-            >
-              CLEAR
-            </Button>
-          </div>
-        </div>
-      </div>
-    </>
+    <div className="input-grp">
+      <InputGroup width={550}>
+        <Input
+          height={12}
+          value={imgurl}
+          pr="4.5rem"
+          backgroundColor={"whitesmoke"}
+          placeholder={"Enter Image Link"}
+          onChange={(e) => {
+            setimgurl(e.target.value);
+          }}
+        />
+        <InputRightElement width="4.5rem">
+          <Button
+            height={8}
+            marginTop={2}
+            size="sm"
+            onClick={handleClick}
+            backgroundColor={"red.400"}
+            fontSize={"large"}
+          >
+            &times;
+          </Button>
+        </InputRightElement>
+      </InputGroup>
+      {/* <div> */}
+      <Button
+        height={"49px"}
+        className="input-button"
+        colorScheme={"green"}
+        onClick={() => {
+          fetchData();
+        }}
+      >
+        DETECT
+      </Button>
+      <Button
+        height={"49px"}
+        className="input-clearbtn"
+        colorScheme={"red"}
+        onClick={() => {
+          clearData();
+        }}
+      >
+        CLEAR
+      </Button>
+      {/* </div> */}
+    </div>
   );
 };

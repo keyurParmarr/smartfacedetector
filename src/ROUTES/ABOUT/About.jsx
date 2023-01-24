@@ -9,6 +9,7 @@ export const About = () => {
     fontsize: "45px",
     marginTop: "10px",
   };
+  document.getElementsByClassName("html-title")[0].innerText = "ABOUT";
   useEffect(() => {
     document.getElementsByClassName("imagetag")[0].style.opacity = "0";
     return opacity;

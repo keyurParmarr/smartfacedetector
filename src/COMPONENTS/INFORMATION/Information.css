@@ -1,7 +1,7 @@
 .information-box {
   display: flex;
   justify-content: center;
-  height: 150px;
+  height: 120px;
   margin-top: 8px;
   color: aliceblue;
   margin-bottom: 8px;
@@ -11,7 +11,7 @@
   color: aliceblue;
 
   width: 70%;
-  font-size: xx-large;
+  font-size: 25px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 900;
 }

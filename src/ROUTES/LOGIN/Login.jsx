@@ -20,6 +20,7 @@ export const Login = () => {
     const { name, value } = e.target;
     setUserDetails({ ...userDetails, [name]: value });
   };
+  document.getElementsByClassName("html-title")[0].innerText = "LOGIN";
   const toastStyle = {
     theme: "colored",
     autoClose: 1500,
@@ -133,8 +134,14 @@ export const Login = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <div className="atag">
-          <a href="/">Forget Password?</a>
+        <div className="login-authbtn">
+          <a href="/forgotpassword" className="login-atag">
+            Forget Password?
+          </a>
+          <div>
+            <input type="checkbox" className="login-checkbox" />
+            <label>REMEMBER ME</label>
+          </div>
         </div>
 
         <div className="login-button">

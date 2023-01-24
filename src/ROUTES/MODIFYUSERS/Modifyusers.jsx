@@ -46,8 +46,9 @@ export const Modifyusers = () => {
       navigate("/adminlogin");
       return;
     }
+    // eslint-disable-next-line
   }, []);
-
+  document.getElementsByClassName("html-title")[0].innerText = "MODIFY-USERS";
   return (
     <div>
       <div className="modifyusers-nav">

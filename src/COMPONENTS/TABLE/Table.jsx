@@ -56,7 +56,7 @@ export const Table = (props) => {
                   : link.history}
               </Button>
             </PopoverTrigger>
-            <PopoverContent>
+            <PopoverContent width={500}>
               <PopoverHeader fontWeight="semibold">Image</PopoverHeader>
               <PopoverArrow />
               <PopoverCloseButton />

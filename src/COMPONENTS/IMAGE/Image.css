@@ -4,17 +4,18 @@
 }
 .image-data {
   position: absolute;
-  box-shadow: 0 0 0 3px rgb(1, 135, 159);
+  box-shadow: 0 0 0 3px rgb(0, 157, 255);
   text-align: center;
-  animation: load 2s linear 1;
+  /* animation: load 2s linear 1; */
+  border-radius: 5px;
 }
 .image-container {
   position: relative;
 }
 
-@keyframes load {
+/* @keyframes load {
   0% {
-    box-shadow: 0 0 0 0.2px #149df2;
+    box-shadow: 0 0 0 0.2px #0b9cf6;
   }
   25% {
     box-shadow: 0 0 0 1px #149df2;
@@ -25,4 +26,4 @@
   100% {
     box-shadow: 0 0 0 3px #149df2;
   }
-}
+} */
