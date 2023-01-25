@@ -11,6 +11,7 @@ export const InputComp = () => {
   const handleClick = () => {
     setimgurl("");
   };
+
   const clearData = () => {
     seturl("");
     setimgurl("");
@@ -29,6 +30,7 @@ export const InputComp = () => {
     if (imgurl === "") {
       return toast.error("PLEASE ENTER URL/LINK", toastStyle);
     }
+
     seturl(imgurl);
     const loadingToast = toast.loading("FETCHING DATA", toastStyle);
     const resp = await fetch("http://localhost:5000/imagebox", {

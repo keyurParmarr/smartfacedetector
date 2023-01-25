@@ -20,9 +20,19 @@ export const InputFromdevice = () => {
     pauseOnHover: true,
     theme: "colored",
   };
+  console.log(first);
+  const clearData = () => {
+    seturl("");
+    setbox([]);
+    setlocalCount(0);
+    document.getElementsByClassName("inputfromdevice-input")[0].value = "";
+  };
   const send = async () => {
     let formdata = new FormData();
     formdata.append("image", first);
+    if (!first.name) {
+      return toast.error("PLEASE CHOOSE AN IMAGE", toastStyle);
+    }
     const loadingToast = toast.loading("FETCHING DATA", toastStyle);
     const res = await fetch(`http://localhost:5000/uploadimage/${user.id}`, {
       method: "post",
@@ -78,6 +88,16 @@ export const InputFromdevice = () => {
         colorScheme={"green"}
       >
         DETECT
+      </Button>
+      <Button
+        height={"43px"}
+        className="input-clearbtn"
+        colorScheme={"red"}
+        onClick={() => {
+          clearData();
+        }}
+      >
+        CLEAR
       </Button>
     </div>
   );
