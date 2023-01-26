@@ -32,16 +32,16 @@ export const Navigation = () => {
             <Avatar size="2xl" />
           </MenuButton>
           <MenuList backgroundColor={"gray.400"} marginTop={"-0.5"}>
+            <MenuItem onClick={() => setprofile(!profile)}>
+              View Profile
+              <Profileinfo profile={profile} setprofile={setprofile} />
+            </MenuItem>
             <MenuItem
               onClick={() => {
                 navigate("/history");
               }}
             >
               History
-            </MenuItem>
-            <MenuItem onClick={() => setprofile(!profile)}>
-              View Profile
-              <Profileinfo profile={profile} setprofile={setprofile} />
             </MenuItem>
             <MenuItem onClick={() => setsignout(!signout)}>
               SIGN OUT

@@ -32,7 +32,6 @@ export const App = () => {
         headers: { "content-type": "application/json", authorization: token },
       });
       const user = await data.json();
-      console.log(user);
       setuser(user);
     }
     // eslint-disable-next-line

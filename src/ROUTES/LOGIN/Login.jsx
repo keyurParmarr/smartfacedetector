@@ -30,7 +30,6 @@ export const Login = () => {
   };
   const loginHandler = async (e) => {
     e.preventDefault();
-    console.log("login");
     toast.dismiss();
     const loadingToast = toast.loading("LOGGING IN", toastStyle);
     try {
@@ -46,7 +45,6 @@ export const Login = () => {
         isLoading: false,
         ...toastStyle,
       });
-      console.log(data);
       if (data.success) {
         localStorage.setItem("token", data.token);
         setuser(data);

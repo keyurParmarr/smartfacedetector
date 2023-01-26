@@ -21,7 +21,6 @@ export const Modifyusers = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token) {
       if (!user.id) {
         fetchData();
@@ -33,13 +32,11 @@ export const Modifyusers = () => {
           headers: { "content-type": "application/json", authorization: token },
         });
         const user = await data.json();
-        console.log(user);
         setuser(user);
       }
       async function fetchModifyUsers() {
         const resp = await fetch("http://localhost:5000/modifyusers");
         const data = await resp.json();
-        console.log(data);
         setmodifyusers(data.modifyusers);
       }
     } else {

@@ -51,7 +51,10 @@ export const Profileinfo = (props) => {
         <ModalContent>
           <ModalHeader>
             <div>Edit Profile</div>
-            <Avatar size="2xl" src="" />
+            <Avatar
+              size="2xl"
+              src="https://media.istockphoto.com/photos/portrait-beautiful-young-woman-with-clean-fresh-skin-picture-id1329622588?b=1&k=20&m=1329622588&s=612x612&w=0&h=3rTZb5z8pQCtKzSzV3eNOPYbhXxbkEOXIGoSHZuQTGA="
+            />
           </ModalHeader>
           <ModalCloseButton
             onClick={() => {

@@ -28,6 +28,11 @@ export const Historyheader = () => {
         <div className="history-extradot"></div>
       </div>
       <div className="history-info">Recent Searches</div>
+      <div className="history-note">
+        <span className="history-notedata">
+          NOTE : HISTORY OF IMAGES DETECTED FROM THIS DEVICE WILL NOT BE SHOWN
+        </span>
+      </div>
     </>
   );
 };

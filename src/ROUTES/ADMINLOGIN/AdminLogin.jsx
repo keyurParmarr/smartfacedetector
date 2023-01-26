@@ -41,7 +41,6 @@ export const AdminLogin = () => {
         isLoading: false,
         ...toastStyle,
       });
-      console.log(data);
       if (data.success) {
         localStorage.setItem("token", data.token);
         setuser(data);

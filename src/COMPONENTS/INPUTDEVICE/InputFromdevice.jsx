@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
-
+import "./InputFromdevice.css";
 export const InputFromdevice = () => {
   const [first, setfirst] = useState({});
   const { user, seturl, setbox, setuser, setlocalCount } =
@@ -20,7 +20,6 @@ export const InputFromdevice = () => {
     pauseOnHover: true,
     theme: "colored",
   };
-  console.log(first);
   const clearData = () => {
     seturl("");
     setbox([]);
@@ -91,7 +90,7 @@ export const InputFromdevice = () => {
       </Button>
       <Button
         height={"43px"}
-        className="input-clearbtn"
+        className="inputfromdevice-clearbtn"
         colorScheme={"red"}
         onClick={() => {
           clearData();

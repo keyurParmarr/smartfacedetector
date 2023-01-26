@@ -32,8 +32,6 @@ export const History = () => {
 
       const resp = await fetch(`http://localhost:5000/history/${user.id}`);
       const history = await resp.json();
-      console.log(history);
-
       sethistory(history.historyData);
       return;
     }

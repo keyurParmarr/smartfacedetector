@@ -4,6 +4,7 @@ export const Scroll = (props) => {
   let style = {
     border: "3px solid black",
     height: "780px",
+    minWidth: "1060px",
   };
   if (props.scroll) {
     style.overflowY = "scroll";

@@ -11,8 +11,8 @@ export const InputTab = () => {
         <div className="input-style">
           <Tabs variant="soft-rounded" colorScheme="green" height={"110px"}>
             <TabList className="tabdata">
-              <Tab color={"white"}>Tab 1</Tab>
-              <Tab color={"white"}>Tab 2</Tab>
+              <Tab color={"white"}>IMAGE LINK</Tab>
+              <Tab color={"white"}>FROM DEVICE</Tab>
             </TabList>
             <TabPanels>
               <TabPanel padding={"10px"} width={"780px"}>

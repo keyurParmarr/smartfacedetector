@@ -1,7 +1,8 @@
-.inputfromdevice-input {
-  width: 100px;
+.inputfromdevice-clearbtn {
+  border: 1px solid wheat;
+  width: 80px;
+  margin-left: 2px;
 }
-.inputfromdevice-box {
-  width: 400px;
-  background-color: blue;
+.inputfromdevice-clearbtn:hover {
+  background-color: greenyellow;
 }

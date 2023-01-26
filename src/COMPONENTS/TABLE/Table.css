@@ -19,7 +19,6 @@ table {
 thead {
   background-color: #455165;
   color: white;
-
   box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
 }
 
@@ -35,8 +34,8 @@ thead {
 .table-container {
   display: flex;
   justify-content: center;
-  margin: 50px 50px 0px 50px;
-  height: 770px;
+  margin: 30px 30px 0px 30px;
+  height: 780px;
 }
 .table {
   width: 75%;

@@ -17,7 +17,6 @@ export const Adminpage = () => {
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token) {
       if (!user.id) {
         fetchData();
@@ -28,7 +27,6 @@ export const Adminpage = () => {
           headers: { "content-type": "application/json", authorization: token },
         });
         const user = await data.json();
-        console.log(user);
         setuser(user);
       }
     } else {

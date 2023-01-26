@@ -42,7 +42,6 @@ export const InputComp = () => {
       }),
     });
     const { data, userData, message } = await resp.json();
-    console.log(data);
     if (message) {
       setbox([]);
       toast.update(loadingToast, {

@@ -25,21 +25,17 @@ export const Table = (props) => {
       body: JSON.stringify(blockdata),
     });
     const data = await res.json();
-    console.log(data);
     setmodifyusers(data);
   };
   const historyUsers = async (id) => {
-    console.log(id);
     const res = await fetch(`http://localhost:5000/history/${id}`);
     const data = await res.json();
-    console.log(data);
     sethistory(data.historyData);
     navigate("/history");
   };
   const removeUsers = async (id) => {
     const res = await fetch(`http://localhost:5000/removeusers/${id}`);
     const data = await res.json();
-    console.log(data);
     setmodifyusers(data);
   };
 
@@ -51,12 +47,12 @@ export const Table = (props) => {
           <Popover placement="bottom">
             <PopoverTrigger>
               <Button>
-                {link.history?.length > 120
-                  ? `${link.history?.slice(0, 120)}${"..."}`
+                {link.history?.length > 100
+                  ? `${link.history?.slice(0, 100)}${"..."}`
                   : link.history}
               </Button>
             </PopoverTrigger>
-            <PopoverContent width={500}>
+            <PopoverContent width={400}>
               <PopoverHeader fontWeight="semibold">Image</PopoverHeader>
               <PopoverArrow />
               <PopoverCloseButton />
@@ -70,7 +66,6 @@ export const Table = (props) => {
     );
   };
   const userDataComp = (data, i) => {
-    console.log(data.isblocked);
     if (!data.isadmin)
       return (
         <>
