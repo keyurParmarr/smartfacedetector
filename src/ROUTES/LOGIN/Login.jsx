@@ -1,12 +1,19 @@
 import React, { useState, useContext } from "react";
-import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
+import {
+  InputGroup,
+  InputRightElement,
+  Button,
+  Input,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { UserContext } from "../../CONTEXT/User.context";
-import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { FaEyeSlash, FaEye, FaLock, FaEnvelopeOpen } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import Cookies from "js-cookie";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -46,7 +53,7 @@ export const Login = () => {
         ...toastStyle,
       });
       if (data.success) {
-        localStorage.setItem("token", data.token);
+        Cookies.set("token", data.token, { expires: 1 });
         setuser(data);
         return navigate("/app");
       } else {
@@ -104,18 +111,28 @@ export const Login = () => {
           </div>
         </div>
         <div className="login-label">EMAIL</div>
-        <Input
-          className="input"
-          autoComplete="off"
-          style={style}
-          name={"email"}
-          type={"email"}
-          // required={"required"}
-          backgroundColor={"whiteAlpha.500"}
-          onChange={(e) => loginData(e)}
-        />
+        <InputGroup>
+          <InputLeftElement
+            children={
+              <FaEnvelopeOpen style={{ marginTop: "10px", color: "white" }} />
+            }
+          />
+          <Input
+            className="input"
+            autoComplete="off"
+            style={style}
+            name={"email"}
+            type={"email"}
+            // required={"required"}
+            backgroundColor={"whiteAlpha.500"}
+            onChange={(e) => loginData(e)}
+          />
+        </InputGroup>
         <div className="login-label">PASSWORD</div>
         <InputGroup size="md" marginTop="5px" marginBottom="5px">
+          <InputLeftElement
+            children={<FaLock style={{ marginTop: "10px", color: "white" }} />}
+          />
           <Input
             className="input"
             autoComplete="off"

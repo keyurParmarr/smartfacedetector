@@ -4,18 +4,22 @@
 }
 .image-data {
   position: absolute;
-  box-shadow: 0 0 0 3px rgb(0, 157, 255);
+  box-shadow: 0 0 0 2px rgb(0, 157, 255);
   text-align: center;
-  /* animation: load 2s linear 1; */
+  animation: load 1s linear 1;
   border-radius: 5px;
 }
 .image-container {
   position: relative;
 }
 
-/* @keyframes load {
+@keyframes load {
   0% {
     box-shadow: 0 0 0 0.2px #0b9cf6;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
   25% {
     box-shadow: 0 0 0 1px #149df2;
@@ -24,6 +28,6 @@
     box-shadow: 0 0 0 2px #149df2;
   }
   100% {
-    box-shadow: 0 0 0 3px #149df2;
+    box-shadow: 0 0 0 2px #149df2;
   }
-} */
+}

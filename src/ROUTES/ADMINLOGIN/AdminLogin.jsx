@@ -1,10 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
-import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
+import {
+  InputGroup,
+  InputRightElement,
+  Button,
+  Input,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { FaEyeSlash, FaEye, FaEnvelopeOpen, FaLock } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { UserContext } from "../../CONTEXT/User.context";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export const AdminLogin = () => {
   const navigate = useNavigate();
@@ -42,7 +49,7 @@ export const AdminLogin = () => {
         ...toastStyle,
       });
       if (data.success) {
-        localStorage.setItem("token", data.token);
+        Cookies.set("token", data.token, { expires: 1 });
         setuser(data);
         return navigate("/adminpage");
       } else {
@@ -102,19 +109,31 @@ export const AdminLogin = () => {
             </div>
           </div>
           <div className="login-label">EMAIL</div>
-          <Input
-            className="input"
-            autoComplete="off"
-            style={style}
-            value={"admin@mail.com"}
-            name={"email"}
-            type={"email"}
-            // required={"required"}
-            backgroundColor={"whiteAlpha.500"}
-            onChange={(e) => setemail(e.target.value)}
-          />
+          <InputGroup>
+            <InputLeftElement
+              children={
+                <FaEnvelopeOpen style={{ marginTop: "10px", color: "white" }} />
+              }
+            />
+            <Input
+              className="input"
+              autoComplete="off"
+              style={style}
+              value={"admin@mail.com"}
+              name={"email"}
+              type={"email"}
+              // required={"required"}
+              backgroundColor={"whiteAlpha.500"}
+              onChange={(e) => setemail(e.target.value)}
+            />
+          </InputGroup>
           <div className="login-label">PASSWORD</div>
           <InputGroup size="md" marginTop="5px" marginBottom="5px">
+            <InputLeftElement
+              children={
+                <FaLock style={{ marginTop: "10px", color: "white" }} />
+              }
+            />
             <Input
               className="input"
               autoComplete="off"

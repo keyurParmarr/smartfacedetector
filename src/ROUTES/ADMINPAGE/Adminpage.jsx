@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React, { useEffect } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +17,7 @@ export const Adminpage = () => {
     marginTop: "10px",
   };
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
       if (!user.id) {
         fetchData();

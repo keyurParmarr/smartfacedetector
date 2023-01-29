@@ -5,3 +5,6 @@
 .profileinfo-input {
   margin-top: 5px;
 }
+input {
+  font-weight: 600;
+}

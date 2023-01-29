@@ -10,7 +10,9 @@ import {
   Button,
   Input,
   Avatar,
+  useDisclosure,
 } from "@chakra-ui/react";
+import img from "./firstimg.png";
 import "./Profileinfo.css";
 import { useContext } from "react";
 import { UserContext } from "../../CONTEXT/User.context";
@@ -26,6 +28,8 @@ export const Profileinfo = (props) => {
   };
   const [name, setname] = useState("");
   const { user, setuser } = useContext(UserContext);
+
+  const { onClose } = useDisclosure();
   const editName = async () => {
     if (name) {
       try {
@@ -46,15 +50,12 @@ export const Profileinfo = (props) => {
   };
   return (
     <div>
-      <Modal isOpen={props.profile} isCentered>
+      <Modal isOpen={props.profile} isCentered onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
             <div>Edit Profile</div>
-            <Avatar
-              size="2xl"
-              src="https://media.istockphoto.com/photos/portrait-beautiful-young-woman-with-clean-fresh-skin-picture-id1329622588?b=1&k=20&m=1329622588&s=612x612&w=0&h=3rTZb5z8pQCtKzSzV3eNOPYbhXxbkEOXIGoSHZuQTGA="
-            />
+            <Avatar size="2xl" src={img} />
           </ModalHeader>
           <ModalCloseButton
             onClick={() => {

@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
+import {
+  InputGroup,
+  InputRightElement,
+  Button,
+  Input,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import "./Signup.css";
 import { UserContext } from "../../CONTEXT/User.context";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  FaEnvelopeOpen,
+  FaEye,
+  FaEyeSlash,
+  FaLock,
+  FaUserAlt,
+} from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { useContext } from "react";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export const Signup = () => {
   const [show, setShow] = useState(false);
@@ -48,7 +61,7 @@ export const Signup = () => {
         ...toastStyle,
       });
       if (data.success) {
-        localStorage.setItem("token", data.token);
+        Cookies.set("token", data.token, { expires: 1 });
         setuser(data);
         return navigate("/app");
       } else {
@@ -106,31 +119,48 @@ export const Signup = () => {
           </div>
         </div>
         <div className="signup-label">NAME</div>
-        <Input
-          style={style}
-          type="text"
-          // required={"required"}
-          name="username"
-          autoComplete="off"
-          backgroundColor={"whiteAlpha.500"}
-          onChange={(e) => {
-            signupData(e);
-          }}
-        />
+        <InputGroup>
+          <InputLeftElement
+            children={
+              <FaUserAlt style={{ marginTop: "10px", color: "white" }} />
+            }
+          />
+          <Input
+            style={style}
+            type="text"
+            // required={"required"}
+            name="username"
+            autoComplete="off"
+            backgroundColor={"whiteAlpha.500"}
+            onChange={(e) => {
+              signupData(e);
+            }}
+          />
+        </InputGroup>
         <div className="signup-label">EMAIL</div>
-        <Input
-          style={style}
-          type={"email"}
-          name="email"
-          // required={"required"}
-          autoComplete="off"
-          backgroundColor={"whiteAlpha.500"}
-          onChange={(e) => {
-            signupData(e);
-          }}
-        />
+        <InputGroup>
+          <InputLeftElement
+            children={
+              <FaEnvelopeOpen style={{ marginTop: "10px", color: "white" }} />
+            }
+          />
+          <Input
+            style={style}
+            type={"email"}
+            name="email"
+            // required={"required"}
+            autoComplete="off"
+            backgroundColor={"whiteAlpha.500"}
+            onChange={(e) => {
+              signupData(e);
+            }}
+          />
+        </InputGroup>
         <div className="signup-label">PASSWORD</div>
         <InputGroup size="md" marginTop="5px" marginBottom="5px">
+          <InputLeftElement
+            children={<FaLock style={{ marginTop: "10px", color: "white" }} />}
+          />
           <Input
             style={style}
             // required={"required"}

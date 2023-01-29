@@ -20,7 +20,7 @@ export const Loginsignupnav = (props) => {
         <div className="loginsignupnav-container">
           <div className="loginsignupnav-space">
             <button
-              style={{ backgroundColor: "blue", ...style }}
+              style={{ backgroundColor: "purple", ...style }}
               onClick={() => navigate("/about")}
             >
               ABOUT
@@ -41,7 +41,7 @@ export const Loginsignupnav = (props) => {
               LOGIN
             </button>
             <button
-              style={{ backgroundColor: "teal", ...style }}
+              style={{ backgroundColor: "#1877f2", ...style }}
               onClick={() => navigate("/signup")}
             >
               SIGNUP

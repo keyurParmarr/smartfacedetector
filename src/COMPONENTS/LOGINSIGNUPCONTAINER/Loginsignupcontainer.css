@@ -8,8 +8,6 @@
   position: relative;
   width: 400px;
   height: 460px;
-  /* background: #1d1d1d; */
-  /* background: transparent; */
   border-radius: 8px;
   overflow: hidden;
   z-index: 10;
@@ -51,6 +49,6 @@
   inset: 5px;
   border: 2px solid black;
   z-index: 10;
-  background: transparent;
-  /* background: linear-gradient(to right, #951de5, #ec1a75) !important; */
+  background-color: rgba(43, 41, 41, 0.8);
+  backdrop-filter: blur(40px);
 }

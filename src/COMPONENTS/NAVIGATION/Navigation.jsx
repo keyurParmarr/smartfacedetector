@@ -2,17 +2,22 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Profileinfo } from "../PROFILEINFO/Profileinfo";
 import { Signout } from "../PROFILEINFO/Signout";
+import { FaUserCircle, FaHistory, FaSignOutAlt } from "react-icons/fa";
 import logo from "./logo3.png";
-import { Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import {
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuIcon,
+} from "@chakra-ui/react";
 import "./Navigation.css";
 import { Title } from "../TITLE/Title";
-import { useContext } from "react";
-import { UserContext } from "../../CONTEXT/User.context";
 
 export const Navigation = () => {
   const [profile, setprofile] = useState(false);
   const [signout, setsignout] = useState(false);
-  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const titleData = {
@@ -33,6 +38,13 @@ export const Navigation = () => {
           </MenuButton>
           <MenuList backgroundColor={"gray.400"} marginTop={"-0.5"}>
             <MenuItem onClick={() => setprofile(!profile)}>
+              <MenuIcon
+                children={
+                  <FaUserCircle
+                    style={{ marginRight: "7px", color: "black" }}
+                  />
+                }
+              />
               View Profile
               <Profileinfo profile={profile} setprofile={setprofile} />
             </MenuItem>
@@ -41,9 +53,21 @@ export const Navigation = () => {
                 navigate("/history");
               }}
             >
+              <MenuIcon
+                children={
+                  <FaHistory style={{ marginRight: "7px", color: "black" }} />
+                }
+              />
               History
             </MenuItem>
             <MenuItem onClick={() => setsignout(!signout)}>
+              <MenuIcon
+                children={
+                  <FaSignOutAlt
+                    style={{ marginRight: "7px", color: "black" }}
+                  />
+                }
+              />
               SIGN OUT
               <Signout signout={signout} setsignout={setsignout} />
             </MenuItem>

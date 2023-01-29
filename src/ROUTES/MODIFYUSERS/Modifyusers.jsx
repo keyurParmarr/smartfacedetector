@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
@@ -20,7 +21,7 @@ export const Modifyusers = () => {
     useContext(UserContext);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
       if (!user.id) {
         fetchData();

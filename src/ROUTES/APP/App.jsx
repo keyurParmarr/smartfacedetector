@@ -1,13 +1,12 @@
 import "./App.css";
 import React, { useEffect, useContext } from "react";
-
 import { Information } from "../../COMPONENTS/INFORMATION/Information";
 import { Navigation } from "../../COMPONENTS/NAVIGATION/Navigation";
-import { InputComp } from "../../COMPONENTS/INPUT/Input";
 import { Image } from "../../COMPONENTS/IMAGE/Image";
 import { UserContext } from "../../CONTEXT/User.context";
 import { useNavigate } from "react-router-dom";
 import { InputTab } from "../../COMPONENTS/INPUTTABPANEL/InputTab";
+import Cookies from "js-cookie";
 
 export const App = () => {
   document.getElementsByClassName("html-title")[0].innerText =
@@ -15,8 +14,7 @@ export const App = () => {
   const { setuser, user } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
+    const token = Cookies.get("token");
     if (token) {
       if (!user.id) {
         fetchData();

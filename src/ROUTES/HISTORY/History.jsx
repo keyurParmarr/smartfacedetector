@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,7 +10,7 @@ export const History = () => {
   const { user, setuser, sethistory, history } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
       if (!user.id) {
         fetchData();
