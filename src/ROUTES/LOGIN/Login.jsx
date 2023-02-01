@@ -76,6 +76,10 @@ export const Login = () => {
   };
   useEffect(() => {
     document.getElementsByClassName("imagetag")[0].style.opacity = "0.5";
+    const token = Cookies.get("token");
+    if (token) {
+      navigate("/app");
+    }
     return opacity;
     function opacity() {
       if (document.getElementsByClassName("imagetag")[0])
@@ -153,10 +157,6 @@ export const Login = () => {
           <a href="/forgotpassword" className="login-atag">
             Forget Password?
           </a>
-          <div>
-            <input type="checkbox" className="login-checkbox" />
-            <label>REMEMBER ME</label>
-          </div>
         </div>
 
         <div className="login-button">

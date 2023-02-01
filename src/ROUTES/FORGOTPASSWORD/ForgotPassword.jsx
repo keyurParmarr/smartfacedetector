@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Title } from "../../COMPONENTS/TITLE/Title";
 import "./ForgotPassword.css";
 export const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
     fontsize: "45px",
     marginTop: "0px",
+  };
+  const passwordHandler = async () => {
+    const res = await fetch("http://localhost:5000/forgotpassword", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
   };
   document.getElementsByClassName("html-title")[0].innerText =
     "FORGOT PASSWORD";
@@ -37,9 +45,16 @@ export const ForgotPassword = () => {
             type="email"
             placeholder="ENTER EMAIL"
             className="forgotpassword-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <div className="forgotpassword-btn">
-            <button className="forgotpassword-insidebtn">SUBMIT</button>
+            <button
+              className="forgotpassword-insidebtn"
+              onClick={passwordHandler}
+            >
+              SUBMIT
+            </button>
           </div>
         </div>
       </div>

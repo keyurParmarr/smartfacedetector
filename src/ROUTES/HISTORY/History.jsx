@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Historyheader } from "../../COMPONENTS/HISTORYHEADER/Historyheader";
 import { Table } from "../../COMPONENTS/TABLE/Table";
@@ -8,6 +8,8 @@ import { UserContext } from "../../CONTEXT/User.context";
 import "./History.css";
 export const History = () => {
   const { user, setuser, sethistory, history } = useContext(UserContext);
+  const [params] = useSearchParams();
+  const id = params.get("id");
   const navigate = useNavigate();
   useEffect(() => {
     const token = Cookies.get("token");
@@ -38,7 +40,7 @@ export const History = () => {
     }
 
     const fetchHistory = async () => {
-      const resp = await fetch(`http://localhost:5000/history/${user.id}`);
+      const resp = await fetch(`http://localhost:5000/history/${id}`);
       const data = await resp.json();
       sethistory(data.historyData);
     };

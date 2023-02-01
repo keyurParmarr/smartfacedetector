@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { Table } from "../../COMPONENTS/TABLE/Table";
 import { Title } from "../../COMPONENTS/TITLE/Title";
 import { UserContext } from "../../CONTEXT/User.context";
-
 import "./Modifyusers.css";
 export const Modifyusers = () => {
   const titleData = {
@@ -53,6 +52,7 @@ export const Modifyusers = () => {
         <div className="modifyusers-backbtn">
           <button
             onClick={() => {
+              console.log(user);
               navigate("/adminpage");
             }}
           >

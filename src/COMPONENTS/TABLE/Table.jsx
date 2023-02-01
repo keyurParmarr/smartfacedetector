@@ -14,7 +14,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Scroll } from "../SCROLL/Scroll";
 import { UserContext } from "../../CONTEXT/User.context";
 export const Table = (props) => {
-  const { setmodifyusers, sethistory } = useContext(UserContext);
+  const { setmodifyusers, user } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
   const blockUnblockUsers = async ({ request, id }) => {
@@ -28,11 +28,9 @@ export const Table = (props) => {
     setmodifyusers(data);
   };
   const historyUsers = async (id) => {
-    const res = await fetch(`http://localhost:5000/history/${id}`);
-    const data = await res.json();
-    sethistory(data.historyData);
-    navigate("/history");
+    navigate(`/history?id=${id}`);
   };
+
   const removeUsers = async (id) => {
     const res = await fetch(`http://localhost:5000/removeusers/${id}`);
     const data = await res.json();
@@ -48,7 +46,10 @@ export const Table = (props) => {
             <PopoverTrigger>
               <Button>
                 {link.history?.length > 100
-                  ? `${link.history?.slice(0, 100)}${"..."}`
+                  ? `${link.history?.slice(
+                      user.id.toString().length,
+                      100
+                    )}${"..."}`
                   : link.history}
               </Button>
             </PopoverTrigger>
@@ -57,7 +58,11 @@ export const Table = (props) => {
               <PopoverArrow />
               <PopoverCloseButton />
               <PopoverBody>
-                <img src={link.history} className="img" alt="" />
+                <img
+                  src={link.history.slice(user.id.toString().length)}
+                  className="img"
+                  alt=""
+                />
               </PopoverBody>
             </PopoverContent>
           </Popover>

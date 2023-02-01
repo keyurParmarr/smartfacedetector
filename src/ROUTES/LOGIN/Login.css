@@ -27,13 +27,7 @@
 .login-atag {
   text-decoration: underline;
 }
-.login-checkbox {
-  margin-right: 5px;
-  height: 14px;
-  width: 15px;
-  cursor: pointer;
-  border-radius: 30px;
-}
+
 .login-title {
   text-align: center;
   color: antiquewhite;

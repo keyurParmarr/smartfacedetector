@@ -71,6 +71,10 @@ export const AdminLogin = () => {
     }
   };
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      navigate("/adminpage");
+    }
     document.getElementsByClassName("imagetag")[0].style.opacity = "0.5";
     return opacity;
     function opacity() {

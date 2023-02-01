@@ -14,11 +14,14 @@ import {
 } from "@chakra-ui/react";
 import "./Navigation.css";
 import { Title } from "../TITLE/Title";
+import { useContext } from "react";
+import { UserContext } from "../../CONTEXT/User.context";
 
 export const Navigation = () => {
   const [profile, setprofile] = useState(false);
   const [signout, setsignout] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const titleData = {
     title: "SMART FACE DETECTOR",
@@ -26,7 +29,6 @@ export const Navigation = () => {
     fontsize: "45px",
     marginTop: "10px",
   };
-
   return (
     <div className="navigation-box">
       <img src={logo} className="navigation-logo" alt="img" />
@@ -37,6 +39,18 @@ export const Navigation = () => {
             <Avatar size="2xl" />
           </MenuButton>
           <MenuList backgroundColor={"gray.400"} marginTop={"-0.5"}>
+            {user.isadmin ? (
+              <MenuItem onClick={() => navigate("/adminpage")}>
+                <MenuIcon
+                  children={
+                    <FaUserCircle
+                      style={{ marginRight: "7px", color: "black" }}
+                    />
+                  }
+                />
+                Modify Users
+              </MenuItem>
+            ) : null}
             <MenuItem onClick={() => setprofile(!profile)}>
               <MenuIcon
                 children={
@@ -50,7 +64,7 @@ export const Navigation = () => {
             </MenuItem>
             <MenuItem
               onClick={() => {
-                navigate("/history");
+                navigate(`/history?id=${user.id}`);
               }}
             >
               <MenuIcon

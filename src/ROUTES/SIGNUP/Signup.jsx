@@ -96,6 +96,10 @@ export const Signup = () => {
   };
   useEffect(() => {
     document.getElementsByClassName("imagetag")[0].style.opacity = "0.5";
+    const token = Cookies.get("token");
+    if (token) {
+      navigate("/app");
+    }
     return opacity;
     function opacity() {
       if (document.getElementsByClassName("imagetag")[0])
