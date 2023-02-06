@@ -12,8 +12,8 @@ import {
   Avatar,
   useDisclosure,
 } from "@chakra-ui/react";
-import img from "./firstimg.png";
 import "./Profileinfo.css";
+import avatar from "../../PICS/avatar.png";
 import { useContext } from "react";
 import { UserContext } from "../../CONTEXT/User.context";
 import { toast } from "react-toastify";
@@ -33,7 +33,7 @@ export const Profileinfo = (props) => {
   const editName = async () => {
     if (name) {
       try {
-        const res = await fetch("http://localhost:5000/editname", {
+        const res = await fetch("http://18.182.53.70:5000/editname", {
           method: "post",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ name, id: user.id }),
@@ -55,7 +55,7 @@ export const Profileinfo = (props) => {
         <ModalContent>
           <ModalHeader>
             <div>Edit Profile</div>
-            <Avatar size="2xl" src={img} />
+            <Avatar size="2xl" src={avatar} />
           </ModalHeader>
           <ModalCloseButton
             onClick={() => {

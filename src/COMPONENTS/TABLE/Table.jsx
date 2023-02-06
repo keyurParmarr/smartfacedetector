@@ -10,16 +10,18 @@ import {
   PopoverCloseButton,
   Button,
 } from "@chakra-ui/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Scroll } from "../SCROLL/Scroll";
 import { UserContext } from "../../CONTEXT/User.context";
 export const Table = (props) => {
-  const { setmodifyusers, user } = useContext(UserContext);
+  const { setmodifyusers } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [params] = useSearchParams();
+  const tempId = params.get("id");
   const blockUnblockUsers = async ({ request, id }) => {
     const blockdata = { request, id };
-    const res = await fetch(`http://localhost:5000/blockusers`, {
+    const res = await fetch(`http://18.182.53.70:5000/blockusers`, {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(blockdata),
@@ -32,7 +34,7 @@ export const Table = (props) => {
   };
 
   const removeUsers = async (id) => {
-    const res = await fetch(`http://localhost:5000/removeusers/${id}`);
+    const res = await fetch(`http://18.182.53.70:5000/removeusers/${id}`);
     const data = await res.json();
     setmodifyusers(data);
   };
@@ -47,10 +49,10 @@ export const Table = (props) => {
               <Button>
                 {link.history?.length > 100
                   ? `${link.history?.slice(
-                      user.id.toString().length,
+                      tempId.toString().length,
                       100
                     )}${"..."}`
-                  : link.history}
+                  : link.history?.slice(tempId.toString().length)}
               </Button>
             </PopoverTrigger>
             <PopoverContent width={400}>
@@ -59,7 +61,7 @@ export const Table = (props) => {
               <PopoverCloseButton />
               <PopoverBody>
                 <img
-                  src={link.history.slice(user.id.toString().length)}
+                  src={link.history.slice(tempId.toString().length)}
                   className="img"
                   alt=""
                 />
@@ -73,65 +75,61 @@ export const Table = (props) => {
   const userDataComp = (data, i) => {
     if (!data.isadmin)
       return (
-        <>
-          <tr
-            key={i}
-            className={
-              data.isblocked ? "table-data-blockrow" : "table-data-row"
-            }
-          >
-            <td>{data.id}</td>
-            <td>{data.name}</td>
-            <td>{data.email}</td>
-            <td>{data.entries}</td>
-            <td>{data.joined?.slice(0, 10)}</td>
-            <td>
-              <button
-                style={{
-                  backgroundColor: "purple",
-                  color: "white",
-                  padding: "3px",
-                  borderRadius: "10px",
-                }}
-                onClick={() => {
-                  historyUsers(data.id);
-                }}
-              >
-                HISTORY
-              </button>
-            </td>
-            <td>
-              <button
-                style={{
-                  backgroundColor: "orange",
-                  color: "white",
-                  padding: "3px",
-                  borderRadius: "10px",
-                }}
-                onClick={() => removeUsers(data.id)}
-              >
-                REMOVE
-              </button>
-            </td>
-            <td>
-              <button
-                style={{
-                  backgroundColor: "red",
-                  color: "white",
-                  padding: "3px",
-                  borderRadius: "10px",
-                }}
-                onClick={() =>
-                  data.isblocked
-                    ? blockUnblockUsers({ request: "unblock", id: data.id })
-                    : blockUnblockUsers({ request: "block", id: data.id })
-                }
-              >
-                {data.isblocked ? "UNBLOCK" : "BLOCK"}
-              </button>
-            </td>
-          </tr>
-        </>
+        <tr
+          key={i}
+          className={data.isblocked ? "table-data-blockrow" : "table-data-row"}
+        >
+          <td>{data.id}</td>
+          <td>{data.name}</td>
+          <td>{data.email}</td>
+          <td>{data.entries}</td>
+          <td>{data.joined?.slice(0, 10)}</td>
+          <td>
+            <button
+              style={{
+                backgroundColor: "purple",
+                color: "white",
+                padding: "3px",
+                borderRadius: "10px",
+              }}
+              onClick={() => {
+                historyUsers(data.id);
+              }}
+            >
+              HISTORY
+            </button>
+          </td>
+          <td>
+            <button
+              style={{
+                backgroundColor: "orange",
+                color: "white",
+                padding: "3px",
+                borderRadius: "10px",
+              }}
+              onClick={() => removeUsers(data.id)}
+            >
+              REMOVE
+            </button>
+          </td>
+          <td>
+            <button
+              style={{
+                backgroundColor: "red",
+                color: "white",
+                padding: "3px",
+                borderRadius: "10px",
+              }}
+              onClick={() =>
+                data.isblocked
+                  ? blockUnblockUsers({ request: "unblock", id: data.id })
+                  : blockUnblockUsers({ request: "block", id: data.id })
+              }
+            >
+              {data.isblocked ? "UNBLOCK" : "BLOCK"}
+            </button>
+          </td>
+        </tr>
       );
   };
   let scroll = false;

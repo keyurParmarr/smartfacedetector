@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminNav } from "../../COMPONENTS/ADMINNAV/AdminNav";
 import { UserContext } from "../../CONTEXT/User.context";
-
 import "./Adminpage.css";
 export const Adminpage = () => {
   const { setuser, user } = useContext(UserContext);
@@ -23,12 +22,16 @@ export const Adminpage = () => {
         fetchData();
       }
       async function fetchData() {
-        const data = await fetch("http://localhost:5000/tokenlogin", {
+        const data = await fetch("http://18.182.53.70:5000/tokenlogin", {
           method: "post",
           headers: { "content-type": "application/json", authorization: token },
         });
         const user = await data.json();
-        setuser(user);
+        if (user && user.isadmin) {
+          setuser(user);
+          return;
+        }
+        navigate("/app");
       }
     } else {
       navigate("/adminlogin");

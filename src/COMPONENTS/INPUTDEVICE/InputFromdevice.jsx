@@ -1,8 +1,10 @@
 import { Button } from "@chakra-ui/react";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
+import { imageProcessing } from "../../UTILS/Utils";
 import "./InputFromdevice.css";
 export const InputFromdevice = () => {
   const [first, setfirst] = useState({});
@@ -33,9 +35,11 @@ export const InputFromdevice = () => {
       return toast.error("PLEASE CHOOSE AN IMAGE", toastStyle);
     }
     const loadingToast = toast.loading("FETCHING DATA", toastStyle);
-    const res = await fetch(`http://localhost:5000/uploadimage/${user.id}`, {
+    const token = Cookies.get("token");
+    const res = await fetch(`http://18.182.53.70:5000/uploadimage/${user.id}`, {
       method: "post",
       body: formdata,
+      headers: { authorization: token },
     });
     const { data, userData, message } = await res.json();
 
@@ -54,22 +58,7 @@ export const InputFromdevice = () => {
         isLoading: false,
         render: "DATA FETCHED SUCCESSFULLY",
       });
-      const { height, width } = document.getElementById("input");
-      const boxData = data.outputs[0].data.regions.map((i) => {
-        const clarfaiim = i.region_info.bounding_box;
-        const w = Number(width);
-        const h = Number(height);
-
-        return {
-          leftCol: clarfaiim.left_col * w,
-          rightCol: w - clarfaiim.right_col * w,
-          topRow: clarfaiim.top_row * h,
-          bottomRow: h - clarfaiim.bottom_row * h,
-        };
-      });
-      setuser(userData[0]);
-      setlocalCount(boxData.length);
-      setbox(boxData);
+      imageProcessing(setuser, setlocalCount, setbox, data, userData);
     }
   };
   return (

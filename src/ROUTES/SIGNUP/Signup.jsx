@@ -23,11 +23,7 @@ import Cookies from "js-cookie";
 
 export const Signup = () => {
   const [show, setShow] = useState(false);
-  const [userDetails, setUserDetails] = useState({
-    username: "test",
-    email: "test@mail.com",
-    password: "Test12@#",
-  });
+  const [userDetails, setUserDetails] = useState({});
   const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
@@ -47,7 +43,7 @@ export const Signup = () => {
     toast.dismiss();
     const loadingToast = toast.loading("CREATING ACCOUNT", toastStyle);
     try {
-      const res = await fetch("http://localhost:5000/signup", {
+      const res = await fetch("http://18.182.53.70:5000/signup", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(userDetails),
@@ -132,7 +128,7 @@ export const Signup = () => {
           <Input
             style={style}
             type="text"
-            // required={"required"}
+            required={"required"}
             name="username"
             autoComplete="off"
             backgroundColor={"whiteAlpha.500"}
@@ -152,7 +148,7 @@ export const Signup = () => {
             style={style}
             type={"email"}
             name="email"
-            // required={"required"}
+            required={"required"}
             autoComplete="off"
             backgroundColor={"whiteAlpha.500"}
             onChange={(e) => {
@@ -167,7 +163,7 @@ export const Signup = () => {
           />
           <Input
             style={style}
-            // required={"required"}
+            required={"required"}
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
             autoComplete="off"
             title="Password must contain at least 1 uppercase,1 lowercase, 1 special character, 1 number,and between 8-12 characters"

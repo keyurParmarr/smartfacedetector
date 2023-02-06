@@ -24,18 +24,24 @@ export const Modifyusers = () => {
     if (token) {
       if (!user.id) {
         fetchData();
+      } else {
+        fetchModifyUsers();
       }
-      fetchModifyUsers();
       async function fetchData() {
-        const data = await fetch("http://localhost:5000/tokenlogin", {
+        const data = await fetch("http://18.182.53.70:5000/tokenlogin", {
           method: "post",
           headers: { "content-type": "application/json", authorization: token },
         });
         const user = await data.json();
-        setuser(user);
+        if (user && user.isadmin) {
+          fetchModifyUsers();
+          setuser(user);
+          return;
+        }
+        navigate("/app");
       }
       async function fetchModifyUsers() {
-        const resp = await fetch("http://localhost:5000/modifyusers");
+        const resp = await fetch("http://18.182.53.70:5000/modifyusers");
         const data = await resp.json();
         setmodifyusers(data.modifyusers);
       }
@@ -52,7 +58,6 @@ export const Modifyusers = () => {
         <div className="modifyusers-backbtn">
           <button
             onClick={() => {
-              console.log(user);
               navigate("/adminpage");
             }}
           >

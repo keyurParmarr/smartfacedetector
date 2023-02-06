@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Profileinfo } from "../PROFILEINFO/Profileinfo";
 import { Signout } from "../PROFILEINFO/Signout";
 import { FaUserCircle, FaHistory, FaSignOutAlt } from "react-icons/fa";
-import logo from "./logo3.png";
+import logo from "../../PICS/logo3.png";
 import {
   Avatar,
   Menu,
@@ -36,11 +36,14 @@ export const Navigation = () => {
       <div className="navigation-profile">
         <Menu>
           <MenuButton>
-            <Avatar size="2xl" />
+            <Avatar
+              size="2xl"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBNdcMDNS2r9df1IWFVc8AY0QNtfNhEJv7fGS5TdhUWrlBqfGu1PCCn9lKpL-FqF9dWc&usqp=CAU"
+            />
           </MenuButton>
           <MenuList backgroundColor={"gray.400"} marginTop={"-0.5"}>
             {user.isadmin ? (
-              <MenuItem onClick={() => navigate("/adminpage")}>
+              <MenuItem onClick={() => navigate("/modifyusers")}>
                 <MenuIcon
                   children={
                     <FaUserCircle

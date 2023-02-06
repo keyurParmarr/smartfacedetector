@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useEffect, useContext } from "react";
 import { Information } from "../../COMPONENTS/INFORMATION/Information";
 import { Navigation } from "../../COMPONENTS/NAVIGATION/Navigation";
@@ -25,7 +24,7 @@ export const App = () => {
     }
 
     async function fetchData() {
-      const data = await fetch("http://localhost:5000/tokenlogin", {
+      const data = await fetch("http://18.182.53.70:5000/tokenlogin", {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });

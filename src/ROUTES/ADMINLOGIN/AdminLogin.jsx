@@ -33,12 +33,12 @@ export const AdminLogin = () => {
     toast.dismiss();
     const loadingToast = toast.loading("LOGGING IN", toastStyle);
     try {
-      const res = await fetch("http://localhost:5000/adminlogin", {
+      const res = await fetch("http://18.182.53.70:5000/adminlogin", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          email: "admin@mail.com",
-          password: "Admin12@#",
+          email,
+          password,
         }),
       });
       const data = await res.json();
@@ -123,10 +123,10 @@ export const AdminLogin = () => {
               className="input"
               autoComplete="off"
               style={style}
-              value={"admin@mail.com"}
+              value={email}
               name={"email"}
               type={"email"}
-              // required={"required"}
+              required={"required"}
               backgroundColor={"whiteAlpha.500"}
               onChange={(e) => setemail(e.target.value)}
             />
@@ -143,8 +143,8 @@ export const AdminLogin = () => {
               autoComplete="off"
               style={style}
               name={"password"}
-              value={"Admin12@#"}
-              // required={"required"}
+              value={password}
+              required={"required"}
               type={show ? "text" : "password"}
               backgroundColor={"whiteAlpha.500"}
               onChange={(e) => setpassword(e.target.value)}

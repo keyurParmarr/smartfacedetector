@@ -30,7 +30,7 @@ export const Signout = (props) => {
     const token = Cookies.get("token");
     try {
       // eslint-disable-next-line
-      const res = await fetch(`http://localhost:5000/signout`, {
+      const res = await fetch(`http://18.182.53.70:5000/signout`, {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });

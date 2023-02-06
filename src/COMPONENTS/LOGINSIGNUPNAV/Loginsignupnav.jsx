@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Title } from "../TITLE/Title";
 import "./Loginsignupnav.css";
-import image from "./firstimg.png";
+import image from "../../PICS/mainimg.png";
+import { UserContext } from "../../CONTEXT/User.context";
+import Cookies from "js-cookie";
 
 export const Loginsignupnav = (props) => {
+  const { setuser } = useContext(UserContext);
+
   const style = {
     height: "45px",
     padding: "7px",
@@ -13,6 +17,29 @@ export const Loginsignupnav = (props) => {
   };
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      fetchData();
+    }
+    async function fetchData() {
+      const data = await fetch("http://18.182.53.70:5000/tokenlogin", {
+        method: "post",
+        headers: { "content-type": "application/json", authorization: token },
+      });
+      const user = await data.json();
+      if (user.id && user.isadmin) {
+        setuser(user);
+        navigate("/adminpage");
+        return;
+      } else if (user.id) {
+        setuser(user);
+        navigate("/app");
+        return;
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className="loginsignnav-box">

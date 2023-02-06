@@ -1,7 +1,9 @@
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import Cookies from "js-cookie";
 import React, { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
+import { imageProcessing } from "../../UTILS/Utils";
 import "./Input.css";
 
 export const InputComp = () => {
@@ -28,14 +30,15 @@ export const InputComp = () => {
   };
   const fetchData = async () => {
     if (imgurl === "") {
-      return toast.error("PLEASE ENTER URL/LINK", toastStyle);
+      return toast.error("PLEASE ENTER IMAGE URL/LINK", toastStyle);
     }
 
     seturl(imgurl);
     const loadingToast = toast.loading("FETCHING DATA", toastStyle);
-    const resp = await fetch("http://localhost:5000/imagebox", {
+    const token = Cookies.get("token");
+    const resp = await fetch("http://18.182.53.70:5000/imagebox", {
       method: "post",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", authorization: token },
       body: JSON.stringify({
         imgurl,
         id: user.id,
@@ -57,22 +60,7 @@ export const InputComp = () => {
         isLoading: false,
         render: "DATA FETCHED SUCCESSFULLY",
       });
-      const { height, width } = document.getElementById("input");
-      const boxData = data.outputs[0].data.regions.map((i) => {
-        const clarfaiim = i.region_info.bounding_box;
-        const w = Number(width);
-        const h = Number(height);
-
-        return {
-          leftCol: clarfaiim.left_col * w,
-          rightCol: w - clarfaiim.right_col * w,
-          topRow: clarfaiim.top_row * h,
-          bottomRow: h - clarfaiim.bottom_row * h,
-        };
-      });
-      setuser(userData[0]);
-      setlocalCount(boxData.length);
-      setbox(boxData);
+      imageProcessing(setuser, setlocalCount, setbox, data, userData);
     }
   };
 
@@ -102,7 +90,6 @@ export const InputComp = () => {
           </Button>
         </InputRightElement>
       </InputGroup>
-      {/* <div> */}
       <Button
         height={"49px"}
         className="input-button"
@@ -123,7 +110,6 @@ export const InputComp = () => {
       >
         CLEAR
       </Button>
-      {/* </div> */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Title } from "../../COMPONENTS/TITLE/Title";
 import "./About.css";
-import gify from "./gify.gif";
+import gify from "../../PICS/gify.gif";
 export const About = () => {
   const titleData = {
     title: "ABOUT",
@@ -27,11 +27,10 @@ export const About = () => {
           it.
         </p>
         <p>
-          It also provide an provide an extra features like u can detect
-          everything that an image contains in it.
+          It also provides an extra features like u can detect url images as
+          well as images from your device also.
         </p>
       </div>
-
       <img src={gify} className="about-img" alt="aboutImage" />
     </div>
   );

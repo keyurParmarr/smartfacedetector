@@ -21,7 +21,7 @@ export const Path = () => {
   return (
     <Routes>
       <Route path="/" element={<Loginsignupnav titleData={titleData} />}>
-        <Route path="login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/about" element={<About />} />

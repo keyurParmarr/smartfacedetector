@@ -5,18 +5,27 @@ import { Title } from "../../COMPONENTS/TITLE/Title";
 import "./ForgotPassword.css";
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const [msg, setmsg] = useState("");
+  const [bool, setbool] = useState(false);
+
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
     fontsize: "45px",
     marginTop: "0px",
   };
+
   const passwordHandler = async () => {
-    const res = await fetch("http://localhost:5000/forgotpassword", {
+    if (bool) return;
+    const res = await fetch("http://18.182.53.70:5000/forgotpassword", {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email }),
     });
+
+    const data = await res.json();
+    setmsg(data.msg);
+    setbool(true);
   };
   document.getElementsByClassName("html-title")[0].innerText =
     "FORGOT PASSWORD";
@@ -41,13 +50,19 @@ export const ForgotPassword = () => {
       <div className="forgotpassword-box">
         <div className="forgotpassword-subbox">
           <label className="forgotpassword-label">FIND YOUR ACCOUNT</label>
-          <input
-            type="email"
-            placeholder="ENTER EMAIL"
-            className="forgotpassword-input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          {bool ? (
+            <span className="forgotpassword-msg">
+              {msg} : <strong>{email}</strong>
+            </span>
+          ) : (
+            <input
+              type="email"
+              placeholder="ENTER EMAIL"
+              className="forgotpassword-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          )}
           <div className="forgotpassword-btn">
             <button
               className="forgotpassword-insidebtn"

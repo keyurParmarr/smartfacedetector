@@ -12,7 +12,6 @@ export const Image = () => {
 
   return (
     <div className="image-box">
-      <style></style>
       <div className="image-container">
         <img style={b} src={url} id="input" alt={""}></img>
         {box.map((data, i) => {

@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./Historyheader.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { Title } from "../TITLE/Title";
-import { UserContext } from "../../CONTEXT/User.context";
 export const Historyheader = () => {
   const titleData = {
     title: "HISTORY",
@@ -11,14 +10,13 @@ export const Historyheader = () => {
     fontsize: "38px",
   };
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
   return (
     <>
       <div className="history-main">
         <div className="history-backbtn">
           <button
             onClick={() => {
-              user.isadmin ? navigate("/modifyusers") : navigate("/app");
+              navigate("/app");
             }}
           >
             <FaArrowLeft

@@ -17,10 +17,7 @@ import Cookies from "js-cookie";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const [userDetails, setUserDetails] = useState({
-    email: "test@mail.com",
-    password: "Test12@#",
-  });
+  const [userDetails, setUserDetails] = useState({});
   const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const loginData = (e) => {
@@ -40,7 +37,7 @@ export const Login = () => {
     toast.dismiss();
     const loadingToast = toast.loading("LOGGING IN", toastStyle);
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch("http://18.182.53.70:5000/login", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(userDetails),
@@ -127,7 +124,7 @@ export const Login = () => {
             style={style}
             name={"email"}
             type={"email"}
-            // required={"required"}
+            required={"required"}
             backgroundColor={"whiteAlpha.500"}
             onChange={(e) => loginData(e)}
           />
@@ -142,7 +139,7 @@ export const Login = () => {
             autoComplete="off"
             style={style}
             name={"password"}
-            // required={"required"}
+            required={"required"}
             type={show ? "text" : "password"}
             backgroundColor={"whiteAlpha.500"}
             onChange={(e) => loginData(e)}

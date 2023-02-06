@@ -29,9 +29,7 @@
         transparent
       )
       0 -50px;
-  /* background-color: rgba(7, 27, 82, 1); */
   background-color: rgba(21, 100, 100, 0);
-  /* linear-gradient(to right, rgba(0, 128, 128, 1) 100%, rgba(7, 27, 82, 1) 0%); */
   background-size: 75px 100px;
 }
 .tabdata {
