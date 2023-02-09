@@ -5,6 +5,7 @@ import "./Loginsignupnav.css";
 import image from "../../PICS/mainimg.png";
 import { UserContext } from "../../CONTEXT/User.context";
 import Cookies from "js-cookie";
+import { link } from "../../Path";
 
 export const Loginsignupnav = (props) => {
   const { setuser } = useContext(UserContext);
@@ -23,7 +24,7 @@ export const Loginsignupnav = (props) => {
       fetchData();
     }
     async function fetchData() {
-      const data = await fetch("http://18.182.53.70:5000/tokenlogin", {
+      const data = await fetch(`${link}/tokenlogin`, {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });

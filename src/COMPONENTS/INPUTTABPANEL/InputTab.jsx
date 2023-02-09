@@ -12,7 +12,7 @@ export const InputTab = () => {
           <Tabs variant="soft-rounded" colorScheme="green" height={"110px"}>
             <TabList className="tabdata">
               <Tab color={"white"}>IMAGE LINK</Tab>
-              <Tab color={"white"}>FROM DEVICE</Tab>
+              <Tab color={"white"}>UPLOAD IMAGE</Tab>
             </TabList>
             <TabPanels>
               <TabPanel padding={"10px"} width={"780px"}>

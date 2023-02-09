@@ -17,6 +17,7 @@ import avatar from "../../PICS/avatar.png";
 import { useContext } from "react";
 import { UserContext } from "../../CONTEXT/User.context";
 import { toast } from "react-toastify";
+import { link } from "../../Path";
 
 export const Profileinfo = (props) => {
   const toastStyle = {
@@ -33,7 +34,7 @@ export const Profileinfo = (props) => {
   const editName = async () => {
     if (name) {
       try {
-        const res = await fetch("http://18.182.53.70:5000/editname", {
+        const res = await fetch(`${link}/editname`, {
           method: "post",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ name, id: user.id }),

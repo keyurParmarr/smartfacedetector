@@ -20,6 +20,7 @@ import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Logi
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { link } from "../../Path";
 
 export const Signup = () => {
   const [show, setShow] = useState(false);
@@ -43,7 +44,7 @@ export const Signup = () => {
     toast.dismiss();
     const loadingToast = toast.loading("CREATING ACCOUNT", toastStyle);
     try {
-      const res = await fetch("http://18.182.53.70:5000/signup", {
+      const res = await fetch(`${link}/signup`, {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(userDetails),

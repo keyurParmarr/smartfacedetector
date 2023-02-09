@@ -12,6 +12,7 @@ import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Logi
 import { UserContext } from "../../CONTEXT/User.context";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { link } from "../../Path";
 
 export const AdminLogin = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export const AdminLogin = () => {
     toast.dismiss();
     const loadingToast = toast.loading("LOGGING IN", toastStyle);
     try {
-      const res = await fetch("http://18.182.53.70:5000/adminlogin", {
+      const res = await fetch(`${link}/adminlogin`, {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({

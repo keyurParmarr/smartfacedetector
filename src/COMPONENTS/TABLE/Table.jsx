@@ -10,18 +10,29 @@ import {
   PopoverCloseButton,
   Button,
 } from "@chakra-ui/react";
+import { MdDelete, MdDeleteForever } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Scroll } from "../SCROLL/Scroll";
 import { UserContext } from "../../CONTEXT/User.context";
+import { link } from "../../Path";
 export const Table = (props) => {
-  const { setmodifyusers } = useContext(UserContext);
+  const { setmodifyusers, sethistory } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [params] = useSearchParams();
   const tempId = params.get("id");
+  const deleteHistory = async (deletelink) => {
+    const res = await fetch(`${link}/deletehistory`, {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ deletelink, id: tempId }),
+    });
+    const data = await res.json();
+    sethistory(data);
+  };
   const blockUnblockUsers = async ({ request, id }) => {
     const blockdata = { request, id };
-    const res = await fetch(`http://18.182.53.70:5000/blockusers`, {
+    const res = await fetch(`${link}/blockusers`, {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(blockdata),
@@ -34,7 +45,7 @@ export const Table = (props) => {
   };
 
   const removeUsers = async (id) => {
-    const res = await fetch(`http://18.182.53.70:5000/removeusers/${id}`);
+    const res = await fetch(`${link}/removeusers/${id}`);
     const data = await res.json();
     setmodifyusers(data);
   };
@@ -68,6 +79,18 @@ export const Table = (props) => {
               </PopoverBody>
             </PopoverContent>
           </Popover>
+        </td>
+        <td>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+            onClick={() => deleteHistory(link.history)}
+          >
+            <MdDelete style={{ height: "25px", width: "22px" }} />
+          </div>
         </td>
       </tr>
     );
@@ -145,6 +168,19 @@ export const Table = (props) => {
                   <>
                     <th>Sr.No</th>
                     <th>Links</th>
+                    <th>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <MdDeleteForever
+                          style={{ height: "25px", width: "22px" }}
+                        />
+                      </div>
+                    </th>
                   </>
                 ) : (
                   <>

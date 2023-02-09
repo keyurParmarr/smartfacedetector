@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Title } from "../../COMPONENTS/TITLE/Title";
+import { link } from "../../Path";
 import "./ForgotPassword.css";
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export const ForgotPassword = () => {
 
   const passwordHandler = async () => {
     if (bool) return;
-    const res = await fetch("http://18.182.53.70:5000/forgotpassword", {
+    const res = await fetch(`${link}/forgotpassword`, {
       method: "post",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email }),

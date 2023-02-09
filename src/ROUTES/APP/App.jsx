@@ -6,6 +6,7 @@ import { UserContext } from "../../CONTEXT/User.context";
 import { useNavigate } from "react-router-dom";
 import { InputTab } from "../../COMPONENTS/INPUTTABPANEL/InputTab";
 import Cookies from "js-cookie";
+import { link } from "../../Path";
 
 export const App = () => {
   document.getElementsByClassName("html-title")[0].innerText =
@@ -24,12 +25,16 @@ export const App = () => {
     }
 
     async function fetchData() {
-      const data = await fetch("http://18.182.53.70:5000/tokenlogin", {
+      const data = await fetch(`${link}/tokenlogin`, {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });
       const user = await data.json();
-      setuser(user);
+      if (user.success) {
+        return setuser(user);
+      }
+      Cookies.remove("token");
+      navigate("/login");
     }
     // eslint-disable-next-line
   }, []);

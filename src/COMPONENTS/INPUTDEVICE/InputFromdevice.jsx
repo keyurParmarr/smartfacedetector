@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
+import { link } from "../../Path";
 import { imageProcessing } from "../../UTILS/Utils";
 import "./InputFromdevice.css";
 export const InputFromdevice = () => {
@@ -36,7 +37,7 @@ export const InputFromdevice = () => {
     }
     const loadingToast = toast.loading("FETCHING DATA", toastStyle);
     const token = Cookies.get("token");
-    const res = await fetch(`http://18.182.53.70:5000/uploadimage/${user.id}`, {
+    const res = await fetch(`${link}/uploadimage/${user.id}`, {
       method: "post",
       body: formdata,
       headers: { authorization: token },

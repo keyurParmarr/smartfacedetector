@@ -14,6 +14,7 @@ import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Logi
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { link } from "../../Path";
 export const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -37,7 +38,7 @@ export const Login = () => {
     toast.dismiss();
     const loadingToast = toast.loading("LOGGING IN", toastStyle);
     try {
-      const res = await fetch("http://18.182.53.70:5000/login", {
+      const res = await fetch(`${link}/login`, {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(userDetails),

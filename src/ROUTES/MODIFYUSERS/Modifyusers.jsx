@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Table } from "../../COMPONENTS/TABLE/Table";
 import { Title } from "../../COMPONENTS/TITLE/Title";
 import { UserContext } from "../../CONTEXT/User.context";
+import { link } from "../../Path";
 import "./Modifyusers.css";
 export const Modifyusers = () => {
   const titleData = {
@@ -28,7 +29,7 @@ export const Modifyusers = () => {
         fetchModifyUsers();
       }
       async function fetchData() {
-        const data = await fetch("http://18.182.53.70:5000/tokenlogin", {
+        const data = await fetch(`${link}/tokenlogin`, {
           method: "post",
           headers: { "content-type": "application/json", authorization: token },
         });
@@ -41,7 +42,7 @@ export const Modifyusers = () => {
         navigate("/app");
       }
       async function fetchModifyUsers() {
-        const resp = await fetch("http://18.182.53.70:5000/modifyusers");
+        const resp = await fetch(`${link}/modifyusers`);
         const data = await resp.json();
         setmodifyusers(data.modifyusers);
       }

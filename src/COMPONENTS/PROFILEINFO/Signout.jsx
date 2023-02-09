@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { useContext } from "react";
 import { UserContext } from "../../CONTEXT/User.context";
 import Cookies from "js-cookie";
+import { link } from "../../Path";
 
 export const Signout = (props) => {
   const toastStyle = {
@@ -30,7 +31,7 @@ export const Signout = (props) => {
     const token = Cookies.get("token");
     try {
       // eslint-disable-next-line
-      const res = await fetch(`http://18.182.53.70:5000/signout`, {
+      const res = await fetch(`${link}/signout`, {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });
