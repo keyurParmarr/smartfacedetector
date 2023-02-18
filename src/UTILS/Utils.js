@@ -1,7 +1,8 @@
+import { boxConstant } from "../REDUCERS/BOXREDUCER/box.constant";
 export const imageProcessing = (
   setuser,
   setlocalCount,
-  setbox,
+  dispatch,
   data,
   userData
 ) => {
@@ -20,5 +21,8 @@ export const imageProcessing = (
   });
   setuser(userData[0]);
   setlocalCount(boxData.length);
-  setbox(boxData);
+  dispatch({
+    type: boxConstant.SETBOX,
+    payload: boxData,
+  });
 };

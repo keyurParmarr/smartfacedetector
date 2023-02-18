@@ -2,11 +2,15 @@ import { Button } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import React, { useContext } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
+import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
+import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
 import { Title } from "../TITLE/Title";
 import "./AdminNav.css";
+import { link } from "../../Path";
 
 export const AdminNav = (props) => {
   const toastStyle = {
@@ -17,8 +21,9 @@ export const AdminNav = (props) => {
     pauseOnHover: true,
     theme: "colored",
   };
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { seturl, setbox, setlocalCount, setuser, setmodifyusers, sethistory } =
+  const { setlocalCount, setuser, setmodifyusers, sethistory } =
     useContext(UserContext);
   const signOutHandler = async () => {
     const token = Cookies.get("token");
@@ -28,9 +33,16 @@ export const AdminNav = (props) => {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });
+
       toast.success("SIGNED OUT SUCCESSFULLY", toastStyle);
-      seturl("");
-      setbox([]);
+      dispatch({
+        type: urlConstant.SETURL,
+        payload: "",
+      });
+      dispatch({
+        type: boxConstant.SETBOX,
+        payload: [],
+      });
       setuser({});
       setmodifyusers([]);
       sethistory([]);

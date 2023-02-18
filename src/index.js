@@ -9,16 +9,20 @@ import { Path } from "./Path";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import { User } from "./CONTEXT/User.context";
+import { Provider } from "react-redux";
+import { store } from "./Store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <ChakraProvider>
-      <ToastContainer position="bottom-center" transition={Flip} />
-      <User>
-        <Path />
-      </User>
-    </ChakraProvider>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <ChakraProvider>
+        <ToastContainer position="bottom-center" transition={Flip} />
+        <User>
+          <Path />
+        </User>
+      </ChakraProvider>
+    </BrowserRouter>
+  </Provider>
 );
 
 reportWebVitals();

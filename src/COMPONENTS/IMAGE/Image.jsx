@@ -1,6 +1,5 @@
 import React from "react";
-import { useContext } from "react";
-import { UserContext } from "../../CONTEXT/User.context";
+import { useSelector } from "react-redux";
 import "./Image.css";
 
 export const Image = () => {
@@ -8,8 +7,12 @@ export const Image = () => {
     width: "auto",
     height: "450px",
   };
-  const { box, url } = useContext(UserContext);
-
+  const url = useSelector((state) => {
+    return state.url;
+  });
+  const box = useSelector((state) => {
+    return state.box;
+  });
   return (
     <div className="image-box">
       <div className="image-container">

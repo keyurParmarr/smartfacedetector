@@ -2,18 +2,24 @@ import { Button } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
+import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
+import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
 import { imageProcessing } from "../../UTILS/Utils";
 import "./InputFromdevice.css";
 export const InputFromdevice = () => {
+  const dispatch = useDispatch();
   const [first, setfirst] = useState({});
-  const { user, seturl, setbox, setuser, setlocalCount } =
-    useContext(UserContext);
+  const { user, setuser, setlocalCount } = useContext(UserContext);
   const upload = (e) => {
     setfirst(e.target.files[0]);
-    seturl(URL.createObjectURL(e.target.files[0]));
+    dispatch({
+      type: urlConstant.SETURL,
+      payload: URL.createObjectURL(e.target.files[0]),
+    });
   };
   const toastStyle = {
     position: "bottom-center",
@@ -24,8 +30,14 @@ export const InputFromdevice = () => {
     theme: "colored",
   };
   const clearData = () => {
-    seturl("");
-    setbox([]);
+    dispatch({
+      type: urlConstant.SETURL,
+      payload: "",
+    });
+    dispatch({
+      type: boxConstant.SETBOX,
+      payload: [],
+    });
     setlocalCount(0);
     document.getElementsByClassName("inputfromdevice-input")[0].value = "";
   };
@@ -45,7 +57,10 @@ export const InputFromdevice = () => {
     const { data, userData, message } = await res.json();
 
     if (message) {
-      setbox([]);
+      dispatch({
+        type: boxConstant.SETBOX,
+        payload: [],
+      });
       toast.update(loadingToast, {
         ...toastStyle,
         type: "error",
@@ -59,7 +74,7 @@ export const InputFromdevice = () => {
         isLoading: false,
         render: "DATA FETCHED SUCCESSFULLY",
       });
-      imageProcessing(setuser, setlocalCount, setbox, data, userData);
+      imageProcessing(setuser, setlocalCount, dispatch, data, userData);
     }
   };
   return (

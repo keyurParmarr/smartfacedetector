@@ -10,7 +10,8 @@ import { Adminpage } from "./ROUTES/ADMINPAGE/Adminpage";
 import { Modifyusers } from "./ROUTES/MODIFYUSERS/Modifyusers";
 import { Loginsignupnav } from "./COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { ForgotPassword } from "./ROUTES/FORGOTPASSWORD/ForgotPassword";
-export const link = "http://18.182.53.70:5000";
+// export const link = "http://18.182.53.70:5000";
+export const link = "http://localhost:5000";
 export const Path = () => {
   const titleData = {
     title: "SMART FACE DETECTOR",

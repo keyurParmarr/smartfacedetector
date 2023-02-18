@@ -1,24 +1,36 @@
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import React, { useState, useContext } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
+import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
+import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
 import { imageProcessing } from "../../UTILS/Utils";
 import "./Input.css";
 
 export const InputComp = () => {
+  const dispatch = useDispatch();
   const [imgurl, setimgurl] = useState("");
-  const { seturl, setbox, user, setlocalCount, setuser } =
-    useContext(UserContext);
+  const { user, setlocalCount, setuser } = useContext(UserContext);
   const handleClick = () => {
-    setimgurl("");
+    dispatch({
+      type: urlConstant.SETURL,
+      payload: "",
+    });
   };
 
   const clearData = () => {
-    seturl("");
+    dispatch({
+      type: urlConstant.SETURL,
+      payload: "",
+    });
+    dispatch({
+      type: boxConstant.SETBOX,
+      payload: [],
+    });
     setimgurl("");
-    setbox([]);
     setlocalCount(0);
   };
   const toastStyle = {
@@ -33,8 +45,10 @@ export const InputComp = () => {
     if (imgurl === "") {
       return toast.error("PLEASE ENTER IMAGE URL/LINK", toastStyle);
     }
-
-    seturl(imgurl);
+    dispatch({
+      type: urlConstant.SETURL,
+      payload: imgurl,
+    });
     const loadingToast = toast.loading("FETCHING DATA", toastStyle);
     const token = Cookies.get("token");
     const resp = await fetch(`${link}/imagebox`, {
@@ -47,7 +61,10 @@ export const InputComp = () => {
     });
     const { data, userData, message } = await resp.json();
     if (message) {
-      setbox([]);
+      dispatch({
+        type: boxConstant.SETBOX,
+        payload: [],
+      });
       toast.update(loadingToast, {
         ...toastStyle,
         type: "error",
@@ -61,7 +78,7 @@ export const InputComp = () => {
         isLoading: false,
         render: "DATA FETCHED SUCCESSFULLY",
       });
-      imageProcessing(setuser, setlocalCount, setbox, data, userData);
+      imageProcessing(setuser, setlocalCount, dispatch, data, userData);
     }
   };
 

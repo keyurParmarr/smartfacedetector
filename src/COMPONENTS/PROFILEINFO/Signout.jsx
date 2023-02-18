@@ -14,6 +14,9 @@ import { useContext } from "react";
 import { UserContext } from "../../CONTEXT/User.context";
 import Cookies from "js-cookie";
 import { link } from "../../Path";
+import { useDispatch } from "react-redux";
+import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
+import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
 
 export const Signout = (props) => {
   const toastStyle = {
@@ -25,7 +28,8 @@ export const Signout = (props) => {
     theme: "colored",
   };
   const navigate = useNavigate();
-  const { seturl, setbox, setlocalCount, setuser, setmodifyusers, sethistory } =
+  const dispatch = useDispatch();
+  const { setlocalCount, setuser, setmodifyusers, sethistory } =
     useContext(UserContext);
   const signOutHandler = async () => {
     const token = Cookies.get("token");
@@ -36,8 +40,14 @@ export const Signout = (props) => {
         headers: { "content-type": "application/json", authorization: token },
       });
       toast.success("SIGNED OUT SUCCESSFULLY", toastStyle);
-      seturl("");
-      setbox([]);
+      dispatch({
+        type: urlConstant.SETURL,
+        payload: "",
+      });
+      dispatch({
+        type: boxConstant.SETBOX,
+        payload: [],
+      });
       setuser({});
       setmodifyusers([]);
       sethistory([]);
