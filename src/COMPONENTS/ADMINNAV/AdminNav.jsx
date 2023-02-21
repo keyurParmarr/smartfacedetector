@@ -33,7 +33,6 @@ export const AdminNav = (props) => {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });
-
       toast.success("SIGNED OUT SUCCESSFULLY", toastStyle);
       dispatch({
         type: urlConstant.SETURL,
@@ -50,6 +49,7 @@ export const AdminNav = (props) => {
       Cookies.remove("token");
       navigate("/");
     } catch (error) {
+      console.log(error);
       toast.error("error");
     }
   };
