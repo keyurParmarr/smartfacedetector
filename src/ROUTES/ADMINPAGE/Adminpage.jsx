@@ -1,19 +1,19 @@
 import Cookies from "js-cookie";
 import React, { useEffect } from "react";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AdminNav } from "../../COMPONENTS/ADMINNAV/AdminNav";
-import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 import "./Adminpage.css";
 export const Adminpage = () => {
-  const { setuser, user } = useContext(UserContext);
-
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const titleData = {
-    title: "Admin Page",
+    title: "ADMIN PAGE",
     color: "black",
-    fontsize: "45px",
+    fontsize: "55px",
     marginTop: "10px",
   };
   useEffect(() => {
@@ -29,7 +29,7 @@ export const Adminpage = () => {
         });
         const user = await data.json();
         if (user && user.isadmin) {
-          setuser(user);
+          dispatch(setUser(user));
           return;
         }
         navigate("/app");

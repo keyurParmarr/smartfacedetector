@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Title } from "../TITLE/Title";
 import "./Loginsignupnav.css";
 import image from "../../PICS/mainimg.png";
-import { UserContext } from "../../CONTEXT/User.context";
 import Cookies from "js-cookie";
 import { link } from "../../Path";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 
 export const Loginsignupnav = (props) => {
-  const { setuser } = useContext(UserContext);
-
+  const dispatch = useDispatch();
   const style = {
     height: "45px",
     padding: "7px",
@@ -29,12 +29,13 @@ export const Loginsignupnav = (props) => {
         headers: { "content-type": "application/json", authorization: token },
       });
       const user = await data.json();
+
       if (user.id && user.isadmin) {
-        setuser(user);
+        dispatch(setUser(user));
         navigate("/adminpage");
         return;
       } else if (user.id) {
-        setuser(user);
+        dispatch(setUser(user));
         navigate("/app");
         return;
       }
@@ -47,31 +48,19 @@ export const Loginsignupnav = (props) => {
         <img src={image} className="imagetag" alt="img" />
         <div className="loginsignupnav-container">
           <div className="loginsignupnav-space">
-            <button
-              style={{ backgroundColor: "purple", ...style }}
-              onClick={() => navigate("/about")}
-            >
+            <button style={style} onClick={() => navigate("/about")}>
               ABOUT
             </button>
           </div>
           <Title titleData={props.titleData} />
           <div className="loginsignupnav-button">
-            <button
-              style={{ backgroundColor: "brown", ...style }}
-              onClick={() => navigate("/adminlogin")}
-            >
+            <button onClick={() => navigate("/adminlogin")} style={style}>
               ADMIN LOGIN
             </button>
-            <button
-              style={{ backgroundColor: "teal", ...style }}
-              onClick={() => navigate("/login")}
-            >
+            <button style={style} onClick={() => navigate("/login")}>
               LOGIN
             </button>
-            <button
-              style={{ backgroundColor: "#1877f2", ...style }}
-              onClick={() => navigate("/signup")}
-            >
+            <button style={style} onClick={() => navigate("/signup")}>
               SIGNUP
             </button>
           </div>

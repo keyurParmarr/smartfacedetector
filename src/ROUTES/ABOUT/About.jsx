@@ -6,7 +6,7 @@ export const About = () => {
   const titleData = {
     title: "ABOUT",
     color: "black",
-    fontsize: "45px",
+    fontsize: "55px",
     marginTop: "10px",
   };
   document.getElementsByClassName("html-title")[0].innerText = "ABOUT";

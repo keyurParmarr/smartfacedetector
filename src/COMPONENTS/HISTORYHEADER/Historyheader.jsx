@@ -7,7 +7,7 @@ export const Historyheader = () => {
   const titleData = {
     title: "HISTORY",
     color: "black",
-    fontsize: "38px",
+    fontsize: "55px",
   };
   const navigate = useNavigate();
   return (

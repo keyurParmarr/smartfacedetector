@@ -1,5 +1,4 @@
 .about-title {
-  font-family: SEGA LOGO FONT;
   padding-top: 15px;
   font-size: 50px;
 }
@@ -8,7 +7,7 @@
 }
 .about-info {
   font-weight: 400;
-  font-size: larger;
+  font-size: x-large;
   margin: 10px;
   color: white;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;

@@ -10,13 +10,17 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useContext } from "react";
-import { UserContext } from "../../CONTEXT/User.context";
+
 import Cookies from "js-cookie";
 import { link } from "../../Path";
 import { useDispatch } from "react-redux";
-import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
-import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
+
+import { setUrl } from "../../REDUCERS/URLREDUCER/url.actions";
+import { setBox } from "../../REDUCERS/BOXREDUCER/box.actions";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
+import { setModifyUsers } from "../../REDUCERS/MODIFYUSERREDUCER/modifyuser.actions";
+import { setHistory } from "../../REDUCERS/HISTORYREDUCER/history.actions";
+import { setLocalCount } from "../../REDUCERS/LOCALCOUNT/localcount.actions";
 
 export const Signout = (props) => {
   const toastStyle = {
@@ -29,8 +33,7 @@ export const Signout = (props) => {
   };
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { setlocalCount, setuser, setmodifyusers, sethistory } =
-    useContext(UserContext);
+
   const signOutHandler = async () => {
     const token = Cookies.get("token");
     try {
@@ -40,18 +43,12 @@ export const Signout = (props) => {
         headers: { "content-type": "application/json", authorization: token },
       });
       toast.success("SIGNED OUT SUCCESSFULLY", toastStyle);
-      dispatch({
-        type: urlConstant.SETURL,
-        payload: "",
-      });
-      dispatch({
-        type: boxConstant.SETBOX,
-        payload: [],
-      });
-      setuser({});
-      setmodifyusers([]);
-      sethistory([]);
-      setlocalCount(0);
+      dispatch(setUrl(""));
+      dispatch(setBox([]));
+      dispatch(setUser({}));
+      dispatch(setModifyUsers([]));
+      dispatch(setHistory([]));
+      dispatch(setLocalCount(0));
       Cookies.remove("token");
       navigate("/");
     } catch (error) {

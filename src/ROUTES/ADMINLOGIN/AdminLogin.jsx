@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   InputGroup,
   InputRightElement,
@@ -9,17 +9,18 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaEye, FaEnvelopeOpen, FaLock } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
-import { UserContext } from "../../CONTEXT/User.context";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { link } from "../../Path";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 
 export const AdminLogin = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { setuser } = useContext(UserContext);
+  const dispatch = useDispatch();
   const handleClick = () => setShow(!show);
   const toastStyle = {
     theme: "colored",
@@ -43,15 +44,15 @@ export const AdminLogin = () => {
         }),
       });
       const data = await res.json();
-      toast.update(loadingToast, {
-        render: "SUCCESSFULLY LOGGED IN",
-        type: "success",
-        isLoading: false,
-        ...toastStyle,
-      });
       if (data.success) {
+        toast.update(loadingToast, {
+          render: "SUCCESSFULLY LOGGED IN",
+          type: "success",
+          isLoading: false,
+          ...toastStyle,
+        });
         Cookies.set("token", data.token, { expires: 1 });
-        setuser(data);
+        dispatch(setUser(data));
         return navigate("/adminpage");
       } else {
         toast.update(loadingToast, {
@@ -82,6 +83,7 @@ export const AdminLogin = () => {
       if (document.getElementsByClassName("imagetag")[0])
         document.getElementsByClassName("imagetag")[0].style.opacity = "1";
     }
+    // eslint-disable-next-line
   }, []);
   const style = {
     background: "transparent",
@@ -108,6 +110,7 @@ export const AdminLogin = () => {
                 backgroundColor: "brown",
                 padding: "3px",
                 borderRadius: "5px",
+                border: "3px solid gray",
               }}
             >
               ADMIN-LOGIN
@@ -158,7 +161,13 @@ export const AdminLogin = () => {
           </InputGroup>
 
           <div className="login-button">
-            <Button type="submit" isLoading={false}>
+            <Button
+              type="submit"
+              isLoading={false}
+              style={{
+                border: "2px solid rgb(253, 6, 6)",
+              }}
+            >
               LOGIN
             </Button>
           </div>

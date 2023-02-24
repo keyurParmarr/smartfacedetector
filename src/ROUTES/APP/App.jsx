@@ -1,17 +1,20 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { Information } from "../../COMPONENTS/INFORMATION/Information";
 import { Navigation } from "../../COMPONENTS/NAVIGATION/Navigation";
 import { Image } from "../../COMPONENTS/IMAGE/Image";
-import { UserContext } from "../../CONTEXT/User.context";
 import { useNavigate } from "react-router-dom";
 import { InputTab } from "../../COMPONENTS/INPUTTABPANEL/InputTab";
 import Cookies from "js-cookie";
 import { link } from "../../Path";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 
 export const App = () => {
   document.getElementsByClassName("html-title")[0].innerText =
     "SMART FACE DETECTOR | APP";
-  const { setuser, user } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   useEffect(() => {
     const token = Cookies.get("token");
@@ -25,13 +28,14 @@ export const App = () => {
     }
 
     async function fetchData() {
-      const data = await fetch(`${link}/tokenlogin`, {
+      const res = await fetch(`${link}/tokenlogin`, {
         method: "post",
         headers: { "content-type": "application/json", authorization: token },
       });
-      const user = await data.json();
-      if (user.success) {
-        return setuser(user);
+      const data = await res.json();
+      if (data.success) {
+        dispatch(setUser(data));
+        return;
       }
       Cookies.remove("token");
       navigate("/login");

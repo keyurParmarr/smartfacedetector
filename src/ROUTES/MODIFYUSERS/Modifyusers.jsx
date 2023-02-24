@@ -1,24 +1,26 @@
 import Cookies from "js-cookie";
 import React from "react";
-import { useContext } from "react";
 import { useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Table } from "../../COMPONENTS/TABLE/Table";
 import { Title } from "../../COMPONENTS/TITLE/Title";
-import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
+import { setModifyUsers } from "../../REDUCERS/MODIFYUSERREDUCER/modifyuser.actions";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 import "./Modifyusers.css";
 export const Modifyusers = () => {
   const titleData = {
-    title: "Modify Users",
+    title: "MODIFY USERS",
     color: "black",
-    fontsize: "45px",
+    fontsize: "55px",
     marginTop: "10px",
   };
   const navigate = useNavigate();
-  const { modifyusers, setmodifyusers, user, setuser } =
-    useContext(UserContext);
+  const dispatch = useDispatch();
+  const modifyUsers = useSelector((state) => state.modifyUsers);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -29,14 +31,14 @@ export const Modifyusers = () => {
         fetchModifyUsers();
       }
       async function fetchData() {
-        const data = await fetch(`${link}/tokenlogin`, {
+        const res = await fetch(`${link}/tokenlogin`, {
           method: "post",
           headers: { "content-type": "application/json", authorization: token },
         });
-        const user = await data.json();
-        if (user && user.isadmin) {
+        const data = await res.json();
+        if (data && data.isadmin) {
           fetchModifyUsers();
-          setuser(user);
+          dispatch(setUser(data));
           return;
         }
         navigate("/app");
@@ -44,7 +46,7 @@ export const Modifyusers = () => {
       async function fetchModifyUsers() {
         const resp = await fetch(`${link}/modifyusers`);
         const data = await resp.json();
-        setmodifyusers(data.modifyusers);
+        dispatch(setModifyUsers(data.modifyusers));
       }
     } else {
       navigate("/adminlogin");
@@ -71,7 +73,7 @@ export const Modifyusers = () => {
         <div className="modifyusers-extra"></div>
       </div>
 
-      <Table data={modifyusers} />
+      <Table data={modifyUsers} />
     </div>
   );
 };

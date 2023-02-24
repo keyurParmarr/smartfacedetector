@@ -16,7 +16,7 @@ export const Path = () => {
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
-    fontsize: "45px",
+    fontsize: "55px",
     marginTop: "10px",
   };
   return (

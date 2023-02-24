@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./Table.css";
 import {
   Popover,
@@ -13,11 +13,13 @@ import {
 import { MdDelete, MdDeleteForever } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Scroll } from "../SCROLL/Scroll";
-import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
+import { useDispatch } from "react-redux";
+import { setHistory } from "../../REDUCERS/HISTORYREDUCER/history.actions";
+import { setModifyUsers } from "../../REDUCERS/MODIFYUSERREDUCER/modifyuser.actions";
 export const Table = (props) => {
-  const { setmodifyusers, sethistory } = useContext(UserContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
   const [params] = useSearchParams();
   const tempId = params.get("id");
@@ -28,7 +30,7 @@ export const Table = (props) => {
       body: JSON.stringify({ deletelink, id: tempId }),
     });
     const data = await res.json();
-    sethistory(data);
+    dispatch(setHistory(data));
   };
   const blockUnblockUsers = async ({ request, id }) => {
     const blockdata = { request, id };
@@ -38,7 +40,7 @@ export const Table = (props) => {
       body: JSON.stringify(blockdata),
     });
     const data = await res.json();
-    setmodifyusers(data);
+    dispatch(setModifyUsers(data));
   };
   const historyUsers = async (id) => {
     navigate(`/history?id=${id}`);
@@ -47,7 +49,7 @@ export const Table = (props) => {
   const removeUsers = async (id) => {
     const res = await fetch(`${link}/removeusers/${id}`);
     const data = await res.json();
-    setmodifyusers(data);
+    dispatch(setModifyUsers(data));
   };
 
   const historyComp = (link, i) => {

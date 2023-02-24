@@ -1,25 +1,21 @@
 import { Button } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
-import { useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
-import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
-import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
+import { setBox } from "../../REDUCERS/BOXREDUCER/box.actions";
+import { setLocalCount } from "../../REDUCERS/LOCALCOUNT/localcount.actions";
+import { setUrl } from "../../REDUCERS/URLREDUCER/url.actions";
 import { imageProcessing } from "../../UTILS/Utils";
 import "./InputFromdevice.css";
 export const InputFromdevice = () => {
   const dispatch = useDispatch();
   const [first, setfirst] = useState({});
-  const { user, setuser, setlocalCount } = useContext(UserContext);
+  const user = useSelector((state) => state.user);
   const upload = (e) => {
     setfirst(e.target.files[0]);
-    dispatch({
-      type: urlConstant.SETURL,
-      payload: URL.createObjectURL(e.target.files[0]),
-    });
+    dispatch(setUrl(URL.createObjectURL(e.target.files[0])));
   };
   const toastStyle = {
     position: "bottom-center",
@@ -30,15 +26,9 @@ export const InputFromdevice = () => {
     theme: "colored",
   };
   const clearData = () => {
-    dispatch({
-      type: urlConstant.SETURL,
-      payload: "",
-    });
-    dispatch({
-      type: boxConstant.SETBOX,
-      payload: [],
-    });
-    setlocalCount(0);
+    dispatch(setUrl(""));
+    dispatch(setBox([]));
+    dispatch(setLocalCount(0));
     document.getElementsByClassName("inputfromdevice-input")[0].value = "";
   };
   const send = async () => {
@@ -57,10 +47,7 @@ export const InputFromdevice = () => {
     const { data, userData, message } = await res.json();
 
     if (message) {
-      dispatch({
-        type: boxConstant.SETBOX,
-        payload: [],
-      });
+      dispatch(setBox([]));
       toast.update(loadingToast, {
         ...toastStyle,
         type: "error",
@@ -74,7 +61,7 @@ export const InputFromdevice = () => {
         isLoading: false,
         render: "DATA FETCHED SUCCESSFULLY",
       });
-      imageProcessing(setuser, setlocalCount, dispatch, data, userData);
+      imageProcessing(dispatch, data, userData);
     }
   };
   return (

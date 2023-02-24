@@ -1,16 +1,19 @@
 import { Button } from "@chakra-ui/react";
 import Cookies from "js-cookie";
-import React, { useContext } from "react";
+import React from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { UserContext } from "../../CONTEXT/User.context";
-import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
-import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
 import { Title } from "../TITLE/Title";
 import "./AdminNav.css";
 import { link } from "../../Path";
+import { setUrl } from "../../REDUCERS/URLREDUCER/url.actions";
+import { setBox } from "../../REDUCERS/BOXREDUCER/box.actions";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
+import { setModifyUsers } from "../../REDUCERS/MODIFYUSERREDUCER/modifyuser.actions";
+import { setHistory } from "../../REDUCERS/HISTORYREDUCER/history.actions";
+import { setLocalCount } from "../../REDUCERS/LOCALCOUNT/localcount.actions";
 
 export const AdminNav = (props) => {
   const toastStyle = {
@@ -23,8 +26,6 @@ export const AdminNav = (props) => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { setlocalCount, setuser, setmodifyusers, sethistory } =
-    useContext(UserContext);
   const signOutHandler = async () => {
     const token = Cookies.get("token");
     try {
@@ -34,18 +35,12 @@ export const AdminNav = (props) => {
         headers: { "content-type": "application/json", authorization: token },
       });
       toast.success("SIGNED OUT SUCCESSFULLY", toastStyle);
-      dispatch({
-        type: urlConstant.SETURL,
-        payload: "",
-      });
-      dispatch({
-        type: boxConstant.SETBOX,
-        payload: [],
-      });
-      setuser({});
-      setmodifyusers([]);
-      sethistory([]);
-      setlocalCount(0);
+      dispatch(setUrl(""));
+      dispatch(setBox([]));
+      dispatch(setUser({}));
+      dispatch(setModifyUsers([]));
+      dispatch(setHistory([]));
+      dispatch(setLocalCount(0));
       Cookies.remove("token");
       navigate("/");
     } catch (error) {
@@ -55,7 +50,6 @@ export const AdminNav = (props) => {
   };
   return (
     <div className="admin-nav">
-      <div></div>
       <Title titleData={props.titleData} />
       <div className="admin-outbtn">
         <Button

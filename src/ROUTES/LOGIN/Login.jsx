@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   InputGroup,
   InputRightElement,
@@ -8,18 +8,19 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { UserContext } from "../../CONTEXT/User.context";
 import { FaEyeSlash, FaEye, FaLock, FaEnvelopeOpen } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { link } from "../../Path";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 export const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const loginData = (e) => {
     const { name, value } = e.target;
@@ -44,15 +45,15 @@ export const Login = () => {
         body: JSON.stringify(userDetails),
       });
       const data = await res.json();
-      toast.update(loadingToast, {
-        render: "SUCCESSFULLY LOGGED IN",
-        type: "success",
-        isLoading: false,
-        ...toastStyle,
-      });
       if (data.success) {
+        toast.update(loadingToast, {
+          render: "SUCCESSFULLY LOGGED IN",
+          type: "success",
+          isLoading: false,
+          ...toastStyle,
+        });
         Cookies.set("token", data.token, { expires: 1 });
-        setuser(data);
+        dispatch(setUser(data));
         return navigate("/app");
       } else {
         toast.update(loadingToast, {
@@ -107,6 +108,7 @@ export const Login = () => {
               backgroundColor: "green",
               padding: "3px",
               borderRadius: "5px",
+              border: "3px solid gray",
             }}
           >
             LOGIN
@@ -158,7 +160,9 @@ export const Login = () => {
         </div>
 
         <div className="login-button">
-          <Button type="submit">LOGIN</Button>
+          <Button type="submit" style={{ border: "2px solid rgb(14, 253, 6)" }}>
+            LOGIN
+          </Button>
         </div>
       </Loginsignupcontainer>
     </form>

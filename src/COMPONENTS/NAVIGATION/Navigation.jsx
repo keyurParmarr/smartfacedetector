@@ -14,19 +14,19 @@ import {
 } from "@chakra-ui/react";
 import "./Navigation.css";
 import { Title } from "../TITLE/Title";
-import { useContext } from "react";
-import { UserContext } from "../../CONTEXT/User.context";
+
+import { useSelector } from "react-redux";
 
 export const Navigation = () => {
   const [profile, setprofile] = useState(false);
   const [signout, setsignout] = useState(false);
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const user = useSelector((state) => state.user);
 
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
-    fontsize: "45px",
+    fontsize: "55px",
     marginTop: "10px",
   };
   return (

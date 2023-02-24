@@ -14,10 +14,10 @@ import {
 } from "@chakra-ui/react";
 import "./Profileinfo.css";
 import avatar from "../../PICS/avatar.png";
-import { useContext } from "react";
-import { UserContext } from "../../CONTEXT/User.context";
 import { toast } from "react-toastify";
 import { link } from "../../Path";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 
 export const Profileinfo = (props) => {
   const toastStyle = {
@@ -28,7 +28,8 @@ export const Profileinfo = (props) => {
     pauseOnHover: true,
   };
   const [name, setname] = useState("");
-  const { user, setuser } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const { onClose } = useDisclosure();
   const editName = async () => {
@@ -41,7 +42,7 @@ export const Profileinfo = (props) => {
         });
         const data = await res.json();
         setname("");
-        setuser(data);
+        dispatch(setUser(data));
         toast.success("Name Changed", toastStyle);
         props.setprofile(!props.profile);
       } catch (error) {

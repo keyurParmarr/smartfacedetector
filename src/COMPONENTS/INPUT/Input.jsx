@@ -1,37 +1,28 @@
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import Cookies from "js-cookie";
-import React, { useState, useContext } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
-import { boxConstant } from "../../REDUCERS/BOXREDUCER/box.constant";
-import { urlConstant } from "../../REDUCERS/URLREDUCER/url.constant";
+import { setBox } from "../../REDUCERS/BOXREDUCER/box.actions";
+import { setLocalCount } from "../../REDUCERS/LOCALCOUNT/localcount.actions";
+import { setUrl } from "../../REDUCERS/URLREDUCER/url.actions";
 import { imageProcessing } from "../../UTILS/Utils";
 import "./Input.css";
 
 export const InputComp = () => {
   const dispatch = useDispatch();
   const [imgurl, setimgurl] = useState("");
-  const { user, setlocalCount, setuser } = useContext(UserContext);
+  const user = useSelector((state) => state.user);
   const handleClick = () => {
-    dispatch({
-      type: urlConstant.SETURL,
-      payload: "",
-    });
+    dispatch(setUrl(""));
   };
 
   const clearData = () => {
-    dispatch({
-      type: urlConstant.SETURL,
-      payload: "",
-    });
-    dispatch({
-      type: boxConstant.SETBOX,
-      payload: [],
-    });
+    dispatch(setUrl(""));
+    dispatch(setBox([]));
     setimgurl("");
-    setlocalCount(0);
+    dispatch(setLocalCount(0));
   };
   const toastStyle = {
     position: "bottom-center",
@@ -45,10 +36,7 @@ export const InputComp = () => {
     if (imgurl === "") {
       return toast.error("PLEASE ENTER IMAGE URL/LINK", toastStyle);
     }
-    dispatch({
-      type: urlConstant.SETURL,
-      payload: imgurl,
-    });
+    dispatch(setUrl(imgurl));
     const loadingToast = toast.loading("FETCHING DATA", toastStyle);
     const token = Cookies.get("token");
     const resp = await fetch(`${link}/imagebox`, {
@@ -61,10 +49,8 @@ export const InputComp = () => {
     });
     const { data, userData, message } = await resp.json();
     if (message) {
-      dispatch({
-        type: boxConstant.SETBOX,
-        payload: [],
-      });
+      dispatch(setBox([]));
+
       toast.update(loadingToast, {
         ...toastStyle,
         type: "error",
@@ -78,7 +64,7 @@ export const InputComp = () => {
         isLoading: false,
         render: "DATA FETCHED SUCCESSFULLY",
       });
-      imageProcessing(setuser, setlocalCount, dispatch, data, userData);
+      imageProcessing(dispatch, data, userData);
     }
   };
 

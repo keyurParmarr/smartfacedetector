@@ -1,16 +1,20 @@
 import Cookies from "js-cookie";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Historyheader } from "../../COMPONENTS/HISTORYHEADER/Historyheader";
 import { Table } from "../../COMPONENTS/TABLE/Table";
-import { UserContext } from "../../CONTEXT/User.context";
 import { link } from "../../Path";
+import { setHistory } from "../../REDUCERS/HISTORYREDUCER/history.actions";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 export const History = () => {
-  const { user, setuser, sethistory, history } = useContext(UserContext);
+  const user = useSelector((state) => state.user);
+  const history = useSelector((state) => state.history);
   const [params] = useSearchParams();
   const id = params.get("id");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
@@ -31,18 +35,18 @@ export const History = () => {
         headers: { "content-type": "application/json", authorization: token },
       });
       const user = await data.json();
-      setuser(user);
+      dispatch(setUser(user));
 
       const resp = await fetch(`${link}/history/${user.id}`);
       const history = await resp.json();
-      sethistory(history.historyData);
+      dispatch(setHistory(history.historyData));
       return;
     }
 
     const fetchHistory = async () => {
       const resp = await fetch(`${link}/history/${id}`);
       const data = await resp.json();
-      sethistory(data.historyData);
+      dispatch(setHistory(data.historyData));
     };
     fetchHistory();
     // eslint-disable-next-line

@@ -1,13 +1,15 @@
 .admin-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   font-size: xx-large;
   font-weight: 800;
-  font-family: Quaxcites;
-  height: 6vh;
+  height: 7vh;
   width: 100vw;
   flex-direction: row;
 }
 .admin-outbtn {
-  margin: 13px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }

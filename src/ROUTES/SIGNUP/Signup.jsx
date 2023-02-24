@@ -8,7 +8,6 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import "./Signup.css";
-import { UserContext } from "../../CONTEXT/User.context";
 import {
   FaEnvelopeOpen,
   FaEye,
@@ -17,17 +16,18 @@ import {
   FaUserAlt,
 } from "react-icons/fa";
 import { Loginsignupcontainer } from "../../COMPONENTS/LOGINSIGNUPCONTAINER/Loginsignupcontainer";
-import { useContext } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { link } from "../../Path";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
 
 export const Signup = () => {
   const [show, setShow] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const { setuser } = useContext(UserContext);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const signupData = (e) => {
     const { name, value } = e.target;
     setUserDetails({ ...userDetails, [name]: value });
@@ -51,15 +51,15 @@ export const Signup = () => {
       });
 
       const data = await res.json();
-      toast.update(loadingToast, {
-        render: "ACCOUNT CREATED",
-        type: "success",
-        isLoading: false,
-        ...toastStyle,
-      });
       if (data.success) {
+        toast.update(loadingToast, {
+          render: "ACCOUNT CREATED",
+          type: "success",
+          isLoading: false,
+          ...toastStyle,
+        });
         Cookies.set("token", data.token, { expires: 1 });
-        setuser(data);
+        dispatch(setUser(data));
         return navigate("/app");
       } else {
         toast.update(loadingToast, {
@@ -102,6 +102,7 @@ export const Signup = () => {
       if (document.getElementsByClassName("imagetag")[0])
         document.getElementsByClassName("imagetag")[0].style.opacity = "1";
     }
+    // eslint-disable-next-line
   }, []);
   document.getElementsByClassName("html-title")[0].innerText = "SIGNUP";
   return (
@@ -114,6 +115,7 @@ export const Signup = () => {
               backgroundColor: "#1877f2",
               padding: "3px",
               borderRadius: "5px",
+              border: "3px solid gray",
             }}
           >
             SIGNUP
@@ -182,7 +184,11 @@ export const Signup = () => {
           </InputRightElement>
         </InputGroup>
         <div className="signup-button">
-          <Button isLoading={false} type="submit">
+          <Button
+            isLoading={false}
+            type="submit"
+            style={{ border: "2px solid #1877f2" }}
+          >
             SIGNUP
           </Button>
         </div>

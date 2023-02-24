@@ -12,7 +12,7 @@ export const ForgotPassword = () => {
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
-    fontsize: "45px",
+    fontsize: "55px",
     marginTop: "0px",
   };
 
@@ -66,6 +66,7 @@ export const ForgotPassword = () => {
           )}
           <div className="forgotpassword-btn">
             <button
+              id="forgot-btn"
               className="forgotpassword-insidebtn"
               onClick={passwordHandler}
             >
