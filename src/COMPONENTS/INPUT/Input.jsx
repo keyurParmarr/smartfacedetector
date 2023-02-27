@@ -15,7 +15,7 @@ export const InputComp = () => {
   const [imgurl, setimgurl] = useState("");
   const user = useSelector((state) => state.user);
   const handleClick = () => {
-    dispatch(setUrl(""));
+    setimgurl("");
   };
 
   const clearData = () => {
