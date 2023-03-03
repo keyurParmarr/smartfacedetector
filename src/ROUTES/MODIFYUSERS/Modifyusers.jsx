@@ -14,8 +14,7 @@ export const Modifyusers = () => {
   const titleData = {
     title: "MODIFY USERS",
     color: "black",
-    fontsize: "55px",
-    marginTop: "10px",
+    fontsize: "60px",
   };
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -64,13 +63,10 @@ export const Modifyusers = () => {
               navigate("/adminpage");
             }}
           >
-            <FaArrowLeft
-              style={{ background: "none", alignContent: "flex-start" }}
-            />
+            <FaArrowLeft style={{ background: "none", fontSize: "larger" }} />
           </button>
         </div>
         <Title titleData={titleData} />
-        <div className="modifyusers-extra"></div>
       </div>
 
       <Table data={modifyUsers} />

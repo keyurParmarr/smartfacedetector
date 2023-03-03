@@ -77,12 +77,6 @@ export const AdminLogin = () => {
     if (token) {
       navigate("/adminpage");
     }
-    document.getElementsByClassName("imagetag")[0].style.opacity = "0.5";
-    return opacity;
-    function opacity() {
-      if (document.getElementsByClassName("imagetag")[0])
-        document.getElementsByClassName("imagetag")[0].style.opacity = "1";
-    }
     // eslint-disable-next-line
   }, []);
   const style = {

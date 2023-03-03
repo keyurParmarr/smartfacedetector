@@ -2,13 +2,18 @@ import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Title } from "../TITLE/Title";
 import "./Loginsignupnav.css";
-import image from "../../PICS/mainimg.png";
 import Cookies from "js-cookie";
 import { link } from "../../Path";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../REDUCERS/USERREDUCER/user.actions";
+import i1 from "../../PICS/1.png";
+import i2 from "../../PICS/2.jpg";
+import i3 from "../../PICS/3.jpg";
+import i4 from "../../PICS/4.jpg";
+import SimpleImageSlider from "react-simple-image-slider";
 
 export const Loginsignupnav = (props) => {
+  const images = [{ url: i1 }, { url: i2 }, { url: i3 }, { url: i4 }];
   const dispatch = useDispatch();
   const style = {
     height: "45px",
@@ -40,12 +45,25 @@ export const Loginsignupnav = (props) => {
         return;
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
       <div className="loginsignnav-box">
-        <img src={image} className="imagetag" alt="img" />
+        <SimpleImageSlider
+          width="100%"
+          height="100vh"
+          images={images}
+          autoPlay={true}
+          loop={true}
+          autoPlayDelay={1.6}
+          slideDuration={0.8}
+          style={{
+            position: "absolute",
+            zIndex: -10,
+          }}
+        />
         <div className="loginsignupnav-container">
           <div className="loginsignupnav-space">
             <button style={style} onClick={() => navigate("/about")}>

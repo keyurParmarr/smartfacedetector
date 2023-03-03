@@ -1,29 +1,34 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Title } from "../../COMPONENTS/TITLE/Title";
 import "./About.css";
 import gify from "../../PICS/gify.gif";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 export const About = () => {
   const titleData = {
     title: "ABOUT",
     color: "black",
-    fontsize: "55px",
-    marginTop: "10px",
+    fontsize: "60px",
   };
   document.getElementsByClassName("html-title")[0].innerText = "ABOUT";
-  useEffect(() => {
-    document.getElementsByClassName("imagetag")[0].style.opacity = "0";
-    return opacity;
-    function opacity() {
-      if (document.getElementsByClassName("imagetag")[0])
-        document.getElementsByClassName("imagetag")[0].style.opacity = "1";
-    }
-  }, []);
+  const navigate = useNavigate();
   return (
     <div className="about-box">
-      <Title titleData={titleData} />
+      <div className="abt">
+        <div className="about-backbtn">
+          <button
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <FaArrowLeft style={{ background: "none", fontSize: "larger" }} />
+          </button>
+        </div>
+        <Title titleData={titleData} />
+      </div>
       <div className="about-info">
         <p>
-          This Face Detector will detect all the faces that an image contain in
+          This Face Detector App will detect all the faces if an image contains
           it.
         </p>
         <p>

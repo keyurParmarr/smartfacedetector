@@ -12,7 +12,7 @@ export const ForgotPassword = () => {
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
-    fontsize: "55px",
+    fontsize: "60px",
     marginTop: "0px",
   };
 

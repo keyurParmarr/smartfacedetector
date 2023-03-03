@@ -10,14 +10,13 @@ import { Adminpage } from "./ROUTES/ADMINPAGE/Adminpage";
 import { Modifyusers } from "./ROUTES/MODIFYUSERS/Modifyusers";
 import { Loginsignupnav } from "./COMPONENTS/LOGINSIGNUPNAV/Loginsignupnav";
 import { ForgotPassword } from "./ROUTES/FORGOTPASSWORD/ForgotPassword";
-export const link = "http://18.182.53.70:5000";
-// export const link = "http://localhost:5000";
+// export const link = "http://18.182.53.70:5000";
+export const link = "http://localhost:5000";
 export const Path = () => {
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
-    fontsize: "55px",
-    marginTop: "10px",
+    fontsize: "60px",
   };
   return (
     <Routes>
@@ -25,8 +24,8 @@ export const Path = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route path="/about" element={<About />} />
       </Route>
+      <Route path="/about" element={<About />} />
       <Route path="/app" element={<App />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/history" element={<History />} />

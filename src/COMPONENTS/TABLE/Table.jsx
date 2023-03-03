@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Table.css";
 import {
   Popover,
@@ -9,20 +9,35 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   Button,
+  useDisclosure,
+  Checkbox,
 } from "@chakra-ui/react";
-import { MdDelete, MdDeleteForever } from "react-icons/md";
+import {
+  MdDelete,
+  MdDeleteForever,
+  MdOutlineDeleteSweep,
+} from "react-icons/md";
+import { CgUnblock } from "react-icons/cg";
+import { ImBlocked } from "react-icons/im";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Scroll } from "../SCROLL/Scroll";
 import { link } from "../../Path";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setHistory } from "../../REDUCERS/HISTORYREDUCER/history.actions";
 import { setModifyUsers } from "../../REDUCERS/MODIFYUSERREDUCER/modifyuser.actions";
+import { Alert } from "./Alert";
+import { FaHistory, FaUserTimes } from "react-icons/fa";
 export const Table = (props) => {
+  const [selectedLinks, setselectedLinks] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const [params] = useSearchParams();
   const tempId = params.get("id");
+  const history = useSelector((state) => {
+    return state.history;
+  });
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const deleteHistory = async (deletelink) => {
     const res = await fetch(`${link}/deletehistory`, {
       method: "post",
@@ -45,12 +60,40 @@ export const Table = (props) => {
   const historyUsers = async (id) => {
     navigate(`/history?id=${id}`);
   };
-
   const removeUsers = async (id) => {
     const res = await fetch(`${link}/removeusers/${id}`);
     const data = await res.json();
     dispatch(setModifyUsers(data));
   };
+  const deletelinkHandler = (e, link) => {
+    if (e.target.checked) {
+      setselectedLinks([...selectedLinks, link]);
+    } else {
+      const newarr = selectedLinks.filter((i) => {
+        return i !== link;
+      });
+      setselectedLinks(newarr);
+    }
+  };
+  const deletingLinks = async () => {
+    try {
+      const res = await fetch(`${link}/deletespecific`, {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ selectedLinks, id: tempId }),
+      });
+      const data = await res.json();
+      dispatch(setHistory(data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    const checkbox = document.getElementsByClassName("table-checkbox");
+    for (let i = 0; i < checkbox.length; i++) {
+      checkbox[i].checked = false;
+    }
+  }, [history]);
 
   const historyComp = (link, i) => {
     return (
@@ -83,6 +126,13 @@ export const Table = (props) => {
           </Popover>
         </td>
         <td>
+          <input
+            type="checkbox"
+            className="table-checkbox"
+            onChange={(e) => deletelinkHandler(e, link.history)}
+          />
+        </td>
+        <td>
           <div
             style={{
               display: "flex",
@@ -110,49 +160,52 @@ export const Table = (props) => {
           <td>{data.entries}</td>
           <td>{data.joined?.slice(0, 10)}</td>
           <td>
-            <button
+            <Button
               style={{
                 backgroundColor: "purple",
                 color: "white",
-                padding: "3px",
-                borderRadius: "10px",
+                padding: "9px",
+                borderRadius: "14px",
               }}
               onClick={() => {
                 historyUsers(data.id);
               }}
+              leftIcon={<FaHistory />}
             >
               HISTORY
-            </button>
+            </Button>
           </td>
           <td>
-            <button
+            <Button
               style={{
                 backgroundColor: "orange",
                 color: "white",
-                padding: "3px",
-                borderRadius: "10px",
+                padding: "9px",
+                borderRadius: "14px",
               }}
               onClick={() => removeUsers(data.id)}
+              leftIcon={<FaUserTimes />}
             >
               REMOVE
-            </button>
+            </Button>
           </td>
           <td>
-            <button
+            <Button
               style={{
-                backgroundColor: "red",
+                backgroundColor: data.isblocked ? "rgb(15 173 109)" : "red",
                 color: "white",
-                padding: "3px",
-                borderRadius: "10px",
+                padding: "9px",
+                borderRadius: "14px",
               }}
               onClick={() =>
                 data.isblocked
                   ? blockUnblockUsers({ request: "unblock", id: data.id })
                   : blockUnblockUsers({ request: "block", id: data.id })
               }
+              leftIcon={data.isblocked ? <CgUnblock /> : <ImBlocked />}
             >
               {data.isblocked ? "UNBLOCK" : "BLOCK"}
-            </button>
+            </Button>
           </td>
         </tr>
       );
@@ -178,9 +231,25 @@ export const Table = (props) => {
                           cursor: "pointer",
                         }}
                       >
-                        <MdDeleteForever
-                          style={{ height: "25px", width: "22px" }}
+                        <MdOutlineDeleteSweep
+                          onClick={deletingLinks}
+                          style={{ height: "35px", width: "22px" }}
                         />
+                      </div>
+                    </th>
+                    <th>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <MdDeleteForever
+                          style={{ height: "35px", width: "22px" }}
+                          onClick={onOpen}
+                        />
+                        <Alert isOpen={isOpen} onClose={onClose} id={tempId} />
                       </div>
                     </th>
                   </>

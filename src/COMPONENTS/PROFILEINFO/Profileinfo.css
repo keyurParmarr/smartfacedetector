@@ -1,10 +1,16 @@
 .profileinfo-details {
   font-weight: 700;
+  color: #09b49b;
   font-size: larger;
 }
 .profileinfo-input {
   margin-top: 5px;
+  border-radius: 7px;
+  border: 1px solid black;
 }
 input {
   font-weight: 600;
+}
+.h4 {
+  color: #5f4d4d;
 }

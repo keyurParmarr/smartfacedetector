@@ -5,7 +5,7 @@ th {
 td,
 tr {
   font-size: large;
-  padding: 7px;
+  padding: 8px;
   border-radius: 20px;
   text-align: center;
 }
@@ -23,17 +23,25 @@ thead {
 }
 
 .table-data-row {
-  background-color: rgb(133, 226, 255);
+  background-color: cyan;
   box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
 }
 .table-data-blockrow {
-  background-color: rgb(255, 79, 79);
+  background-color: rgb(255 71 55);
   box-shadow: 0 2px 8px 0 rgba(99, 99, 99, 0.2);
 }
 
 .table-container {
   display: flex;
   justify-content: center;
-  margin: 30px 30px 0px 30px;
+  margin: 18px 30px 0px 30px;
   height: 780px;
+}
+.table-checkbox {
+  margin-top: 7px;
+  height: 16px;
+  width: 16px;
+}
+input:checked {
+  color: red;
 }

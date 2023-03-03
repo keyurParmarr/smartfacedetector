@@ -7,7 +7,7 @@ export const Historyheader = () => {
   const titleData = {
     title: "HISTORY",
     color: "black",
-    fontsize: "55px",
+    fontsize: "60px",
   };
   const navigate = useNavigate();
   return (
@@ -19,13 +19,11 @@ export const Historyheader = () => {
               navigate("/app");
             }}
           >
-            <FaArrowLeft
-              style={{ background: "none", alignContent: "flex-start" }}
-            />
+            <FaArrowLeft style={{ background: "none", fontSize: "larger" }} />
           </button>
         </div>
         <Title titleData={titleData} />
-        <div className="history-extradot"></div>
+        {/* <div className="history-extradot"></div> */}
       </div>
       <div className="history-info">Recent Searches</div>
       <div className="history-note">

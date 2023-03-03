@@ -13,7 +13,7 @@ export const Adminpage = () => {
   const titleData = {
     title: "ADMIN PAGE",
     color: "black",
-    fontsize: "55px",
+    fontsize: "60px",
     marginTop: "10px",
   };
   useEffect(() => {

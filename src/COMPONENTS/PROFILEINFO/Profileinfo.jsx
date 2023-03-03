@@ -56,7 +56,7 @@ export const Profileinfo = (props) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <div>Edit Profile</div>
+            <div className="h4">Edit Profile</div>
             <Avatar size="2xl" src={avatar} />
           </ModalHeader>
           <ModalCloseButton
@@ -66,8 +66,9 @@ export const Profileinfo = (props) => {
           />
           <ModalBody>
             <div className="profileinfo-details">
+              <h4>Certified Mail: {user.email}</h4>
               <h4>
-                Member since:
+                Member since:&nbsp;
                 {new Date(user.joined).toLocaleString("hi-IN").slice(0, 10)}
               </h4>
               <h2>Name: {user.name}</h2>
