@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { RiCloseCircleLine } from "react-icons/ri";
 import { link } from "../../Path";
 import { setBox } from "../../REDUCERS/BOXREDUCER/box.actions";
 import { setLocalCount } from "../../REDUCERS/LOCALCOUNT/localcount.actions";
@@ -83,14 +84,13 @@ export const InputComp = () => {
         />
         <InputRightElement width="4.5rem">
           <Button
-            height={8}
+            height={9}
             marginTop={2}
             size="sm"
             onClick={handleClick}
             backgroundColor={"red.400"}
-            fontSize={"large"}
           >
-            &times;
+            <RiCloseCircleLine size={23} />
           </Button>
         </InputRightElement>
       </InputGroup>

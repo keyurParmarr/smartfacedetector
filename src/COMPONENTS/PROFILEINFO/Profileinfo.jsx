@@ -13,7 +13,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import "./Profileinfo.css";
-import avatar from "../../PICS/avatar.png";
 import { toast } from "react-toastify";
 import { link } from "../../Path";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,7 +56,7 @@ export const Profileinfo = (props) => {
         <ModalContent>
           <ModalHeader>
             <div className="h4">Edit Profile</div>
-            <Avatar size="2xl" src={avatar} />
+            <Avatar size="2xl" name={user.name} />
           </ModalHeader>
           <ModalCloseButton
             onClick={() => {
