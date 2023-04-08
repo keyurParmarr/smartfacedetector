@@ -12,7 +12,10 @@ export const Information = () => {
         <div>
           You have Detected {user.entries} Images
           {!localCount ? null : (
-            <div>Your Image contains {localCount} Faces</div>
+            <div>
+              Your Image contains{" "}
+              {localCount === 1 ? `${localCount} Face` : `${localCount} Faces`}
+            </div>
           )}
         </div>
       </div>

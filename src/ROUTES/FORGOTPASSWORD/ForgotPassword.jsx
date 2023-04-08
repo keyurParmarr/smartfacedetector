@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TbLockSquare } from "react-icons/tb";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Title } from "../../COMPONENTS/TITLE/Title";
@@ -50,10 +51,13 @@ export const ForgotPassword = () => {
       </div>
       <div className="forgotpassword-box">
         <div className="forgotpassword-subbox">
-          <label className="forgotpassword-label">FIND YOUR ACCOUNT</label>
+          <div className="forgot-icon">
+            <TbLockSquare size={70} />
+          </div>
+          <label className="forgotpassword-label">TROUBLE LOGGING IN?</label>
           {bool ? (
             <span className="forgotpassword-msg">
-              {msg} : <strong>{email}</strong>
+              <i>{msg}</i>: <strong>{email}</strong>
             </span>
           ) : (
             <input
@@ -65,13 +69,15 @@ export const ForgotPassword = () => {
             />
           )}
           <div className="forgotpassword-btn">
-            <button
-              id="forgot-btn"
-              className="forgotpassword-insidebtn"
-              onClick={passwordHandler}
-            >
-              SUBMIT
-            </button>
+            {msg.length === 0 && (
+              <button
+                id="forgot-btn"
+                className="forgotpassword-insidebtn"
+                onClick={passwordHandler}
+              >
+                SUBMIT
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -11,7 +11,9 @@ import {
   Input,
   Avatar,
   useDisclosure,
+  AvatarBadge,
 } from "@chakra-ui/react";
+import { AiFillCamera } from "react-icons/ai";
 import "./Profileinfo.css";
 import { toast } from "react-toastify";
 import { link } from "../../Path";
@@ -27,14 +29,14 @@ export const Profileinfo = (props) => {
     pauseOnHover: true,
   };
   const [name, setname] = useState("");
+  const [img, setimg] = useState({});
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
   const { onClose } = useDisclosure();
-  const editName = async () => {
+  const editDetails = async () => {
     if (name) {
       try {
-        const res = await fetch(`${link}/editname`, {
+        const res = await fetch(`${link}/editdetails`, {
           method: "post",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ name, id: user.id }),
@@ -42,12 +44,25 @@ export const Profileinfo = (props) => {
         const data = await res.json();
         setname("");
         dispatch(setUser(data));
-        toast.success("Name Changed", toastStyle);
+        toast.success("PROFILE UPDATED", toastStyle);
         props.setprofile(!props.profile);
       } catch (error) {
         console.log(error);
       }
     }
+
+    let formdata = new FormData();
+    formdata.append("profilepic", img);
+    const res = await fetch(`${link}/uploadprofileimg/${user.id}`, {
+      method: "post",
+      body: formdata,
+    });
+    const data = await res.json();
+    dispatch(setUser(data));
+    window.location.reload(false);
+  };
+  const upload = (e) => {
+    setimg(e.target.files[0]);
   };
   return (
     <div>
@@ -56,7 +71,18 @@ export const Profileinfo = (props) => {
         <ModalContent>
           <ModalHeader>
             <div className="h4">Edit Profile</div>
-            <Avatar size="2xl" name={user.name} />
+            <Avatar size="2xl" name={user.name} src={user.avatarurl}>
+              <AvatarBadge boxSize="0.em" bg={"white"} color="green">
+                <label className="custom-file-upload">
+                  <input
+                    type="file"
+                    className="avatar-file"
+                    onChange={upload}
+                  />
+                  <AiFillCamera />
+                </label>
+              </AvatarBadge>
+            </Avatar>
           </ModalHeader>
           <ModalCloseButton
             onClick={() => {
@@ -65,7 +91,7 @@ export const Profileinfo = (props) => {
           />
           <ModalBody>
             <div className="profileinfo-details">
-              <h4>Certified Mail: {user.email}</h4>
+              <h4>Gmail: {user.email}</h4>
               <h4>
                 Member since:&nbsp;
                 {new Date(user.joined).toLocaleString("hi-IN").slice(0, 10)}
@@ -83,7 +109,11 @@ export const Profileinfo = (props) => {
             </div>
           </ModalBody>
           <ModalFooter padding={1} display={"flex"} justifyContent={"center"}>
-            <Button colorScheme={"red"} margin={2} onClick={() => editName()}>
+            <Button
+              colorScheme={"red"}
+              margin={2}
+              onClick={() => editDetails()}
+            >
               Save
             </Button>
             <Button

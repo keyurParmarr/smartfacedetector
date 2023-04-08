@@ -112,7 +112,7 @@ export const Signup = () => {
               border: "3px solid gray",
             }}
           >
-            SIGNUP
+            SIGN UP
           </div>
         </div>
         <div className="signup-label">NAME</div>
@@ -183,7 +183,7 @@ export const Signup = () => {
             type="submit"
             style={{ border: "2px solid #1877f2" }}
           >
-            SIGNUP
+            SIGN UP
           </Button>
         </div>
       </Loginsignupcontainer>

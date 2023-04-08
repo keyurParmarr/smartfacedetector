@@ -10,7 +10,7 @@ import {
   PopoverCloseButton,
   Button,
   useDisclosure,
-  Checkbox,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   MdDelete,
@@ -76,16 +76,19 @@ export const Table = (props) => {
     }
   };
   const deletingLinks = async () => {
-    try {
-      const res = await fetch(`${link}/deletespecific`, {
-        method: "post",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ selectedLinks, id: tempId }),
-      });
-      const data = await res.json();
-      dispatch(setHistory(data));
-    } catch (error) {
-      console.log(error.message);
+    if (selectedLinks.length) {
+      try {
+        const res = await fetch(`${link}/deletespecific`, {
+          method: "post",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ selectedLinks, id: tempId }),
+        });
+        const data = await res.json();
+        dispatch(setHistory(data));
+        setselectedLinks([]);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   useEffect(() => {
@@ -94,7 +97,6 @@ export const Table = (props) => {
       checkbox[i].checked = false;
     }
   }, [history]);
-
   const historyComp = (link, i) => {
     return (
       <tr key={i} className="table-data-row">
@@ -224,18 +226,35 @@ export const Table = (props) => {
                     <th>Sr.No</th>
                     <th>Links</th>
                     <th>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          cursor: "pointer",
-                        }}
+                      <Tooltip
+                        label="To delete links, please select them"
+                        placement="top"
+                        fontSize={"16px"}
+                        bg="red.600"
                       >
-                        <MdOutlineDeleteSweep
-                          onClick={deletingLinks}
-                          style={{ height: "35px", width: "22px" }}
-                        />
-                      </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <span>
+                            <MdOutlineDeleteSweep
+                              onClick={
+                                selectedLinks.length === 0 ? null : onOpen
+                              }
+                              style={{ height: "35px", width: "22px" }}
+                            />
+                          </span>
+                          <Alert
+                            isOpen={isOpen}
+                            onClose={onClose}
+                            title={"Selected"}
+                            deletingLinks={deletingLinks}
+                          />
+                        </div>
+                      </Tooltip>
                     </th>
                     <th>
                       <div
@@ -247,9 +266,17 @@ export const Table = (props) => {
                       >
                         <MdDeleteForever
                           style={{ height: "35px", width: "22px" }}
-                          onClick={onOpen}
+                          onClick={() => {
+                            onOpen();
+                            setselectedLinks([]);
+                          }}
                         />
-                        <Alert isOpen={isOpen} onClose={onClose} id={tempId} />
+                        <Alert
+                          isOpen={selectedLinks.length === 0 ? isOpen : null}
+                          onClose={onClose}
+                          id={tempId}
+                          title={"All"}
+                        />
                       </div>
                     </th>
                   </>
@@ -267,7 +294,6 @@ export const Table = (props) => {
                 )}
               </tr>
             </thead>
-
             <tbody>
               {location.pathname === "/history"
                 ? props.data.map((link, i) => {

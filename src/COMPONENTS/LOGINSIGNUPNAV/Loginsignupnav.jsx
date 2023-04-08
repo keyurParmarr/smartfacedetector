@@ -79,7 +79,7 @@ export const Loginsignupnav = (props) => {
               LOGIN
             </button>
             <button style={style} onClick={() => navigate("/signup")}>
-              SIGNUP
+              SIGN UP
             </button>
           </div>
         </div>

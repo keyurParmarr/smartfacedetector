@@ -21,7 +21,6 @@ export const Navigation = () => {
   const [signout, setsignout] = useState(false);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-
   const titleData = {
     title: "SMART FACE DETECTOR",
     color: "black",
@@ -35,7 +34,7 @@ export const Navigation = () => {
       <div className="navigation-profile">
         <Menu>
           <MenuButton>
-            <Avatar size="2xl" name={user.name} />
+            <Avatar size="2xl" name={user.name} src={user.avatarurl} />
           </MenuButton>
           <MenuList backgroundColor={"gray.400"} marginTop={"-0.5"}>
             {user.isadmin ? (

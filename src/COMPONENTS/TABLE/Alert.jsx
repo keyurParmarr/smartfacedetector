@@ -22,14 +22,13 @@ export const Alert = (props) => {
     const data = await res.json();
     dispatch(setHistory(data));
   };
-
   return (
     <div>
       <AlertDialog isOpen={props.isOpen}>
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete All History
+              Delete {props.title} History
             </AlertDialogHeader>
             <AlertDialogBody>Are you sure?</AlertDialogBody>
             <AlertDialogFooter>
@@ -37,7 +36,9 @@ export const Alert = (props) => {
                 colorScheme="red"
                 onClick={() => {
                   props.onClose();
-                  HistoryDeleteHandler();
+                  props.title === "All"
+                    ? HistoryDeleteHandler()
+                    : props.deletingLinks();
                 }}
               >
                 Yes

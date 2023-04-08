@@ -1,6 +1,6 @@
 .profileinfo-details {
   font-weight: 700;
-  color: #09b49b;
+  color: chocolate;
   font-size: larger;
 }
 .profileinfo-input {
@@ -13,4 +13,12 @@ input {
 }
 .h4 {
   color: #5f4d4d;
+}
+.avatar-file {
+  display: none;
+}
+.custom-file-upload {
+  display: inline-block;
+  font-size: 30px;
+  cursor: pointer;
 }

@@ -67,7 +67,7 @@ export const InputFromdevice = () => {
   return (
     <div className="inputfromdevice-box">
       <input
-        type={"file"}
+        type="file"
         className="inputfromdevice-input"
         style={{ color: "white" }}
         onChange={upload}
