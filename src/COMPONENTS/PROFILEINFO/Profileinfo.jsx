@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -29,7 +29,8 @@ export const Profileinfo = (props) => {
     pauseOnHover: true,
   };
   const [name, setname] = useState("");
-  const [img, setimg] = useState({});
+  const [img, setimg] = useState("");
+  const [avatar, setavatar] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { onClose } = useDisclosure();
@@ -59,11 +60,14 @@ export const Profileinfo = (props) => {
     });
     const data = await res.json();
     dispatch(setUser(data));
+    props.setprofile(!props.profile);
     window.location.reload(false);
   };
   const upload = (e) => {
     setimg(e.target.files[0]);
+    setavatar(URL.createObjectURL(e.target.files[0]));
   };
+
   return (
     <div>
       <Modal isOpen={props.profile} isCentered onClose={onClose}>
@@ -71,7 +75,7 @@ export const Profileinfo = (props) => {
         <ModalContent>
           <ModalHeader>
             <div className="h4">Edit Profile</div>
-            <Avatar size="2xl" name={user.name} src={user.avatarurl}>
+            <Avatar size="2xl" src={avatar || user.avatarurl}>
               <AvatarBadge boxSize="0.em" bg={"white"} color="green">
                 <label className="custom-file-upload">
                   <input

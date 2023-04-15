@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Profileinfo } from "../PROFILEINFO/Profileinfo";
 import { Signout } from "../PROFILEINFO/Signout";
@@ -27,6 +27,7 @@ export const Navigation = () => {
     fontsize: "60px",
     marginTop: "10px",
   };
+
   return (
     <div className="navigation-box">
       <img src={logo} className="navigation-logo" alt="img" />
